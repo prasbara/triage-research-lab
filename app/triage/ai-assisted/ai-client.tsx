@@ -20,6 +20,7 @@ import {
   Cpu,
 } from 'lucide-react'
 import Link from 'next/link'
+import { PatientSafetyIncidentModal } from '@/components/triage/incident/PatientSafetyIncidentModal'
 
 interface AIAssistedTriageClientProps {
   categories: string[]
@@ -54,6 +55,7 @@ export function AIAssistedTriageClient({
   const [submitting, setSubmitting] = useState(false)
   const [taskStartedAt, setTaskStartedAt] = useState<string | null>(null)
   const [submittedMessage, setSubmittedMessage] = useState<string | null>(null)
+  const [incidentModalOpen, setIncidentModalOpen] = useState(false)
 
   // Load first task on mount
   useEffect(() => {
@@ -368,6 +370,14 @@ export function AIAssistedTriageClient({
                       <p className="mt-0.5 text-amber-800">
                         Model mendeteksi potensi dampak klinis/keselamatan pasien. Pastikan meneliti apakah keluhan membutuhkan penanganan medis segera sesuai SOP.
                       </p>
+                      <button
+                        type="button"
+                        onClick={() => setIncidentModalOpen(true)}
+                        className="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] bg-rose-50 text-rose-800 border border-rose-200 text-xs font-mono tracking-[0.5px] hover:bg-rose-100 transition-colors cursor-pointer"
+                      >
+                        <ShieldAlert size={12} />
+                        <span>Formulir Insiden Keselamatan Pasien (KARS / Permenkes 11/2017)</span>
+                      </button>
                     </div>
                   </div>
                 )}
@@ -574,6 +584,13 @@ export function AIAssistedTriageClient({
           </form>
         </div>
       </div>
+
+      <PatientSafetyIncidentModal
+        caseId={task?.complaint_cases?.case_id || 'CASE-CURRENT'}
+        complaintText={task?.complaint_cases?.complaint_text || ''}
+        isOpen={incidentModalOpen}
+        onClose={() => setIncidentModalOpen(false)}
+      />
     </div>
   )
 }

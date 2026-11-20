@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import { ResearchExportPanel } from '@/components/reports/ResearchExportPanel'
 import {
   Download,
   FileSpreadsheet,
@@ -130,12 +131,12 @@ export function ReportsClient({ stats }: ReportsClientProps) {
 
       {/* ─── Tabs ────────────────────────────────────── */}
       <Tabs defaultValue="report" className="w-full space-y-6">
-        <TabsList className="bg-[var(--color-linen)] p-1 rounded-full border border-[var(--color-hairline)] print:hidden">
-          <TabsTrigger value="report" className="rounded-full px-5 py-2 text-xs font-medium">
+        <TabsList className="bg-[var(--color-linen)] p-1 rounded-[4px] border border-[var(--color-hairline)] print:hidden">
+          <TabsTrigger value="report" className="rounded-[4px] px-5 py-2 text-xs font-mono uppercase tracking-[1px]">
             Pratinjau Laporan Tesis
           </TabsTrigger>
-          <TabsTrigger value="export" className="rounded-full px-5 py-2 text-xs font-medium">
-            Paket Ekspor Data Mentah & Skrip
+          <TabsTrigger value="export" className="rounded-[4px] px-5 py-2 text-xs font-mono uppercase tracking-[1px]">
+            Paket Ekspor Open Science (FAIR)
           </TabsTrigger>
         </TabsList>
 
@@ -251,6 +252,14 @@ export function ReportsClient({ stats }: ReportsClientProps) {
 
         {/* TAB 2: EXPORT PACKAGES */}
         <TabsContent value="export" className="space-y-6">
+          <ResearchExportPanel />
+
+          <div className="pt-4 border-t border-[var(--color-hairline)]">
+            <h4 className="text-sm font-light text-[var(--color-ink)] mb-4">
+              Unduh Komponen Data Terpisah
+            </h4>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-7 space-y-4 flex flex-col justify-between">
               <div className="space-y-3">

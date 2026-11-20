@@ -102,7 +102,7 @@ export function SettingsClient({
             <Card className="p-6 space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-[var(--border-subtle)]">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-blue-50 text-[var(--accent)] flex items-center justify-center font-bold text-xs">
+                  <div className="w-8 h-8 rounded-[4px] bg-[var(--color-linen)] text-[var(--color-electric-violet)] flex items-center justify-center font-mono text-xs border border-[var(--color-hairline)]">
                     NV
                   </div>
                   <div>
@@ -138,7 +138,7 @@ export function SettingsClient({
 
               {nvidiaHealth && (
                 <div
-                  className={`p-3 rounded-xl border text-xs ${
+                  className={`p-3 rounded-[4px] border text-xs ${
                     nvidiaHealth.status === 'ok'
                       ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
                       : 'bg-rose-50 border-rose-200 text-rose-800'
@@ -174,12 +174,12 @@ export function SettingsClient({
             <Card className="p-6 space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-[var(--border-subtle)]">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold text-xs">
+                  <div className="w-8 h-8 rounded-[4px] bg-[var(--color-linen)] text-[var(--color-electric-violet)] flex items-center justify-center font-mono text-xs border border-[var(--color-hairline)]">
                     GE
                   </div>
                   <div>
-                    <h3 className="font-bold text-sm text-[var(--text-primary)]">Google Gemini</h3>
-                    <span className="text-[11px] text-[var(--text-muted)]">
+                    <h3 className="font-light text-sm text-[var(--color-ink)]">Google Gemini</h3>
+                    <span className="text-[11px] font-mono text-[var(--color-graphite)]">
                       Official SDK @google/genai
                     </span>
                   </div>
@@ -189,20 +189,20 @@ export function SettingsClient({
 
               <div className="space-y-3 text-xs">
                 <div>
-                  <span className="text-[var(--text-muted)] block">Model Aktif:</span>
-                  <span className="font-mono font-semibold text-[var(--text-primary)]">
+                  <span className="text-[var(--color-smoke)] block font-mono text-[10px] uppercase">Model Aktif:</span>
+                  <span className="font-mono text-[var(--color-ink)]">
                     gemini-2.5-flash
                   </span>
                 </div>
                 <div>
-                  <span className="text-[var(--text-muted)] block">Dual Rotation Keys:</span>
-                  <span className="font-mono text-[var(--text-secondary)]">
+                  <span className="text-[var(--color-smoke)] block font-mono text-[10px] uppercase">Dual Rotation Keys:</span>
+                  <span className="font-mono text-[var(--color-graphite)]">
                     AQ.Ab8RN6Jz... (Primary) & AQ.Ab8RN6Ji... (Backup)
                   </span>
                 </div>
                 <div>
-                  <span className="text-[var(--text-muted)] block">Format Respon:</span>
-                  <span className="font-mono text-[var(--text-secondary)]">
+                  <span className="text-[var(--color-smoke)] block font-mono text-[10px] uppercase">Format Respon:</span>
+                  <span className="font-mono text-[var(--color-graphite)]">
                     application/json (Native Structured Output)
                   </span>
                 </div>
@@ -210,13 +210,13 @@ export function SettingsClient({
 
               {geminiHealth && (
                 <div
-                  className={`p-3 rounded-xl border text-xs ${
+                  className={`p-3 rounded-[4px] border text-xs font-mono ${
                     geminiHealth.status === 'ok'
                       ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
                       : 'bg-rose-50 border-rose-200 text-rose-800'
                   }`}
                 >
-                  <div className="font-bold flex items-center gap-1.5">
+                  <div className="flex items-center gap-1.5">
                     {geminiHealth.status === 'ok' ? (
                       <>
                         <CheckCircle2 size={14} /> Terhubung ({geminiHealth.latency_ms}ms)
@@ -233,7 +233,7 @@ export function SettingsClient({
               <Button
                 variant="secondary"
                 size="sm"
-                className="w-full"
+                className="w-full rounded-[4px]"
                 onClick={testGemini}
                 loading={geminiTesting}
               >
@@ -247,30 +247,30 @@ export function SettingsClient({
         {/* TAXONOMY TAB */}
         <TabsContent value="taxonomy" className="space-y-5">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <Card className="p-5">
-              <h3 className="font-bold text-sm text-[var(--text-primary)] mb-3">
+            <Card className="p-5 border-[var(--color-hairline)] bg-[var(--color-pure-white)] rounded-[4px] shadow-none">
+              <h3 className="font-light text-sm text-[var(--color-ink)] mb-3">
                 Kategori Keluhan ({categories.length})
               </h3>
               <ul className="space-y-2 text-xs">
                 {categories.map((c) => (
-                  <li key={c.id} className="p-2.5 bg-[var(--surface)] rounded-xl">
-                    <span className="font-semibold block text-[var(--text-primary)]">{c.name}</span>
-                    <span className="text-[10px] text-[var(--text-muted)] font-mono">{c.code}</span>
+                  <li key={c.id} className="p-2.5 bg-[var(--color-linen)]/40 border border-[var(--color-hairline)] rounded-[4px]">
+                    <span className="font-light block text-[var(--color-ink)]">{c.name}</span>
+                    <span className="text-[10px] text-[var(--color-smoke)] font-mono">{c.code}</span>
                   </li>
                 ))}
               </ul>
             </Card>
 
-            <Card className="p-5">
-              <h3 className="font-bold text-sm text-[var(--text-primary)] mb-3">
+            <Card className="p-5 border-[var(--color-hairline)] bg-[var(--color-pure-white)] rounded-[4px] shadow-none">
+              <h3 className="font-light text-sm text-[var(--color-ink)] mb-3">
                 Tingkat Prioritas ({priorities.length})
               </h3>
               <ul className="space-y-2 text-xs">
                 {priorities.map((p) => (
-                  <li key={p.id} className="p-2.5 bg-[var(--surface)] rounded-xl flex items-center justify-between">
+                  <li key={p.id} className="p-2.5 bg-[var(--color-linen)]/40 border border-[var(--color-hairline)] rounded-[4px] flex items-center justify-between">
                     <div>
-                      <span className="font-semibold block text-[var(--text-primary)]">{p.name}</span>
-                      <span className="text-[10px] text-[var(--text-muted)]">Level {p.level}</span>
+                      <span className="font-light block text-[var(--color-ink)]">{p.name}</span>
+                      <span className="text-[10px] text-[var(--color-smoke)] font-mono">Level {p.level}</span>
                     </div>
                     {p.is_high_priority && <Badge variant="danger">High Risk</Badge>}
                   </li>
@@ -278,15 +278,15 @@ export function SettingsClient({
               </ul>
             </Card>
 
-            <Card className="p-5">
-              <h3 className="font-bold text-sm text-[var(--text-primary)] mb-3">
+            <Card className="p-5 border-[var(--color-hairline)] bg-[var(--color-pure-white)] rounded-[4px] shadow-none">
+              <h3 className="font-light text-sm text-[var(--color-ink)] mb-3">
                 Unit Rumah Sakit ({units.length})
               </h3>
               <ul className="space-y-2 text-xs">
                 {units.map((u) => (
-                  <li key={u.id} className="p-2.5 bg-[var(--surface)] rounded-xl">
-                    <span className="font-semibold block text-[var(--text-primary)]">{u.name}</span>
-                    <span className="text-[10px] text-[var(--text-muted)] capitalize">{u.unit_type}</span>
+                  <li key={u.id} className="p-2.5 bg-[var(--color-linen)]/40 border border-[var(--color-hairline)] rounded-[4px]">
+                    <span className="font-light block text-[var(--color-ink)]">{u.name}</span>
+                    <span className="text-[10px] text-[var(--color-smoke)] font-mono uppercase">{u.unit_type}</span>
                   </li>
                 ))}
               </ul>

@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Select } from '@/components/ui/select'
+import { RobustnessTestRunner } from '@/components/ai-lab/RobustnessTestRunner'
 import {
   Cpu,
   Sparkles,
@@ -195,6 +196,9 @@ export function AILabClient({ supportedModels }: AILabClientProps) {
           </TabsTrigger>
           <TabsTrigger value="single" className="rounded-[4px] px-4 py-2 text-xs font-mono tracking-[1px] uppercase">
             Uji Model Tunggal
+          </TabsTrigger>
+          <TabsTrigger value="robustness" className="rounded-[4px] px-4 py-2 text-xs font-mono tracking-[1px] uppercase">
+            Ketahanan Linguistik & Dialek
           </TabsTrigger>
         </TabsList>
 
@@ -459,6 +463,11 @@ export function AILabClient({ supportedModels }: AILabClientProps) {
               </div>
             </div>
           )}
+        </TabsContent>
+
+        {/* ROBUSTNESS & ADVERSARIAL TAB */}
+        <TabsContent value="robustness" className="space-y-6">
+          <RobustnessTestRunner />
         </TabsContent>
       </Tabs>
     </div>
