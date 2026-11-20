@@ -308,7 +308,8 @@ export function ManualTriageClient({
               <div className="pt-4 border-t border-[var(--border-subtle)]">
                 <Button
                   type="submit"
-                  className="w-full"
+                  size="lg"
+                  className="w-full h-11 text-xs sm:text-sm font-medium gap-2 justify-center"
                   disabled={
                     submitting ||
                     !form.final_category ||
@@ -318,7 +319,7 @@ export function ManualTriageClient({
                   loading={submitting}
                 >
                   <span>Simpan & Lanjut ke Kasus Berikutnya</span>
-                  <ArrowRight size={14} />
+                  <ArrowRight size={15} />
                 </Button>
               </div>
             </Card>

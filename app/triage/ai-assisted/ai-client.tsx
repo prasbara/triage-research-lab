@@ -422,25 +422,25 @@ export function AIAssistedTriageClient({
                 </div>
 
                 {/* HITL Action Buttons */}
-                <div className="flex gap-2.5 pt-1">
+                <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <Button
                     type="button"
-                    size="sm"
-                    className="flex-1"
+                    size="md"
+                    className="flex-1 h-10 gap-2 font-medium"
                     onClick={handleAcceptAI}
                   >
-                    <Check size={14} />
-                    <span>Terima Rekomendasi</span>
+                    <Check size={15} />
+                    <span>Terima Rekomendasi AI</span>
                   </Button>
                   <Button
                     type="button"
                     variant="outline"
-                    size="sm"
-                    className="flex-1"
+                    size="md"
+                    className="flex-1 h-10 gap-2 font-medium"
                     onClick={handleModifyAI}
                   >
-                    <Edit3 size={14} />
-                    <span>Modifikasi / Koreksi</span>
+                    <Edit3 size={15} />
+                    <span>Modifikasi / Koreksi Human</span>
                   </Button>
                 </div>
               </div>
@@ -556,7 +556,8 @@ export function AIAssistedTriageClient({
               <div className="pt-4 border-t border-[var(--border-subtle)]">
                 <Button
                   type="submit"
-                  className="w-full"
+                  size="lg"
+                  className="w-full h-11 text-xs sm:text-sm font-medium gap-2 justify-center"
                   disabled={
                     submitting ||
                     !form.final_category ||
@@ -566,7 +567,7 @@ export function AIAssistedTriageClient({
                   loading={submitting}
                 >
                   <span>Simpan Keputusan Final Petugas</span>
-                  <ArrowRight size={14} />
+                  <ArrowRight size={15} />
                 </Button>
               </div>
             </Card>

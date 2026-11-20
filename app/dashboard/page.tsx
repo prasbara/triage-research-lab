@@ -19,6 +19,7 @@ export default async function DashboardPage() {
     { count: totalParticipants },
     { count: completedTasks },
     { data: recentTasks },
+    { data: allTaskDurations },
   ] = await Promise.all([
     supabase.from('complaint_cases').select('*', { count: 'exact', head: true }).eq('is_archived', false),
     supabase.from('complaint_cases').select('*', { count: 'exact', head: true }).eq('validation_status', 'validated'),
@@ -30,10 +31,14 @@ export default async function DashboardPage() {
       .eq('completion_status', 'completed')
       .order('task_submitted_at', { ascending: false })
       .limit(8),
+    supabase
+      .from('triage_tasks')
+      .select('method, duration_seconds')
+      .eq('completion_status', 'completed'),
   ])
 
-  const manualTasks = (recentTasks || []).filter((t) => t.method === 'manual')
-  const aiTasks = (recentTasks || []).filter((t) => t.method === 'ai_assisted')
+  const manualTasks = (allTaskDurations || []).filter((t) => t.method === 'manual')
+  const aiTasks = (allTaskDurations || []).filter((t) => t.method === 'ai_assisted')
 
   const avgManual =
     manualTasks.length > 0

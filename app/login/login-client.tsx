@@ -22,8 +22,8 @@ export function LoginClient() {
     errorParam === 'invalid_credentials'
       ? 'Email atau password salah. Silakan coba lagi.'
       : errorParam === 'missing_fields'
-      ? 'Silakan isi email dan password.'
-      : null
+        ? 'Silakan isi email dan password.'
+        : null
   )
 
   const quickAccounts = [
@@ -174,11 +174,10 @@ export function LoginClient() {
                   key={acc.email}
                   type="button"
                   onClick={() => handleFill(acc.email, acc.password)}
-                  className={`w-full p-3 rounded-2xl text-left border transition-all flex items-center justify-between gap-3 text-xs ${
-                    isSelected
+                  className={`w-full p-3 rounded-2xl text-left border transition-all flex items-center justify-between gap-3 text-xs ${isSelected
                       ? 'border-[var(--color-pricing-blue)] bg-blue-50/30'
                       : 'border-[var(--color-control-gray)] bg-[var(--color-studio-mist)]/50 hover:bg-[var(--color-studio-mist)]'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div className="w-7 h-7 rounded-full bg-white border border-[var(--color-control-gray)] flex items-center justify-center shrink-0">

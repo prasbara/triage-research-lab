@@ -1,46 +1,47 @@
 'use client'
 
 import { useState } from 'react'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Select } from '@/components/ui/select'
+import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import { Select } from '@/components/ui/select'
 import {
   Cpu,
-  Bot,
-  Play,
-  RotateCw,
   Sparkles,
-  Zap,
+  Bot,
+  Split,
   Clock,
   CheckCircle2,
   AlertTriangle,
-  ArrowRight,
-  Split,
+  Play,
+  RotateCcw,
+  FileText,
+  ShieldCheck,
+  Building2,
 } from 'lucide-react'
 
 interface AILabClientProps {
-  supportedModels: any
+  supportedModels?: any
 }
 
 export function AILabClient({ supportedModels }: AILabClientProps) {
   const [complaintText, setComplaintText] = useState(
     'Pasien IGD mengeluh telah menunggu 45 menit dengan keluhan nyeri dada menjalar ke punggung dan sesak, namun perawat triase hanya mencatat tensi dan menyuruh duduk di ruang tunggu umum tanpa pemeriksaan EKG segera.'
   )
-  const [singleProvider, setSingleProvider] = useState<'nvidia' | 'gemini'>('nvidia')
-  const [singleModel, setSingleModel] = useState('nvidia/nemotron-3.5-lightning-30b-a3b')
-  const [singleLoading, setSingleLoading] = useState(false)
-  const [singleResult, setSingleResult] = useState<any | null>(null)
-  const [singleError, setSingleError] = useState<string | null>(null)
 
-  // Comparison Mode States
+  // Comparison State
   const [compareLoading, setCompareLoading] = useState(false)
-  const [nvidiaResult, setNvidiaResult] = useState<any | null>(null)
-  const [geminiResult, setGeminiResult] = useState<any | null>(null)
+  const [nvidiaResult, setNvidiaResult] = useState<any>(null)
+  const [geminiResult, setGeminiResult] = useState<any>(null)
   const [nvidiaError, setNvidiaError] = useState<string | null>(null)
   const [geminiError, setGeminiError] = useState<string | null>(null)
+
+  // Single Model State
+  const [selectedProvider, setSelectedProvider] = useState<'nvidia' | 'gemini'>('nvidia')
+  const [singleLoading, setSingleLoading] = useState(false)
+  const [singleResult, setSingleResult] = useState<any>(null)
+  const [singleError, setSingleError] = useState<string | null>(null)
 
   const handleRunSingle = async () => {
     if (!complaintText) return
@@ -55,8 +56,11 @@ export function AILabClient({ supportedModels }: AILabClientProps) {
         body: JSON.stringify({
           case_id: 'AI-LAB-TEST',
           complaint_text: complaintText,
-          provider: singleProvider,
-          model: singleModel,
+          provider: selectedProvider,
+          model:
+            selectedProvider === 'nvidia'
+              ? 'nvidia/nemotron-3.5-lightning-30b-a3b'
+              : 'gemini-2.5-flash',
         }),
       })
       const data = await res.json()
@@ -117,33 +121,39 @@ export function AILabClient({ supportedModels }: AILabClientProps) {
   }
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-[var(--border-subtle)]">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-[var(--text-primary)]">
+    <div className="space-y-8 max-w-7xl mx-auto px-2 sm:px-4 py-2">
+      {/* ─── Header Stage ────────────────────────────── */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-6 border-b border-[var(--color-control-gray)]">
+        <div className="space-y-1.5">
+          <span className="launch-label text-[11px] font-semibold uppercase tracking-wider">
+            Dual Provider LLM Testbed & Reasoner
+          </span>
+          <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[var(--color-ink)]">
             AI Laboratory
           </h1>
-          <p className="text-sm text-[var(--text-secondary)] mt-0.5">
-            Eksplorasi inferensi model, uji perbandingan respons ganda (NVIDIA NIM vs Google Gemini), dan inspeksi penalarannya
+          <p className="text-sm text-[var(--color-slate)] max-w-2xl">
+            Eksplorasi inferensi model, evaluasi konsistensi taksonomi ganda (NVIDIA Nemotron 3.5 vs Google Gemini 2.5), dan inspeksi penalarannya.
           </p>
         </div>
         <Badge variant="purple">Dual Provider Testbed</Badge>
       </div>
 
-      {/* Input Complaint */}
-      <Card className="p-6">
-        <label className="text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] mb-2 block">
+      {/* ─── Input Complaint Capsule ──────────────────── */}
+      <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-7 space-y-4">
+        <label className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-slate)] block">
           Teks Kasus Keluhan Uji Coba (De-Identified)
         </label>
         <textarea
           rows={3}
           value={complaintText}
           onChange={(e) => setComplaintText(e.target.value)}
-          className="w-full rounded-2xl border border-[var(--border)] p-4 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-blue-100 font-medium leading-relaxed"
+          className="w-full rounded-2xl border border-[var(--color-hairline-silver)] p-4 text-xs sm:text-sm text-[var(--color-ink)] outline-none focus:border-[var(--color-pricing-blue)] font-medium leading-relaxed"
           placeholder="Tuliskan narasi keluhan rumah sakit untuk dianalisis..."
         />
-        <div className="mt-2 text-right">
+        <div className="flex items-center justify-between pt-1">
+          <span className="text-[11px] text-[var(--color-slate)]">
+            {complaintText.length} karakter
+          </span>
           <button
             type="button"
             onClick={() =>
@@ -151,42 +161,53 @@ export function AILabClient({ supportedModels }: AILabClientProps) {
                 'Pasien rawat jalan poli bedah sudah 3 jam menunggu dipanggil padahal nomor antrean sudah lewat, petugas konter pendaftaran bersikap acuh tak acuh dan mengatakan dokter sedang rapat tanpa pemberitahuan sebelumnya.'
               )
             }
-            className="text-xs text-[var(--accent)] hover:underline cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-[var(--color-apple-blue)] bg-blue-50/60 hover:bg-blue-100/60 border border-blue-200/50 transition-colors cursor-pointer"
           >
-            Gunakan contoh kasus poliklinik
+            <FileText size={12} />
+            <span>Gunakan contoh kasus poliklinik</span>
           </button>
         </div>
-      </Card>
+      </div>
 
-      <Tabs defaultValue="comparison" className="w-full">
-        <TabsList>
-          <TabsTrigger value="comparison">Komparasi Ganda (NVIDIA vs Gemini)</TabsTrigger>
-          <TabsTrigger value="single">Uji Model Tunggal</TabsTrigger>
+      {/* ─── Mode Tabs & Testbed ─────────────────────── */}
+      <Tabs defaultValue="comparison" className="w-full space-y-6">
+        <TabsList className="bg-[var(--color-studio-mist)] p-1 rounded-full border border-[var(--color-control-gray)]">
+          <TabsTrigger value="comparison" className="rounded-full px-5 py-2 text-xs font-medium">
+            Komparasi Ganda (NVIDIA vs Gemini)
+          </TabsTrigger>
+          <TabsTrigger value="single" className="rounded-full px-5 py-2 text-xs font-medium">
+            Uji Model Tunggal
+          </TabsTrigger>
         </TabsList>
 
         {/* COMPARISON TAB */}
-        <TabsContent value="comparison" className="space-y-4">
-          <div className="flex justify-between items-center py-2">
-            <p className="text-xs text-[var(--text-secondary)]">
-              Kirim teks keluhan yang sama secara paralel ke kedua endpoint untuk mengevaluasi konsistensi taksonomi dan penalarannya.
+        <TabsContent value="comparison" className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)]">
+            <p className="text-xs text-[var(--color-slate)] max-w-xl leading-relaxed">
+              Kirim teks narasi keluhan secara paralel ke endpoint NVIDIA Nemotron-3.5 Lightning (30B) dan Google Gemini 2.5 Flash untuk menganalisis akurasi, waktu latensi, dan konsistensi penalaran klinis.
             </p>
-            <Button size="sm" onClick={handleRunComparison} loading={compareLoading}>
+            <Button
+              size="md"
+              onClick={handleRunComparison}
+              loading={compareLoading}
+              className="shrink-0 h-10 px-6 gap-2"
+            >
               <Split size={14} />
               <span>Jalankan Komparasi Paralel</span>
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* NVIDIA Column */}
-            <Card className="p-5 border-blue-100 space-y-4">
-              <div className="flex items-center justify-between pb-2 border-b border-blue-100">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 bg-blue-50 text-[var(--accent)] rounded-xl flex items-center justify-center font-bold text-xs">
+            <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-7 space-y-5">
+              <div className="flex items-center justify-between pb-3 border-b border-[var(--color-control-gray)]">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-blue-50 text-[var(--color-pricing-blue)] rounded-xl flex items-center justify-center font-bold text-xs border border-blue-100">
                     NV
                   </div>
                   <div>
-                    <h3 className="font-bold text-sm text-[var(--text-primary)]">NVIDIA NIM</h3>
-                    <span className="text-[11px] text-[var(--text-muted)]">
+                    <h3 className="font-semibold text-sm text-[var(--color-ink)]">NVIDIA NIM</h3>
+                    <span className="text-[11px] text-[var(--color-slate)]">
                       Nemotron-3.5 Lightning (30B)
                     </span>
                   </div>
@@ -197,75 +218,79 @@ export function AILabClient({ supportedModels }: AILabClientProps) {
               </div>
 
               {compareLoading ? (
-                <div className="py-12 text-center text-xs text-[var(--text-muted)] animate-pulse">
-                  Menjalankan inferensi NVIDIA NIM...
+                <div className="py-16 text-center text-xs text-[var(--color-slate)] space-y-2">
+                  <div className="w-5 h-5 border-2 border-[var(--color-pricing-blue)] border-t-transparent rounded-full animate-spin mx-auto" />
+                  <p>Menjalankan inferensi penalaran NVIDIA NIM...</p>
                 </div>
               ) : nvidiaError ? (
-                <div className="p-3 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded-xl">
+                <div className="p-4 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded-2xl">
                   {nvidiaError}
                 </div>
               ) : nvidiaResult ? (
-                <div className="space-y-3 text-xs">
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="p-2.5 bg-[var(--surface)] rounded-xl">
-                      <span className="text-[10px] text-[var(--text-muted)] uppercase font-semibold">
+                <div className="space-y-4 text-xs">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="p-3.5 bg-[var(--color-studio-mist)] rounded-2xl space-y-1">
+                      <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold">
                         Kategori
                       </span>
-                      <p className="font-bold text-[var(--text-primary)] mt-0.5">
+                      <p className="font-semibold text-[var(--color-ink)]">
                         {nvidiaResult.recommendation?.category}
                       </p>
                     </div>
-                    <div className="p-2.5 bg-[var(--surface)] rounded-xl">
-                      <span className="text-[10px] text-[var(--text-muted)] uppercase font-semibold">
+                    <div className="p-3.5 bg-[var(--color-studio-mist)] rounded-2xl space-y-1">
+                      <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold">
                         Prioritas
                       </span>
-                      <p className="font-bold text-[var(--text-primary)] mt-0.5">
+                      <p className="font-semibold text-[var(--color-ink)]">
                         {nvidiaResult.recommendation?.priority}
                       </p>
                     </div>
-                    <div className="p-2.5 bg-[var(--surface)] rounded-xl">
-                      <span className="text-[10px] text-[var(--text-muted)] uppercase font-semibold">
+                    <div className="p-3.5 bg-[var(--color-studio-mist)] rounded-2xl space-y-1">
+                      <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold">
                         Unit
                       </span>
-                      <p className="font-bold text-[var(--text-primary)] mt-0.5">
+                      <p className="font-semibold text-[var(--color-ink)]">
                         {nvidiaResult.recommendation?.target_unit}
                       </p>
                     </div>
-                    <div className="p-2.5 bg-[var(--surface)] rounded-xl">
-                      <span className="text-[10px] text-[var(--text-muted)] uppercase font-semibold">
+                    <div className="p-3.5 bg-[var(--color-studio-mist)] rounded-2xl space-y-1">
+                      <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold">
                         Eskalasi
                       </span>
-                      <p className="font-bold text-[var(--text-primary)] mt-0.5">
+                      <p className="font-semibold text-[var(--color-ink)]">
                         {nvidiaResult.recommendation?.escalation_required ? 'Ya' : 'Tidak'}
                       </p>
                     </div>
                   </div>
-                  <div className="p-3 bg-[var(--surface)] rounded-xl">
-                    <span className="text-[10px] text-[var(--text-muted)] uppercase font-semibold">
-                      Reasoning
+
+                  <div className="p-4 bg-[var(--color-studio-mist)] rounded-2xl border border-[var(--color-control-gray)] space-y-1.5">
+                    <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold block">
+                      Penalaran Klinis (Reasoning)
                     </span>
-                    <p className="mt-1 text-[var(--text-primary)] leading-relaxed font-sans">
+                    <p className="text-[var(--color-ink)] leading-relaxed">
                       {nvidiaResult.recommendation?.reasoning}
                     </p>
                   </div>
                 </div>
               ) : (
-                <div className="py-12 text-center text-xs text-[var(--text-muted)]">
-                  Klik "Jalankan Komparasi Paralel" untuk menguji respons.
+                <div className="py-14 text-center text-xs text-[var(--color-slate)]">
+                  Klik tombol di atas untuk menjalankan inferensi model.
                 </div>
               )}
-            </Card>
+            </div>
 
             {/* Gemini Column */}
-            <Card className="p-5 border-purple-100 space-y-4">
-              <div className="flex items-center justify-between pb-2 border-b border-purple-100">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center font-bold text-xs">
+            <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-7 space-y-5">
+              <div className="flex items-center justify-between pb-3 border-b border-[var(--color-control-gray)]">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-purple-50 text-purple-700 rounded-xl flex items-center justify-center font-bold text-xs border border-purple-100">
                     GE
                   </div>
                   <div>
-                    <h3 className="font-bold text-sm text-[var(--text-primary)]">Google Gemini</h3>
-                    <span className="text-[11px] text-[var(--text-muted)]">Gemini 2.5 Flash</span>
+                    <h3 className="font-semibold text-sm text-[var(--color-ink)]">Google Gemini</h3>
+                    <span className="text-[11px] text-[var(--color-slate)]">
+                      Gemini 2.5 Flash
+                    </span>
                   </div>
                 </div>
                 {geminiResult?.latency_ms && (
@@ -274,115 +299,146 @@ export function AILabClient({ supportedModels }: AILabClientProps) {
               </div>
 
               {compareLoading ? (
-                <div className="py-12 text-center text-xs text-[var(--text-muted)] animate-pulse">
-                  Menjalankan inferensi Gemini...
+                <div className="py-16 text-center text-xs text-[var(--color-slate)] space-y-2">
+                  <div className="w-5 h-5 border-2 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto" />
+                  <p>Menjalankan inferensi penalaran Google Gemini...</p>
                 </div>
               ) : geminiError ? (
-                <div className="p-3 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded-xl">
+                <div className="p-4 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded-2xl">
                   {geminiError}
                 </div>
               ) : geminiResult ? (
-                <div className="space-y-3 text-xs">
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="p-2.5 bg-[var(--surface)] rounded-xl">
-                      <span className="text-[10px] text-[var(--text-muted)] uppercase font-semibold">
+                <div className="space-y-4 text-xs">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="p-3.5 bg-[var(--color-studio-mist)] rounded-2xl space-y-1">
+                      <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold">
                         Kategori
                       </span>
-                      <p className="font-bold text-[var(--text-primary)] mt-0.5">
+                      <p className="font-semibold text-[var(--color-ink)]">
                         {geminiResult.recommendation?.category}
                       </p>
                     </div>
-                    <div className="p-2.5 bg-[var(--surface)] rounded-xl">
-                      <span className="text-[10px] text-[var(--text-muted)] uppercase font-semibold">
+                    <div className="p-3.5 bg-[var(--color-studio-mist)] rounded-2xl space-y-1">
+                      <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold">
                         Prioritas
                       </span>
-                      <p className="font-bold text-[var(--text-primary)] mt-0.5">
+                      <p className="font-semibold text-[var(--color-ink)]">
                         {geminiResult.recommendation?.priority}
                       </p>
                     </div>
-                    <div className="p-2.5 bg-[var(--surface)] rounded-xl">
-                      <span className="text-[10px] text-[var(--text-muted)] uppercase font-semibold">
+                    <div className="p-3.5 bg-[var(--color-studio-mist)] rounded-2xl space-y-1">
+                      <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold">
                         Unit
                       </span>
-                      <p className="font-bold text-[var(--text-primary)] mt-0.5">
+                      <p className="font-semibold text-[var(--color-ink)]">
                         {geminiResult.recommendation?.target_unit}
                       </p>
                     </div>
-                    <div className="p-2.5 bg-[var(--surface)] rounded-xl">
-                      <span className="text-[10px] text-[var(--text-muted)] uppercase font-semibold">
+                    <div className="p-3.5 bg-[var(--color-studio-mist)] rounded-2xl space-y-1">
+                      <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold">
                         Eskalasi
                       </span>
-                      <p className="font-bold text-[var(--text-primary)] mt-0.5">
+                      <p className="font-semibold text-[var(--color-ink)]">
                         {geminiResult.recommendation?.escalation_required ? 'Ya' : 'Tidak'}
                       </p>
                     </div>
                   </div>
-                  <div className="p-3 bg-[var(--surface)] rounded-xl">
-                    <span className="text-[10px] text-[var(--text-muted)] uppercase font-semibold">
-                      Reasoning
+
+                  <div className="p-4 bg-[var(--color-studio-mist)] rounded-2xl border border-[var(--color-control-gray)] space-y-1.5">
+                    <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold block">
+                      Penalaran Klinis (Reasoning)
                     </span>
-                    <p className="mt-1 text-[var(--text-primary)] leading-relaxed font-sans">
+                    <p className="text-[var(--color-ink)] leading-relaxed">
                       {geminiResult.recommendation?.reasoning}
                     </p>
                   </div>
                 </div>
               ) : (
-                <div className="py-12 text-center text-xs text-[var(--text-muted)]">
-                  Klik "Jalankan Komparasi Paralel" untuk menguji respons.
+                <div className="py-14 text-center text-xs text-[var(--color-slate)]">
+                  Klik tombol di atas untuk menjalankan inferensi model.
                 </div>
               )}
-            </Card>
+            </div>
           </div>
         </TabsContent>
 
         {/* SINGLE MODEL TAB */}
-        <TabsContent value="single" className="space-y-4">
-          <Card className="p-5 space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <TabsContent value="single" className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)]">
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-semibold text-[var(--color-ink)]">Pilih Provider:</span>
               <Select
-                label="Provider"
-                value={singleProvider}
-                onChange={(e) => {
-                  const p = e.target.value as 'nvidia' | 'gemini'
-                  setSingleProvider(p)
-                  setSingleModel(
-                    p === 'nvidia'
-                      ? 'nvidia/nemotron-3.5-lightning-30b-a3b'
-                      : 'gemini-2.5-flash'
-                  )
-                }}
+                value={selectedProvider}
+                onChange={(e) => setSelectedProvider(e.target.value as any)}
+                className="h-10 rounded-xl text-xs w-56"
               >
-                <option value="nvidia">NVIDIA NIM</option>
-                <option value="gemini">Google Gemini</option>
+                <option value="nvidia">NVIDIA NIM (Nemotron 3.5)</option>
+                <option value="gemini">Google Gemini (Gemini 2.5)</option>
               </Select>
-              <Input
-                label="Model Identifier"
-                value={singleModel}
-                onChange={(e) => setSingleModel(e.target.value)}
-              />
             </div>
-            <div className="flex justify-end">
-              <Button size="sm" onClick={handleRunSingle} loading={singleLoading}>
-                <Play size={14} />
-                <span>Uji Inferensi Tunggal</span>
-              </Button>
-            </div>
-          </Card>
+            <Button
+              size="md"
+              onClick={handleRunSingle}
+              loading={singleLoading}
+              className="h-10 px-6 gap-2"
+            >
+              <Play size={14} />
+              <span>Jalankan Inferensi Tunggal</span>
+            </Button>
+          </div>
 
           {singleResult && (
-            <Card className="p-6 space-y-3">
-              <h3 className="font-bold text-sm text-[var(--text-primary)]">
-                Hasil Inferensi ({singleResult.provider} • {singleResult.model})
-              </h3>
-              <pre className="p-4 bg-[var(--surface)] rounded-2xl text-xs font-mono overflow-x-auto text-[var(--text-primary)]">
-                {JSON.stringify(singleResult, null, 2)}
-              </pre>
-            </Card>
-          )}
+            <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-7 space-y-5">
+              <div className="flex items-center justify-between pb-3 border-b border-[var(--color-control-gray)]">
+                <span className="font-semibold text-sm text-[var(--color-ink)]">
+                  Hasil Rekomendasi Model ({singleResult.provider})
+                </span>
+                <Badge variant="outline">{singleResult.latency_ms}ms</Badge>
+              </div>
 
-          {singleError && (
-            <div className="p-4 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded-2xl">
-              {singleError}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                <div className="p-3.5 bg-[var(--color-studio-mist)] rounded-2xl space-y-1">
+                  <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold">
+                    Kategori
+                  </span>
+                  <p className="font-semibold text-[var(--color-ink)]">
+                    {singleResult.recommendation?.category}
+                  </p>
+                </div>
+                <div className="p-3.5 bg-[var(--color-studio-mist)] rounded-2xl space-y-1">
+                  <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold">
+                    Prioritas
+                  </span>
+                  <p className="font-semibold text-[var(--color-ink)]">
+                    {singleResult.recommendation?.priority}
+                  </p>
+                </div>
+                <div className="p-3.5 bg-[var(--color-studio-mist)] rounded-2xl space-y-1">
+                  <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold">
+                    Unit
+                  </span>
+                  <p className="font-semibold text-[var(--color-ink)]">
+                    {singleResult.recommendation?.target_unit}
+                  </p>
+                </div>
+                <div className="p-3.5 bg-[var(--color-studio-mist)] rounded-2xl space-y-1">
+                  <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold">
+                    Eskalasi
+                  </span>
+                  <p className="font-semibold text-[var(--color-ink)]">
+                    {singleResult.recommendation?.escalation_required ? 'Ya' : 'Tidak'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-4 bg-[var(--color-studio-mist)] rounded-2xl border border-[var(--color-control-gray)] space-y-1.5 text-xs">
+                <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold block">
+                  Penalaran Model
+                </span>
+                <p className="text-[var(--color-ink)] leading-relaxed">
+                  {singleResult.recommendation?.reasoning}
+                </p>
+              </div>
             </div>
           )}
         </TabsContent>

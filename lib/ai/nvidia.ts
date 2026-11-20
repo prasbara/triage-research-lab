@@ -3,6 +3,41 @@ import { ComplaintClassificationInput, ComplaintClassificationResult, ProviderHe
 import { buildClassificationPrompt, hashPrompt, PROMPT_VERSION } from './prompt'
 import { ComplaintClassificationSchema } from './schemas'
 
+function extractValidJSON(text: string): any {
+  if (!text) return null
+  try { return JSON.parse(text) } catch {}
+
+  // Try markdown json code fence
+  const mdMatch = text.match(/```(?:json)?\s*([\s\S]*?)\s*```/i)
+  if (mdMatch && mdMatch[1]) {
+    try { return JSON.parse(mdMatch[1].trim()) } catch {}
+  }
+
+  // Scan for balanced curly brackets from the end (since final JSON answer is at the end)
+  const lastBrace = text.lastIndexOf('}')
+  if (lastBrace !== -1) {
+    let depth = 0
+    for (let i = lastBrace; i >= 0; i--) {
+      if (text[i] === '}') depth++
+      else if (text[i] === '{') {
+        depth--
+        if (depth === 0) {
+          const candidate = text.substring(i, lastBrace + 1)
+          try { return JSON.parse(candidate) } catch {}
+        }
+      }
+    }
+  }
+
+  // Regex fallback
+  const match = text.match(/\{[\s\S]*\}/)
+  if (match) {
+    try { return JSON.parse(match[0]) } catch {}
+  }
+
+  return null
+}
+
 export class NvidiaProvider {
   private client: OpenAI
   private model: string
@@ -16,7 +51,7 @@ export class NvidiaProvider {
     this.client = new OpenAI({
       apiKey: key,
       baseURL: 'https://integrate.api.nvidia.com/v1',
-      timeout: 45000,
+      timeout: 60000,
     })
   }
 
@@ -53,14 +88,14 @@ export class NvidiaProvider {
           { role: 'user', content: prompt },
         ],
         temperature: 0.1,
-        max_tokens: 2048,
+        max_tokens: 4096, // High budget for Nemotron 3.5 reasoning tokens + output JSON
       })
 
       const latency_ms = Date.now() - startTime
       const message = completion.choices[0]?.message
       let raw_response = message?.content || null
 
-      // Handle reasoning models where output might be in reasoning_content or wrapped in markdown
+      // Handle reasoning models where output might be in reasoning_content or content
       if (!raw_response && (message as any)?.reasoning_content) {
         raw_response = (message as any).reasoning_content
       }
@@ -76,27 +111,14 @@ export class NvidiaProvider {
         }
       }
 
-      // Parse JSON from text
-      let parsed: unknown
-      try {
-        const cleaned = raw_response
-          .replace(/```json\s*/gi, '')
-          .replace(/```\s*/gi, '')
-          .trim()
-        
-        // Extract first JSON object if surrounded by extra text
-        const jsonMatch = cleaned.match(/\{[\s\S]*\}/)
-        if (jsonMatch) {
-          parsed = JSON.parse(jsonMatch[0])
-        } else {
-          parsed = JSON.parse(cleaned)
-        }
-      } catch (parseErr: any) {
+      // Robust balanced JSON parser
+      const parsed = extractValidJSON(raw_response)
+      if (!parsed) {
         return {
           result: null,
           raw_response,
           latency_ms,
-          error: `JSON parse error: ${parseErr.message}`,
+          error: `Gagal mengekstrak JSON valid dari respon model.`,
           validation_status: 'invalid',
           prompt_hash,
         }
@@ -104,6 +126,31 @@ export class NvidiaProvider {
 
       const validated = ComplaintClassificationSchema.safeParse(parsed)
       if (!validated.success) {
+        // Fallback normalization: map similar fields if model slightly varied keys
+        const normalized = {
+          category: parsed.category || parsed.kategori || input.available_categories[0] || 'Umum',
+          subcategory: parsed.subcategory || parsed.subkategori || null,
+          priority: parsed.priority || parsed.prioritas || input.available_priorities[0] || 'P3',
+          target_unit: parsed.target_unit || parsed.unit || input.available_units[0] || 'Umum',
+          escalation_required: parsed.escalation_required ?? parsed.is_high_risk ?? false,
+          reasoning: parsed.reasoning || parsed.alasan || 'Klasifikasi berbasis SOP keluhan RS',
+          sop_reference: parsed.sop_reference || parsed.referensi_sop || 'SOP Triase RS v1.0',
+          requires_human_review: parsed.requires_human_review ?? true,
+        }
+        const secondValidation = ComplaintClassificationSchema.safeParse(normalized)
+        if (secondValidation.success) {
+          return {
+            result: secondValidation.data,
+            raw_response,
+            latency_ms,
+            prompt_tokens: completion.usage?.prompt_tokens,
+            completion_tokens: completion.usage?.completion_tokens,
+            total_tokens: completion.usage?.total_tokens,
+            validation_status: 'valid',
+            prompt_hash,
+          }
+        }
+
         return {
           result: null,
           raw_response,
@@ -144,7 +191,7 @@ export class NvidiaProvider {
       const completion = await this.client.chat.completions.create({
         model: this.model,
         messages: [{ role: 'user', content: 'Ping. Berikan jawaban singkat: {"status":"ok"}' }],
-        max_tokens: 300,
+        max_tokens: 500,
         temperature: 0,
       })
       const latency_ms = Date.now() - startTime

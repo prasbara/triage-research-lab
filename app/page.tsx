@@ -41,14 +41,14 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
             <Link href="/login">
-              <button className="h-7 px-3 rounded-full text-[12px] font-normal tracking-[-0.12px] border border-[var(--color-hairline-silver)] bg-transparent hover:bg-[var(--color-studio-mist)] text-[var(--color-ink)] transition-colors">
+              <button className="h-8 px-3.5 rounded-full text-[12px] font-normal tracking-[-0.12px] border border-[var(--color-hairline-silver)] bg-transparent hover:bg-[var(--color-studio-mist)] text-[var(--color-ink)] transition-colors cursor-pointer">
                 Masuk Staf
               </button>
             </Link>
             <Link href="/dashboard">
-              <button className="h-7 px-3.5 rounded-full text-[12px] font-normal tracking-[-0.12px] bg-[var(--color-pricing-blue)] hover:bg-[#0077ed] text-white transition-colors">
+              <button className="h-8 px-4 rounded-full text-[12px] font-medium tracking-[-0.12px] bg-[var(--color-pricing-blue)] hover:bg-[#0077ed] text-white transition-colors cursor-pointer">
                 Buka Dashboard
               </button>
             </Link>
@@ -57,7 +57,7 @@ export default function LandingPage() {
       </nav>
 
       {/* ─── Hero Launch Stage (Gallery White #ffffff) ─── */}
-      <section className="pt-20 pb-16 px-6 max-w-5xl mx-auto text-center">
+      <section className="pt-24 pb-16 px-6 max-w-5xl mx-auto text-center">
         {/* Launch Status Label: bare #b64400 12px text, no pill background or border */}
         <p className="launch-label mb-3">
           Riset Tesis Magister Manajemen Rumah Sakit
@@ -74,20 +74,20 @@ export default function LandingPage() {
         </h1>
 
         {/* Subtitle / Feature Copy */}
-        <p className="body-editorial max-w-2xl mx-auto mb-8">
+        <p className="body-editorial max-w-2xl mx-auto mb-10 leading-relaxed">
           Platform kuasi-eksperimen kuantitatif untuk mengevaluasi apakah pendampingan Large Language Model (NVIDIA NIM & Google Gemini) mempersingkat durasi triase administratif dan meningkatkan ketepatan penanganan awal keluhan pasien.
         </p>
 
         {/* Controls: Compact Pricing Blue pill + Outlined Explore pill */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
           <Link href="/dashboard">
-            <Button size="lg" variant="primary">
+            <Button size="lg" variant="primary" className="h-12 px-8 text-sm gap-2.5">
               <span>Buka Research Dashboard</span>
-              <ArrowRight size={14} className="ml-1" />
+              <ArrowRight size={15} />
             </Button>
           </Link>
           <Link href="/about">
-            <Button size="lg" variant="outline">
+            <Button size="lg" variant="outline" className="h-12 px-8 text-sm gap-2.5">
               <span>Eksplorasi Metodologi & FAQ</span>
             </Button>
           </Link>
@@ -95,15 +95,15 @@ export default function LandingPage() {
       </section>
 
       {/* ─── Official Research Title Capsule (Gallery White, 28px Radius, Hairline Edge) ─── */}
-      <section className="max-w-4xl mx-auto px-6 mb-24">
-        <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-8 text-center space-y-3">
+      <section className="max-w-4xl mx-auto px-6 my-16">
+        <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-8 sm:p-12 text-center space-y-4 shadow-none">
           <span className="text-[11px] font-semibold uppercase tracking-[0.228px] text-[var(--color-slate)] block">
             Judul Penelitian Tesis Magister
           </span>
-          <h2 className="text-lg sm:text-xl font-semibold text-[var(--color-ink)] leading-snug tracking-[-0.2px] max-w-3xl mx-auto">
+          <h2 className="text-xl sm:text-2xl font-semibold text-[var(--color-ink)] leading-relaxed tracking-[-0.2px] max-w-3xl mx-auto">
             “Efektivitas Pendampingan Large Language Model dalam Klasifikasi dan Prioritisasi Keluhan Pasien terhadap Waktu Triase dan Ketepatan Penanganan Awal Keluhan di Rumah Sakit.”
           </h2>
-          <p className="text-xs text-[var(--color-slate)] max-w-2xl mx-auto">
+          <p className="text-xs sm:text-sm text-[var(--color-slate)] max-w-2xl mx-auto leading-relaxed">
             Desain kuasi-eksperimen kuantitatif dengan alokasi acak berimbang (*Counterbalanced Latin Square Design*) & Standar Emas Adjudikasi Independen.
           </p>
         </div>
