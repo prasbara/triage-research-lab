@@ -7,7 +7,19 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { ShieldCheck, UserCheck, Stethoscope, AlertCircle, ArrowRight, Lock } from 'lucide-react'
+import {
+  ShieldCheck,
+  UserCheck,
+  Stethoscope,
+  AlertCircle,
+  ArrowRight,
+  Lock,
+  Mail,
+  Eye,
+  EyeOff,
+  CheckCircle2,
+  Sparkles,
+} from 'lucide-react'
 
 export function LoginClient() {
   const router = useRouter()
@@ -17,12 +29,14 @@ export function LoginClient() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [selectedRole, setSelectedRole] = useState<string | null>(null)
   const [errorMessage, setErrorMessage] = useState(
     errorParam === 'invalid_credentials'
-      ? 'Email atau password salah. Silakan coba lagi.'
+      ? 'Email atau kata sandi tidak sesuai. Silakan periksa kembali.'
       : errorParam === 'missing_fields'
-        ? 'Silakan isi email dan password.'
+        ? 'Silakan isi email dan kata sandi.'
         : null
   )
 
@@ -32,42 +46,51 @@ export function LoginClient() {
       email: 'admin@triage.ac.id',
       password: 'Triage2025!',
       role: 'researcher',
-      desc: 'Akses penuh seluruh dashboard, analitik, dan pengaturan',
+      desc: 'Akses penuh seluruh dashboard analitik, inferensi ganda, & ekspor data',
       icon: ShieldCheck,
       badge: 'Admin',
+      badgeColor: 'bg-blue-100 text-blue-700 border-blue-200',
+      activeColor: 'border-blue-500 bg-blue-50/60 ring-2 ring-blue-100',
     },
     {
       title: 'Pakar 1 (Medis & KARS)',
       email: 'expert@triage.ac.id',
       password: 'Triage2025!',
-      role: 'expert',
-      desc: 'Validasi independen keluhan & pembentukan Gold Standard',
+      role: 'expert_1',
+      desc: 'Validasi independen klinis & pembentukan Gold Standard',
       icon: Stethoscope,
       badge: 'Pakar 1',
+      badgeColor: 'bg-emerald-100 text-emerald-700 border-emerald-200',
+      activeColor: 'border-emerald-500 bg-emerald-50/60 ring-2 ring-emerald-100',
     },
     {
       title: 'Pakar 2 (Mutu RS & MARS)',
       email: 'expert2@triage.ac.id',
       password: 'Triage2025!',
-      role: 'expert',
-      desc: 'Validasi independen kedua & sidang adjudikasi konsensus',
+      role: 'expert_2',
+      desc: 'Validasi independen kedua & sidang adjudikasi konsensus KARS',
       icon: Stethoscope,
       badge: 'Pakar 2',
+      badgeColor: 'bg-purple-100 text-purple-700 border-purple-200',
+      activeColor: 'border-purple-500 bg-purple-50/60 ring-2 ring-purple-100',
     },
     {
       title: 'Staf Penguji Triase (Participant)',
       email: 'participant@triage.ac.id',
       password: 'Triage2025!',
       role: 'participant',
-      desc: 'Pengujian triase manual vs AI-assisted terandomisasi',
+      desc: 'Sesi pengujian triase manual vs AI terandomisasi (Latin Square)',
       icon: UserCheck,
       badge: 'Partisipan P001',
+      badgeColor: 'bg-sky-100 text-sky-700 border-sky-200',
+      activeColor: 'border-sky-500 bg-sky-50/60 ring-2 ring-sky-100',
     },
   ]
 
-  const handleFill = (accEmail: string, accPass: string) => {
-    setEmail(accEmail)
-    setPassword(accPass)
+  const handleFill = (acc: typeof quickAccounts[0]) => {
+    setEmail(acc.email)
+    setPassword(acc.password)
+    setSelectedRole(acc.role)
     setErrorMessage(null)
   }
 
@@ -98,113 +121,151 @@ export function LoginClient() {
   }
 
   return (
-    <div className="min-h-screen bg-[#faf9f6] flex flex-col justify-center items-center py-12 px-6">
-      {/* Brand Header in Intercom Whisper-Weight */}
-      <div className="text-center mb-8 max-w-sm">
-        <div className="w-10 h-10 rounded-[4px] bg-[#000000] text-white mx-auto mb-4 flex items-center justify-center font-mono font-bold text-base shadow-none">
+    <div className="min-h-screen bg-slate-50 flex flex-col justify-center items-center py-12 px-4 sm:px-6 relative selection:bg-blue-100 selection:text-blue-900">
+      {/* Background Soft Glow & Grid */}
+      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-100/40 rounded-full blur-3xl pointer-events-none" />
+
+      {/* Brand Header */}
+      <div className="text-center mb-8 max-w-sm relative z-10">
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white mx-auto mb-4 flex items-center justify-center font-bold text-lg shadow-md shadow-blue-500/20 ring-4 ring-white">
           T
         </div>
-        <p className="font-mono text-xs uppercase tracking-[1.2px] text-[#585858] mb-1">Portal Eksperimen Riset</p>
-        <h1 className="text-2xl font-light tracking-tight text-[#111111]">
+        <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-[11px] font-medium mb-2">
+          <Sparkles size={11} className="text-blue-600" />
+          <span>Research Portal &amp; Clinical Lab</span>
+        </div>
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900">
           Masuk ke TRIAGE Lab
         </h1>
-        <p className="text-xs text-[#585858] mt-1.5 leading-relaxed">
+        <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
           Gunakan akun penelitian terdaftar untuk mengakses ruang kerja triase dan instrumen eksperimen.
         </p>
       </div>
 
-      {/* Main Login Card in Intercom Warm Cream Editorial */}
-      <Card className="max-w-md w-full p-8 border border-[#dedbd6] bg-[#ffffff] rounded-[4px] space-y-6">
+      {/* Main Login Card */}
+      <Card className="max-w-md w-full p-6 sm:p-8 bg-white border border-slate-200/90 rounded-2xl shadow-xl shadow-slate-200/40 space-y-6 relative z-10">
         {errorMessage && (
-          <div className="p-3.5 rounded-[4px] bg-rose-50 border border-rose-200 text-xs text-rose-800 flex items-start gap-2.5">
-            <AlertCircle size={15} className="text-rose-600 shrink-0 mt-0.5" />
-            <span>{errorMessage}</span>
+          <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-800 flex items-start gap-2.5 shadow-2xs">
+            <AlertCircle size={16} className="text-rose-600 shrink-0 mt-0.5" />
+            <span className="font-medium leading-relaxed">{errorMessage}</span>
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1.5">
-            <label className="text-[11px] font-mono uppercase tracking-[1.2px] text-[#585858] block">
+            <label className="text-xs font-semibold text-slate-700 block">
               Alamat Email Penelitian
             </label>
-            <Input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="peneliti@triage.ac.id"
-              className="text-xs h-10 rounded-[4px] px-3.5"
-            />
+            <div className="relative">
+              <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+              <Input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value)
+                  setSelectedRole(null)
+                }}
+                placeholder="peneliti@triage.ac.id"
+                className="pl-10 h-10.5 text-xs rounded-xl border-slate-200 bg-slate-50/50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all"
+              />
+            </div>
           </div>
 
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="text-[11px] font-mono uppercase tracking-[1.2px] text-[#585858] block">
+              <label className="text-xs font-semibold text-slate-700 block">
                 Kata Sandi
               </label>
-              <span className="text-[10px] text-[#888888] font-mono">
+              <span className="text-[11px] text-slate-400 font-mono">
                 Default: Triage2025!
               </span>
             </div>
-            <Input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              className="text-xs h-10 rounded-[4px] px-3.5"
-            />
+            <div className="relative">
+              <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                required
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value)
+                  setSelectedRole(null)
+                }}
+                placeholder="••••••••"
+                className="pl-10 pr-10 h-10.5 text-xs rounded-xl border-slate-200 bg-slate-50/50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+              >
+                {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+              </button>
+            </div>
           </div>
 
           <Button
             type="submit"
             size="lg"
             variant="primary"
-            className="w-full text-xs font-normal h-10 mt-2 rounded-[4px]"
+            className="w-full text-xs font-medium h-11 mt-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white shadow-sm flex items-center justify-center gap-2 cursor-pointer transition-all"
             loading={loading}
           >
             <span>Masuk ke Dashboard</span>
-            <ArrowRight size={13} className="ml-1.5" />
+            <ArrowRight size={14} />
           </Button>
         </form>
 
         {/* 1-Click Fast Fill Accounts */}
-        <div className="pt-5 border-t border-[#dedbd6] space-y-3">
-          <span className="text-[10px] font-mono text-[#585858] uppercase tracking-[1.2px] block text-center">
-            Akun Riset Tersedia (Klik untuk Mengisi):
-          </span>
+        <div className="pt-5 border-t border-slate-100 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-semibold text-slate-600 uppercase tracking-wider">
+              Akun Riset (Klik untuk Mengisi):
+            </span>
+            <span className="text-[10px] text-slate-400 font-medium">1-Click Fast Fill</span>
+          </div>
 
           <div className="space-y-2">
             {quickAccounts.map((acc) => {
               const Icon = acc.icon
-              const isSelected = email === acc.email
+              const isSelected = selectedRole === acc.role || email === acc.email
               return (
                 <button
                   key={acc.email}
                   type="button"
-                  onClick={() => handleFill(acc.email, acc.password)}
-                  className={`w-full p-3 rounded-[4px] text-left border transition-colors flex items-center justify-between gap-3 text-xs ${
+                  onClick={() => handleFill(acc)}
+                  className={`w-full p-3 rounded-xl text-left border transition-all flex items-center justify-between gap-3 text-xs cursor-pointer ${
                     isSelected
-                      ? 'border-[#000000] bg-[#f1eee9]'
-                      : 'border-[#dedbd6] bg-[#faf9f6] hover:bg-[#f1eee9]'
+                      ? acc.activeColor
+                      : 'border-slate-200/80 bg-white hover:bg-slate-50 hover:border-slate-300'
                   }`}
                 >
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-6 h-6 rounded-[2px] bg-white border border-[#dedbd6] flex items-center justify-center shrink-0">
-                      <Icon size={12} className="text-[#111111]" />
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div
+                      className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${
+                        isSelected
+                          ? 'bg-white border-transparent shadow-2xs'
+                          : 'bg-slate-100/70 border-slate-200/60 text-slate-600'
+                      }`}
+                    >
+                      <Icon size={14} className={isSelected ? 'text-blue-600' : 'text-slate-600'} />
                     </div>
                     <div className="min-w-0">
-                      <div className="font-normal text-[#111111] truncate flex items-center gap-1.5">
+                      <div className="font-semibold text-slate-900 truncate flex items-center gap-1.5">
                         <span>{acc.title}</span>
+                        {isSelected && <CheckCircle2 size={12} className="text-blue-600 shrink-0" />}
                       </div>
-                      <span className="text-[10px] text-[#585858] font-mono block truncate">
+                      <span className="text-[11px] text-slate-500 font-mono block truncate">
                         {acc.email}
                       </span>
                     </div>
                   </div>
-                  <Badge variant="outline" className="text-[10px] shrink-0 font-normal">
+                  <span
+                    className={`text-[10px] font-semibold px-2 py-0.5 rounded-md border shrink-0 ${acc.badgeColor}`}
+                  >
                     {acc.badge}
-                  </Badge>
+                  </span>
                 </button>
               )
             })}
@@ -213,12 +274,12 @@ export function LoginClient() {
       </Card>
 
       {/* Back to Home Link */}
-      <div className="mt-8 text-center text-xs font-mono uppercase tracking-[1.2px]">
+      <div className="mt-6 text-center text-xs relative z-10">
         <Link
           href="/"
-          className="text-[#585858] hover:text-[#111111] transition-colors"
+          className="text-slate-500 hover:text-slate-900 font-medium transition-colors inline-flex items-center gap-1.5"
         >
-          ← Kembali ke Beranda TRIAGE Lab
+          <span>← Kembali ke Beranda TRIAGE Lab</span>
         </Link>
       </div>
     </div>

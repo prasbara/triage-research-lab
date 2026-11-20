@@ -1,23 +1,24 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { Bell, ChevronDown, User, LogOut, FlaskConical } from 'lucide-react'
+import { ChevronDown, LogOut, FlaskConical, Bell, ExternalLink } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 const pageTitles: Record<string, string> = {
-  '/dashboard': 'Overview',
-  '/complaints': 'Dataset Keluhan',
-  '/experiments': 'Eksperimen',
-  '/triage/manual': 'Triase Manual',
-  '/triage/ai-assisted': 'Triase AI',
-  '/validation': 'Validasi Ahli',
-  '/participants': 'Partisipan',
-  '/analytics': 'Analitik LMM',
-  '/ai-lab': 'AI Laboratory',
-  '/reports': 'Laporan Riset',
-  '/settings': 'Pengaturan',
-  '/about': 'Tentang Riset',
+  '/dashboard': 'Overview Dashboard',
+  '/complaints': 'Manajemen Korpus Keluhan',
+  '/experiments': 'Sesi Eksperimen',
+  '/triage/manual': 'Instrumen Triase Manual',
+  '/triage/ai-assisted': 'Instrumen Triase Berbantuan AI',
+  '/validation': 'Validasi Standar Emas Pakar',
+  '/participants': 'Daftar Partisipan Staf',
+  '/analytics': 'Analitik Inferensial LMM',
+  '/ai-lab': 'AI Laboratory (Dual Provider)',
+  '/reports': 'Laporan & Ekspor Riset',
+  '/settings': 'Pengaturan Sistem',
+  '/about': 'Metodologi & Regulasi RS',
 }
 
 interface HeaderProps {
@@ -31,7 +32,6 @@ interface HeaderProps {
 export function Header({ user }: HeaderProps) {
   const pathname = usePathname()
   const [userMenuOpen, setUserMenuOpen] = useState(false)
-  const [notifOpen, setNotifOpen] = useState(false)
 
   const title =
     pageTitles[pathname] ??
@@ -39,57 +39,69 @@ export function Header({ user }: HeaderProps) {
     'TRIAGE Research Lab'
 
   return (
-    <header className="sticky top-0 z-30 h-12 flex items-center justify-between px-6 bg-[#faf9f6]/95 backdrop-blur-sm border-b border-[#dedbd6] shrink-0 select-none">
-      {/* Left: Page Title in Saans 300 / 400 */}
-      <div className="flex items-center gap-3">
-        <h1 className="text-sm font-normal text-[#111111] tracking-tight">
+    <header className="sticky top-0 z-30 h-14 flex items-center justify-between px-6 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shrink-0 select-none shadow-2xs">
+      {/* Left: Breadcrumbs & Page Title */}
+      <div className="flex items-center gap-2.5">
+        <span className="text-xs font-medium text-slate-400 hidden sm:inline">
+          Research Lab
+        </span>
+        <span className="text-slate-300 hidden sm:inline">/</span>
+        <h1 className="text-sm font-semibold text-slate-900 tracking-tight">
           {title}
         </h1>
-        <span className="text-[#888888] font-mono text-[10px] uppercase tracking-[1.2px] hidden sm:inline">
-          / Hospital Quality Management
-        </span>
       </div>
 
-      {/* Right: Controls */}
-      <div className="flex items-center gap-2">
-        {/* Experiment session indicator */}
-        <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 text-xs text-[#585858] bg-[#f1eee9] rounded-[4px] border border-[#dedbd6]">
-          <FlaskConical size={12} className="text-[#0007cb]" />
-          <span className="font-mono text-[11px]">Sesi Aktif (Latin Square)</span>
+      {/* Right: Controls & User Profile */}
+      <div className="flex items-center gap-3">
+        {/* Active Session Pill */}
+        <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 text-xs text-slate-600 bg-slate-50 rounded-full border border-slate-200/80">
+          <FlaskConical size={13} className="text-blue-600" />
+          <span className="font-medium text-[11px]">Protokol Latin Square (Active)</span>
         </div>
 
-        {/* User menu button */}
+        {/* Public View Button */}
+        <Link
+          href="/"
+          target="_blank"
+          className="hidden md:flex items-center gap-1 text-xs text-slate-500 hover:text-slate-900 font-medium transition-colors"
+          title="Buka Beranda Riset"
+        >
+          <span>Beranda</span>
+          <ExternalLink size={12} />
+        </Link>
+
+        {/* User Dropdown */}
         <div className="relative">
           <button
-            onClick={() => { setUserMenuOpen(!userMenuOpen); setNotifOpen(false) }}
+            onClick={() => setUserMenuOpen(!userMenuOpen)}
             className={cn(
-              'flex items-center gap-2 px-2.5 py-1 rounded-[4px] border border-[#dedbd6] transition-colors text-xs bg-[#ffffff]',
-              userMenuOpen ? 'bg-[#f1eee9]' : 'hover:bg-[#f1eee9]'
+              'flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-lg border border-slate-200/80 transition-all text-xs bg-white shadow-2xs cursor-pointer',
+              userMenuOpen ? 'bg-slate-50 ring-2 ring-blue-100' : 'hover:bg-slate-50 hover:border-slate-300'
             )}
           >
-            <div className="w-5 h-5 rounded-[2px] bg-[#000000] flex items-center justify-center text-white text-[10px] font-mono">
+            <div className="w-5 h-5 rounded-md bg-slate-900 text-white flex items-center justify-center text-[11px] font-semibold">
               {user?.name?.charAt(0).toUpperCase() ?? 'P'}
             </div>
-            <span className="hidden md:block text-xs font-normal text-[#111111] max-w-[120px] truncate">
-              {user?.name ?? 'Peneliti'}
+            <span className="text-xs font-medium text-slate-800 max-w-[130px] truncate">
+              {user?.name ?? 'Staf Riset'}
             </span>
-            <ChevronDown size={11} className="text-[#888888]" />
+            <ChevronDown size={12} className="text-slate-400" />
           </button>
 
           {userMenuOpen && (
-            <div className="absolute right-0 mt-1.5 w-52 bg-[#ffffff] rounded-[4px] border border-[#dedbd6] p-1 shadow-none animate-fade-in z-50">
-              <div className="px-3 py-2 border-b border-[#dedbd6] mb-1">
-                <p className="text-xs font-medium text-[#111111] truncate">{user?.name}</p>
-                <p className="text-[10px] font-mono text-[#888888] truncate">{user?.email}</p>
+            <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl border border-slate-200 p-1.5 shadow-md animate-fade-in z-50">
+              <div className="px-3 py-2 border-b border-slate-100 mb-1">
+                <p className="text-xs font-semibold text-slate-900 truncate">{user?.name ?? 'Staf Riset'}</p>
+                <p className="text-[11px] text-slate-500 font-mono truncate">{user?.email ?? 'peneliti@triage.ac.id'}</p>
               </div>
               <button
                 onClick={() => {
                   window.location.href = '/api/auth/logout'
                 }}
-                className="w-full flex items-center gap-2 px-3 py-1.5 text-xs text-rose-700 hover:bg-[#f1eee9] rounded-[2px] transition-colors text-left"
+                className="w-full flex items-center gap-2 px-3 py-2 text-xs font-medium text-rose-600 hover:bg-rose-50 rounded-lg transition-colors text-left cursor-pointer"
               >
-                <LogOut size={12} />
-                <span>Keluar Akun</span>
+                <LogOut size={14} />
+                <span>Keluar Akun Penelitian</span>
               </button>
             </div>
           )}

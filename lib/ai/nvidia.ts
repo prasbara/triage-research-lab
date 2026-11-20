@@ -1,87 +1,7 @@
 import OpenAI from 'openai'
 import { ComplaintClassificationInput, ComplaintClassificationResult, ProviderHealthResult } from '@/types'
 import { buildClassificationPrompt, hashPrompt, PROMPT_VERSION } from './prompt'
-import { ComplaintClassificationSchema } from './schemas'
-
-function cleanAndParseJSON(str: string): any {
-  if (!str) return null
-  const trimmed = str.trim()
-  try {
-    return JSON.parse(trimmed)
-  } catch {}
-
-  // Strip line comments // and block comments /* */
-  const noComments = trimmed
-    .replace(/\/\*[\s\S]*?\*\//g, '')
-    .replace(/\/\/.*/g, '')
-
-  try {
-    return JSON.parse(noComments)
-  } catch {}
-
-  // Remove trailing commas before } or ]
-  const noTrailingCommas = noComments
-    .replace(/,\s*([}\]])/g, '$1')
-
-  try {
-    return JSON.parse(noTrailingCommas)
-  } catch {}
-
-  // Quote unquoted keys: { key: "val" } -> { "key": "val" }
-  const quotedKeys = noTrailingCommas
-    .replace(/([{,]\s*)([a-zA-Z0-9_]+)\s*:/g, '$1"$2":')
-
-  try {
-    return JSON.parse(quotedKeys)
-  } catch {}
-
-  return null
-}
-
-function extractValidJSON(text: string): any {
-  if (!text) return null
-  
-  // 0. Strip thinking/reasoning blocks
-  let cleaned = text
-    .replace(/<think>[\s\S]*?<\/think>/gi, '')
-    .replace(/Here's a thinking process[\s\S]*?(?=\{|\`\`\`)/gi, '')
-    .trim()
-
-  // 1. Direct parse attempt
-  const direct = cleanAndParseJSON(cleaned)
-  if (direct && typeof direct === 'object') return direct
-
-  // 2. Scan all markdown code blocks (global match)
-  const codeBlockRegex = /```(?:json)?\s*([\s\S]*?)\s*```/gi
-  let match: RegExpExecArray | null
-  while ((match = codeBlockRegex.exec(cleaned)) !== null) {
-    const candidate = match[1]
-    const parsed = cleanAndParseJSON(candidate)
-    if (parsed && typeof parsed === 'object') return parsed
-  }
-
-  // 3. Scan for outermost curly braces { ... }
-  const firstBrace = cleaned.indexOf('{')
-  const lastBrace = cleaned.lastIndexOf('}')
-  if (firstBrace !== -1 && lastBrace > firstBrace) {
-    const candidate = cleaned.substring(firstBrace, lastBrace + 1)
-    const parsed = cleanAndParseJSON(candidate)
-    if (parsed && typeof parsed === 'object') return parsed
-  }
-
-  // 4. Fallback search for any inner JSON block matching classification fields
-  const innerMatch = cleaned.match(/\{(?:[^{}]|(?:\{[^{}]*\}))*\}/g)
-  if (innerMatch) {
-    for (const block of innerMatch) {
-      const parsed = cleanAndParseJSON(block)
-      if (parsed && (parsed.category || parsed.kategori || parsed.priority || parsed.prioritas)) {
-        return parsed
-      }
-    }
-  }
-
-  return null
-}
+import { extractAndValidateTriageJSON } from './json-repair'
 
 export class NvidiaProvider {
   private client: OpenAI
@@ -128,19 +48,19 @@ export class NvidiaProvider {
         messages: [
           {
             role: 'system',
-            content: 'Anda adalah asisten klasifikasi keluhan administratif rumah sakit. Output HANYA JSON valid sesuai skema yang diminta tanpa penjelasan tambahan di luar JSON.',
+            content: 'Anda adalah asisten klasifikasi keluhan administratif rumah sakit. Output HANYA JSON valid sesuai skema yang diminta tanpa teks tambahan di luar JSON.',
           },
           { role: 'user', content: prompt },
         ],
         temperature: 0.1,
-        max_tokens: 4096, // High budget for Nemotron 3.5 reasoning tokens + output JSON
+        max_tokens: 4096,
       })
 
       const latency_ms = Date.now() - startTime
       const message = completion.choices[0]?.message
       let raw_response = message?.content || null
 
-      // Handle reasoning models where output might be in reasoning_content or content
+      // If content is empty/null, check reasoning_content (e.g. Nemotron reasoning models)
       if (!raw_response && (message as any)?.reasoning_content) {
         raw_response = (message as any).reasoning_content
       }
@@ -150,14 +70,19 @@ export class NvidiaProvider {
           result: null,
           raw_response: null,
           latency_ms,
-          error: 'Model NVIDIA NIM mengembalikan respon kosong atau kehabisan token sebelum menghasilkan keluaran.',
+          error: 'Model NVIDIA NIM mengembalikan respon kosong atau kehabisan token.',
           validation_status: 'invalid',
           prompt_hash,
         }
       }
 
-      // Robust balanced JSON parser
-      const parsed = extractValidJSON(raw_response)
+      // Universal resilient JSON extraction & repair
+      const parsed = extractAndValidateTriageJSON(raw_response, {
+        available_categories: input.available_categories,
+        available_priorities: input.available_priorities,
+        available_units: input.available_units,
+      })
+
       if (!parsed) {
         return {
           result: null,
@@ -169,45 +94,8 @@ export class NvidiaProvider {
         }
       }
 
-      const validated = ComplaintClassificationSchema.safeParse(parsed)
-      if (!validated.success) {
-        // Fallback normalization: map similar fields if model slightly varied keys
-        const normalized = {
-          category: parsed.category || parsed.kategori || input.available_categories[0] || 'Umum',
-          subcategory: parsed.subcategory || parsed.subkategori || null,
-          priority: parsed.priority || parsed.prioritas || input.available_priorities[0] || 'P3',
-          target_unit: parsed.target_unit || parsed.unit || input.available_units[0] || 'Umum',
-          escalation_required: parsed.escalation_required ?? parsed.is_high_risk ?? false,
-          reasoning: parsed.reasoning || parsed.alasan || 'Klasifikasi berbasis SOP keluhan RS',
-          sop_reference: parsed.sop_reference || parsed.referensi_sop || 'SOP Triase RS v1.0',
-          requires_human_review: parsed.requires_human_review ?? true,
-        }
-        const secondValidation = ComplaintClassificationSchema.safeParse(normalized)
-        if (secondValidation.success) {
-          return {
-            result: secondValidation.data,
-            raw_response,
-            latency_ms,
-            prompt_tokens: completion.usage?.prompt_tokens,
-            completion_tokens: completion.usage?.completion_tokens,
-            total_tokens: completion.usage?.total_tokens,
-            validation_status: 'valid',
-            prompt_hash,
-          }
-        }
-
-        return {
-          result: null,
-          raw_response,
-          latency_ms,
-          error: `Schema validation failed: ${validated.error.message}`,
-          validation_status: 'invalid',
-          prompt_hash,
-        }
-      }
-
       return {
-        result: validated.data,
+        result: parsed,
         raw_response,
         latency_ms,
         prompt_tokens: completion.usage?.prompt_tokens,

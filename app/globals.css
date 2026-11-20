@@ -1,144 +1,97 @@
 @import "tailwindcss";
 
 @theme {
-  /* Intercom Colors */
-  --color-electric-violet: #0007cb;
+  /* Modern Clean Clinical/Tech Color System (Linear/Vercel inspired) */
+  --color-electric-violet: #2563eb;
   --color-pure-white: #ffffff;
-  --color-canvas-cream: #faf9f6;
-  --color-linen: #f1eee9;
-  --color-stone: #d3cec6;
-  --color-hairline: #dedbd6;
-  --color-ink: #111111;
-  --color-carbon: #000000;
-  --color-iron: #414141;
-  --color-graphite: #585858;
-  --color-smoke: #888888;
-  --color-ash: #a0a0a0;
-  --color-silver: #b8b8b8;
+  --color-canvas-cream: #f8fafc;
+  --color-linen: #f1f5f9;
+  --color-stone: #e2e8f0;
+  --color-hairline: #e2e8f0;
+  --color-ink: #0f172a;
+  --color-carbon: #020617;
+  --color-iron: #334155;
+  --color-graphite: #475569;
+  --color-smoke: #64748b;
+  --color-ash: #94a3b8;
+  --color-silver: #cbd5e1;
 
   /* Typography */
-  --font-saans: 'Saans', Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-saansmono: 'SaansMono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-serrif: 'Serrif', Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-mediumll: 'MediumLL', Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-saans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-saansmono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-serrif: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Typography — Scale */
-  --text-caption: 12px;
-  --leading-caption: 1.4;
-  --tracking-caption: 1.2px;
-  --text-body-sm: 14px;
-  --leading-body-sm: 1.4;
-  --tracking-body-sm: 0px;
-  --text-body: 16px;
-  --leading-body: 1.5;
-  --tracking-body: -0.16px;
-  --text-subheading: 20px;
-  --leading-subheading: 1.25;
-  --tracking-subheading: -0.2px;
-  --text-heading-sm: 24px;
-  --leading-heading-sm: 1.4;
-  --tracking-heading-sm: -0.48px;
-  --text-heading: 32px;
-  --leading-heading: 1.43;
-  --tracking-heading: -0.64px;
-  --text-heading-lg: 40px;
-  --leading-heading-lg: 1.25;
-  --tracking-heading-lg: -1.2px;
-  --text-display: 54px;
-  --leading-display: 1;
-  --tracking-display: -1.62px;
-  --text-display-lg: 80px;
-  --leading-display-lg: 0.95;
-  --tracking-display-lg: -2.4px;
-
-  /* Spacing */
-  --spacing-4: 4px;
-  --spacing-8: 8px;
-  --spacing-12: 12px;
-  --spacing-16: 16px;
-  --spacing-20: 20px;
-  --spacing-24: 24px;
-  --spacing-32: 32px;
-  --spacing-40: 40px;
-  --spacing-48: 48px;
-  --spacing-64: 64px;
-  --spacing-80: 80px;
-  --spacing-96: 96px;
-  --spacing-112: 112px;
-  --spacing-216: 216px;
-
-  /* Universal Intercom Border Radius */
-  --radius-md: 4px;
+  /* Universal Modern Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
 }
 
 :root {
-  /* Colors */
-  --color-electric-violet: #0007cb;
+  /* Surface & Canvas */
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --surface-secondary: #f1f5f9;
+  --surface-hover: #f8fafc;
+  
+  /* Text */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  
+  /* Borders */
+  --border: #e2e8f0;
+  --border-subtle: #f1f5f9;
+  --border-strong: #cbd5e1;
+
+  /* Accent */
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-light: #eff6ff;
+
+  /* Color Aliases for 100% Backwards Compatibility */
+  --color-electric-violet: #2563eb;
   --color-pure-white: #ffffff;
-  --color-canvas-cream: #faf9f6;
-  --color-linen: #f1eee9;
-  --color-stone: #d3cec6;
-  --color-hairline: #dedbd6;
-  --color-ink: #111111;
-  --color-carbon: #000000;
-  --color-iron: #414141;
-  --color-graphite: #585858;
-  --color-smoke: #888888;
-  --color-ash: #a0a0a0;
-  --color-silver: #b8b8b8;
-
-  /* Aliases for compatibility */
+  --color-canvas-cream: #f8fafc;
+  --color-linen: #f1f5f9;
+  --color-stone: #e2e8f0;
+  --color-hairline: #e2e8f0;
+  --color-ink: #0f172a;
+  --color-carbon: #020617;
+  --color-iron: #334155;
+  --color-graphite: #475569;
+  --color-smoke: #64748b;
+  --color-ash: #94a3b8;
+  --color-silver: #cbd5e1;
   --color-gallery-white: #ffffff;
-  --color-studio-mist: #f1eee9;
-  --color-paper-frost: #faf9f6;
-  --color-hairline-silver: #dedbd6;
-  --color-control-gray: #dedbd6;
-  --color-slate: #585858;
-  --color-steel: #888888;
-  --color-apple-blue: #0007cb;
-  --color-pricing-blue: #0007cb;
-  --color-launch-orange: #0007cb;
+  --color-studio-mist: #f1f5f9;
+  --color-paper-frost: #f8fafc;
+  --color-hairline-silver: #e2e8f0;
+  --color-control-gray: #e2e8f0;
+  --color-slate: #475569;
+  --color-steel: #64748b;
+  --color-apple-blue: #2563eb;
+  --color-pricing-blue: #2563eb;
+  --color-launch-orange: #2563eb;
 
-  /* Semantic Mappings */
-  --background: #faf9f6;
-  --surface: #f1eee9;
-  --surface-secondary: #ffffff;
-  --text-primary: #111111;
-  --text-secondary: #414141;
-  --text-muted: #585858;
-  --border: #dedbd6;
-  --border-subtle: #dedbd6;
-  --accent: #0007cb;
-  --accent-link: #0007cb;
+  /* Modern Radius */
+  --radius-card: 10px;
+  --radius-cards: 10px;
+  --radius-inputs: 8px;
+  --radius-buttons: 8px;
+  --radius-badges: 6px;
 
-  /* Universal 4px Architectural Radii */
-  --radius-cards: 4px;
-  --radius-card: 4px;
-  --radius-links: 4px;
-  --radius-pills: 4px;
-  --radius-badges: 4px;
-  --radius-images: 4px;
-  --radius-inputs: 4px;
-  --radius-buttons: 4px;
-  --radius-navigation: 4px;
+  /* Refined Elevation Shadows (Linear / Vercel style) */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
 
-  /* Intercom Layout */
-  --page-max-width: 1200px;
-  --section-gap: 80px;
-  --card-padding: 28px;
-  --element-gap: 12px;
-
-  /* Flat Elevation: Depth achieved through tone shifts, zero shadows */
-  --shadow-subtle: none;
-  --shadow-sm: none;
-  --shadow-md: none;
-  --shadow-card: none;
-  --shadow-lg: none;
-
-  /* Typography Families */
-  --font-saans: 'Saans', Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-saansmono: 'SaansMono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-serrif: 'Serrif', Georgia, Cambria, 'Times New Roman', Times, serif;
+  /* Fonts */
+  --font-saans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-saansmono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 /* ─── Reset & Base ───────────────────────────────────── */
@@ -158,112 +111,102 @@ html {
 
 body {
   font-family: var(--font-saans);
-  background-color: var(--color-canvas-cream);
-  color: var(--color-ink);
+  background-color: var(--background);
+  color: var(--text-primary);
   line-height: 1.5;
-  letter-spacing: -0.16px;
+  font-weight: 400;
   min-height: 100vh;
 }
 
-/* ─── Intercom Editorial Typography ──────────────────── */
+/* ─── Clean Modern Typography ───────────────────────── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-saans);
-  color: var(--color-ink);
-  font-weight: 300; /* Signature Whisper-Weight Authority */
+  color: var(--text-primary);
+  font-weight: 600;
+  letter-spacing: -0.025em;
 }
 
-/* Display 80px at Weight 300 with -2.4px tracking */
 .hero-display {
   font-family: var(--font-saans);
-  font-size: clamp(38px, 6.5vw, 80px);
-  font-weight: 300;
-  line-height: 0.95;
-  letter-spacing: -2.4px;
-  color: var(--color-ink);
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
 }
 
-/* Headings at Weight 300 */
 .feature-heading {
   font-family: var(--font-saans);
-  font-size: clamp(26px, 3.8vw, 40px);
-  font-weight: 300;
-  line-height: 1.15;
-  letter-spacing: -1.2px;
-  color: var(--color-ink);
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
 }
 
 .product-kicker {
   font-family: var(--font-saans);
-  font-size: 20px;
-  font-weight: 300;
-  line-height: 1.25;
-  letter-spacing: -0.2px;
-  color: var(--color-iron);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-secondary);
 }
 
-/* SaansMono Labeling System */
 .saans-mono-tag,
 .launch-label {
   font-family: var(--font-saansmono);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.4;
-  letter-spacing: 1.2px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--color-graphite);
+  color: var(--text-muted);
 }
 
 .body-editorial {
   font-family: var(--font-saans);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: -0.16px;
-  color: var(--color-iron);
+  line-height: 1.6;
+  color: var(--text-secondary);
 }
 
-/* Humanist Serif Counterpoint */
 .serrif-editorial {
-  font-family: var(--font-serrif);
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 1.4;
-  letter-spacing: -0.01em;
-  color: var(--color-iron);
+  font-family: var(--font-saans);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-secondary);
 }
 
 a {
-  color: var(--color-ink);
+  color: inherit;
   text-decoration: none;
-  transition: opacity 0.15s ease;
-}
-a:hover {
-  opacity: 0.75;
+  transition: opacity 0.15s ease, color 0.15s ease;
 }
 
-/* ─── Scrollbar ──────────────────────────────────────── */
+/* ─── Modern Scrollbar ───────────────────────────────── */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-canvas-cream);
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-hairline);
-  border-radius: 4px;
+  background: #cbd5e1;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-stone);
+  background: #94a3b8;
 }
 
 /* ─── Focus & Selection ──────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--color-electric-violet);
+  outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
 
 ::selection {
-  background: rgba(0, 7, 203, 0.12);
-  color: var(--color-ink);
+  background: rgba(37, 99, 235, 0.15);
+  color: #0f172a;
 }
