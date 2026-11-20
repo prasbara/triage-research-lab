@@ -5,11 +5,9 @@ export function Card({ className, children, ...props }: HTMLAttributes<HTMLDivEl
   return (
     <div
       className={cn(
-        'bg-white rounded-[20px] border border-[var(--border-subtle)] p-6 transition-shadow',
-        'hover:shadow-[0_4px_20px_rgba(0,0,0,0.04)]',
+        'bg-white rounded-[28px] border border-[var(--border-subtle)] p-7 transition-colors',
         className
       )}
-      style={{ boxShadow: 'var(--shadow-card)' }}
       {...props}
     >
       {children}
@@ -18,7 +16,7 @@ export function Card({ className, children, ...props }: HTMLAttributes<HTMLDivEl
 }
 
 export function CardHeader({ className, children, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn('mb-4', className)} {...props}>{children}</div>
+  return <div className={cn('mb-4 space-y-1', className)} {...props}>{children}</div>
 }
 
 export function CardTitle({ className, children, ...props }: HTMLAttributes<HTMLHeadingElement>) {
@@ -31,7 +29,7 @@ export function CardTitle({ className, children, ...props }: HTMLAttributes<HTML
 
 export function CardDescription({ className, children, ...props }: HTMLAttributes<HTMLParagraphElement>) {
   return (
-    <p className={cn('text-sm text-[var(--text-secondary)] mt-1 leading-relaxed', className)} {...props}>
+    <p className={cn('text-sm text-[var(--text-secondary)] leading-relaxed', className)} {...props}>
       {children}
     </p>
   )
