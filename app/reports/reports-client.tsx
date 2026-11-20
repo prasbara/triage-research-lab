@@ -97,40 +97,7 @@ export function ReportsClient({ stats }: ReportsClientProps) {
   }
 
   const handleDownloadRScript = () => {
-    const script = `# ==============================================================================
-# TRIAGE Research Lab — Linear Mixed-Effects Model (LMM) Analysis Script
-# Penelitian Tesis Magister Manajemen Rumah Sakit
-# Judul: Efektivitas Pendampingan Large Language Model dalam Klasifikasi dan
-#        Prioritisasi Keluhan Pasien terhadap Waktu Triase dan Ketepatan Penanganan Awal
-# ==============================================================================
-
-library(lme4)
-library(lmerTest)
-library(emmeans)
-library(ggplot2)
-library(jsonlite)
-
-cat("Memuat dataset observasi eksperimen triase...\\n")
-
-# Model 1: Log-transformed Triage Duration (Primary Outcome - H1)
-# lmm_time <- lmer(log(duration_seconds) ~ method + (1 | participant_id) + (1 | case_id), data = df)
-# summary(lmm_time)
-
-# Model 2: Logistic GLMM on Accuracy (Secondary Outcome - H2)
-# glmm_acc <- glmer(is_correct ~ method + (1 | participant_id) + (1 | case_id), data = df, family = binomial)
-# summary(glmm_acc)
-
-# Model 3: Workload Assessment (NASA-TLX - H3)
-# t.test(nasa_tlx ~ method, data = workload_df, paired = TRUE)
-`
-    const blob = new Blob([script], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `triage-lmm-analysis-${Date.now()}.R`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
+    window.location.href = '/api/analytics/r-script'
   }
 
   return (
