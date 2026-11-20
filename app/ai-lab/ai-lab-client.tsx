@@ -63,7 +63,13 @@ export function AILabClient({ supportedModels }: AILabClientProps) {
               : 'gemini-2.5-flash',
         }),
       })
-      const data = await res.json()
+      let data: any
+      try {
+        data = await res.json()
+      } catch {
+        const text = await res.text().catch(() => '')
+        throw new Error(`Respon server tidak valid (${res.status}): ${text.slice(0, 100)}`)
+      }
       if (!res.ok) throw new Error(data.error || 'Inference failed')
       setSingleResult(data)
     } catch (err: any) {
@@ -93,7 +99,13 @@ export function AILabClient({ supportedModels }: AILabClientProps) {
       }),
     })
       .then(async (r) => {
-        const d = await r.json()
+        let d: any
+        try {
+          d = await r.json()
+        } catch {
+          const text = await r.text().catch(() => '')
+          throw new Error(`Respon server tidak valid (${r.status}): ${text.slice(0, 100)}`)
+        }
         if (!r.ok) throw new Error(d.error || 'NVIDIA NIM failed')
         setNvidiaResult(d)
       })
@@ -110,7 +122,13 @@ export function AILabClient({ supportedModels }: AILabClientProps) {
       }),
     })
       .then(async (r) => {
-        const d = await r.json()
+        let d: any
+        try {
+          d = await r.json()
+        } catch {
+          const text = await r.text().catch(() => '')
+          throw new Error(`Respon server tidak valid (${r.status}): ${text.slice(0, 100)}`)
+        }
         if (!r.ok) throw new Error(d.error || 'Gemini API failed')
         setGeminiResult(d)
       })

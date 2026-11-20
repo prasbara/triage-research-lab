@@ -5,34 +5,30 @@ import { ComplaintClassificationSchema } from './schemas'
 
 function extractValidJSON(text: string): any {
   if (!text) return null
+  
+  // 1. Direct parse attempt
   try { return JSON.parse(text) } catch {}
 
-  // Try markdown json code fence
+  // 2. Try markdown json code fence
   const mdMatch = text.match(/```(?:json)?\s*([\s\S]*?)\s*```/i)
   if (mdMatch && mdMatch[1]) {
     try { return JSON.parse(mdMatch[1].trim()) } catch {}
   }
 
-  // Scan for balanced curly brackets from the end (since final JSON answer is at the end)
+  // 3. Scan for outer-most curly braces { ... }
+  const firstBrace = text.indexOf('{')
   const lastBrace = text.lastIndexOf('}')
-  if (lastBrace !== -1) {
-    let depth = 0
-    for (let i = lastBrace; i >= 0; i--) {
-      if (text[i] === '}') depth++
-      else if (text[i] === '{') {
-        depth--
-        if (depth === 0) {
-          const candidate = text.substring(i, lastBrace + 1)
-          try { return JSON.parse(candidate) } catch {}
-        }
-      }
-    }
-  }
+  if (firstBrace !== -1 && lastBrace > firstBrace) {
+    const candidate = text.substring(firstBrace, lastBrace + 1)
+    try { return JSON.parse(candidate) } catch {}
 
-  // Regex fallback
-  const match = text.match(/\{[\s\S]*\}/)
-  if (match) {
-    try { return JSON.parse(match[0]) } catch {}
+    // Clean common JSON syntax flaws (trailing commas before closing braces/brackets)
+    try {
+      const sanitized = candidate
+        .replace(/,\s*([}\]])/g, '$1')
+        .replace(/(['"])?([a-zA-Z0-9_]+)(['"])?:/g, '"$2":')
+      return JSON.parse(sanitized)
+    } catch {}
   }
 
   return null
@@ -105,7 +101,7 @@ export class NvidiaProvider {
           result: null,
           raw_response: null,
           latency_ms,
-          error: 'Empty response from NVIDIA NIM',
+          error: 'Model NVIDIA NIM mengembalikan respon kosong atau kehabisan token sebelum menghasilkan keluaran.',
           validation_status: 'invalid',
           prompt_hash,
         }
@@ -118,7 +114,7 @@ export class NvidiaProvider {
           result: null,
           raw_response,
           latency_ms,
-          error: `Gagal mengekstrak JSON valid dari respon model.`,
+          error: `Gagal mengekstrak format JSON valid dari respon model NVIDIA (${raw_response.slice(0, 100)}...).`,
           validation_status: 'invalid',
           prompt_hash,
         }

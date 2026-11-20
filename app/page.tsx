@@ -57,7 +57,7 @@ export default function LandingPage() {
       </nav>
 
       {/* ─── Hero Launch Stage (Gallery White #ffffff) ─── */}
-      <section className="pt-24 pb-16 px-6 max-w-5xl mx-auto text-center">
+      <section className="pt-24 pb-12 mb-6 px-6 max-w-5xl mx-auto text-center">
         {/* Launch Status Label: bare #b64400 12px text, no pill background or border */}
         <p className="launch-label mb-3">
           Riset Tesis Magister Manajemen Rumah Sakit
@@ -79,7 +79,7 @@ export default function LandingPage() {
         </p>
 
         {/* Controls: Compact Pricing Blue pill + Outlined Explore pill */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
           <Link href="/dashboard">
             <Button size="lg" variant="primary" className="h-12 px-8 text-sm gap-2.5">
               <span>Buka Research Dashboard</span>
@@ -95,7 +95,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─── Official Research Title Capsule (Gallery White, 28px Radius, Hairline Edge) ─── */}
-      <section className="max-w-4xl mx-auto px-6 my-16">
+      <section className="max-w-4xl mx-auto px-6 mb-24">
         <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-8 sm:p-12 text-center space-y-4 shadow-none">
           <span className="text-[11px] font-semibold uppercase tracking-[0.228px] text-[var(--color-slate)] block">
             Judul Penelitian Tesis Magister
