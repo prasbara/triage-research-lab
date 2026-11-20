@@ -279,13 +279,12 @@ export default async function SessionDetailPage({ params }: SessionDetailPagePro
                         return (
                           <td
                             key={pred}
-                            className={`px-3 py-3.5 font-mono text-xs ${
-                              isDiagonal && val > 0
+                            className={`px-3 py-3.5 font-mono text-xs ${isDiagonal && val > 0
                                 ? 'bg-blue-50/70 font-bold text-[var(--color-pricing-blue)]'
                                 : !isDiagonal && val > 0
-                                ? 'bg-amber-50 font-bold text-amber-700'
-                                : 'text-[var(--color-steel)]'
-                            }`}
+                                  ? 'bg-amber-50 font-bold text-amber-700'
+                                  : 'text-[var(--color-steel)]'
+                              }`}
                           >
                             {val}
                           </td>
@@ -356,9 +355,8 @@ export default async function SessionDetailPage({ params }: SessionDetailPagePro
                       </td>
                       <td className="px-5 py-3">
                         <span
-                          className={`inline-flex items-center gap-1 font-semibold ${
-                            isMatch ? 'text-emerald-700' : 'text-amber-700'
-                          }`}
+                          className={`inline-flex items-center gap-1 font-semibold ${isMatch ? 'text-emerald-700' : 'text-amber-700'
+                            }`}
                         >
                           {isMatch ? <CheckCircle2 size={13} /> : <AlertTriangle size={13} />}
                           <span>{isMatch ? 'Tepat' : 'Deviasi'}</span>

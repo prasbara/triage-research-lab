@@ -186,11 +186,10 @@ export function ValidationClient({
                   <div
                     key={c.id}
                     onClick={() => setSelectedCase(c)}
-                    className={`p-4 rounded-2xl border text-xs cursor-pointer transition-all ${
-                      isSelected
+                    className={`p-4 rounded-2xl border text-xs cursor-pointer transition-all ${isSelected
                         ? 'border-[var(--color-pricing-blue)] bg-blue-50/40 ring-1 ring-blue-200'
                         : 'border-[var(--color-control-gray)] bg-white hover:bg-[var(--color-studio-mist)]'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center justify-between mb-1.5">
                       <span className="font-mono font-semibold text-[var(--color-ink)] text-xs">
