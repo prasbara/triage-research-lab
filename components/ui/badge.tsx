@@ -9,18 +9,24 @@ interface BadgeProps {
 
 export function Badge({ children, variant = 'default', className }: BadgeProps) {
   const variants = {
-    default: 'bg-blue-50 text-blue-700 border border-blue-200/60',
-    outline: 'bg-transparent border border-[var(--border)] text-[var(--text-secondary)]',
-    success: 'bg-emerald-50 text-emerald-700 border border-emerald-200/60',
-    warning: 'bg-amber-50 text-amber-700 border border-amber-200/60',
-    danger: 'bg-rose-50 text-rose-700 border border-rose-200/60',
-    muted: 'bg-gray-100 text-gray-600 border border-gray-200',
-    purple: 'bg-purple-50 text-purple-700 border border-purple-200/60',
+    // Intercom Linen tag
+    default: 'bg-[#f1eee9] text-[#111111] border border-[#dedbd6]',
+    // Outlined tag
+    outline: 'bg-transparent border border-[#dedbd6] text-[#585858]',
+    // Electric Violet Accent tag
+    purple: 'bg-[#0007cb]/10 text-[#0007cb] border border-[#0007cb]/30',
+    // Muted Stone tag
+    muted: 'bg-[#f1eee9] text-[#888888] border border-[#dedbd6]',
+    // Clinical indicators
+    success: 'bg-emerald-50 text-emerald-800 border border-emerald-200',
+    warning: 'bg-amber-50 text-amber-900 border border-amber-200',
+    danger: 'bg-rose-50 text-rose-800 border border-rose-200',
   }
+
   return (
     <span
       className={cn(
-        'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium tracking-tight transition-colors',
+        'inline-flex items-center rounded-[4px] px-2 py-0.5 text-[11px] font-mono tracking-[1.2px] uppercase select-none transition-colors',
         variants[variant],
         className
       )}

@@ -3,32 +3,81 @@ import { ComplaintClassificationInput, ComplaintClassificationResult, ProviderHe
 import { buildClassificationPrompt, hashPrompt, PROMPT_VERSION } from './prompt'
 import { ComplaintClassificationSchema } from './schemas'
 
+function cleanAndParseJSON(str: string): any {
+  if (!str) return null
+  const trimmed = str.trim()
+  try {
+    return JSON.parse(trimmed)
+  } catch {}
+
+  // Strip line comments // and block comments /* */
+  const noComments = trimmed
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/\/\/.*/g, '')
+
+  try {
+    return JSON.parse(noComments)
+  } catch {}
+
+  // Remove trailing commas before } or ]
+  const noTrailingCommas = noComments
+    .replace(/,\s*([}\]])/g, '$1')
+
+  try {
+    return JSON.parse(noTrailingCommas)
+  } catch {}
+
+  // Quote unquoted keys: { key: "val" } -> { "key": "val" }
+  const quotedKeys = noTrailingCommas
+    .replace(/([{,]\s*)([a-zA-Z0-9_]+)\s*:/g, '$1"$2":')
+
+  try {
+    return JSON.parse(quotedKeys)
+  } catch {}
+
+  return null
+}
+
 function extractValidJSON(text: string): any {
   if (!text) return null
   
-  // 1. Direct parse attempt
-  try { return JSON.parse(text) } catch {}
+  // 0. Strip thinking/reasoning blocks
+  let cleaned = text
+    .replace(/<think>[\s\S]*?<\/think>/gi, '')
+    .replace(/Here's a thinking process[\s\S]*?(?=\{|\`\`\`)/gi, '')
+    .trim()
 
-  // 2. Try markdown json code fence
-  const mdMatch = text.match(/```(?:json)?\s*([\s\S]*?)\s*```/i)
-  if (mdMatch && mdMatch[1]) {
-    try { return JSON.parse(mdMatch[1].trim()) } catch {}
+  // 1. Direct parse attempt
+  const direct = cleanAndParseJSON(cleaned)
+  if (direct && typeof direct === 'object') return direct
+
+  // 2. Scan all markdown code blocks (global match)
+  const codeBlockRegex = /```(?:json)?\s*([\s\S]*?)\s*```/gi
+  let match: RegExpExecArray | null
+  while ((match = codeBlockRegex.exec(cleaned)) !== null) {
+    const candidate = match[1]
+    const parsed = cleanAndParseJSON(candidate)
+    if (parsed && typeof parsed === 'object') return parsed
   }
 
-  // 3. Scan for outer-most curly braces { ... }
-  const firstBrace = text.indexOf('{')
-  const lastBrace = text.lastIndexOf('}')
+  // 3. Scan for outermost curly braces { ... }
+  const firstBrace = cleaned.indexOf('{')
+  const lastBrace = cleaned.lastIndexOf('}')
   if (firstBrace !== -1 && lastBrace > firstBrace) {
-    const candidate = text.substring(firstBrace, lastBrace + 1)
-    try { return JSON.parse(candidate) } catch {}
+    const candidate = cleaned.substring(firstBrace, lastBrace + 1)
+    const parsed = cleanAndParseJSON(candidate)
+    if (parsed && typeof parsed === 'object') return parsed
+  }
 
-    // Clean common JSON syntax flaws (trailing commas before closing braces/brackets)
-    try {
-      const sanitized = candidate
-        .replace(/,\s*([}\]])/g, '$1')
-        .replace(/(['"])?([a-zA-Z0-9_]+)(['"])?:/g, '"$2":')
-      return JSON.parse(sanitized)
-    } catch {}
+  // 4. Fallback search for any inner JSON block matching classification fields
+  const innerMatch = cleaned.match(/\{(?:[^{}]|(?:\{[^{}]*\}))*\}/g)
+  if (innerMatch) {
+    for (const block of innerMatch) {
+      const parsed = cleanAndParseJSON(block)
+      if (parsed && (parsed.category || parsed.kategori || parsed.priority || parsed.prioritas)) {
+        return parsed
+      }
+    }
   }
 
   return null

@@ -56,25 +56,25 @@ export function ComplaintImportDialog({ isOpen, onClose, onSuccess }: ComplaintI
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-      <Card className="max-w-md w-full p-6 space-y-4 relative animate-in fade-in zoom-in-95">
+    <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
+      <Card className="max-w-md w-full p-6 space-y-4 relative border-[var(--color-hairline)] bg-[var(--color-pure-white)] rounded-[4px] shadow-none">
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 text-[var(--text-muted)] hover:text-[var(--text-primary)]"
+          className="absolute right-4 top-4 text-[var(--color-smoke)] hover:text-[var(--color-ink)]"
         >
           <X size={18} />
         </button>
 
         <div>
-          <h3 className="font-bold text-base text-[var(--text-primary)]">
+          <h3 className="font-light text-base text-[var(--color-ink)]">
             Impor Dataset Keluhan (CSV / JSON)
           </h3>
-          <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+          <p className="text-xs text-[var(--color-graphite)] mt-0.5">
             Unggah berkas keluhan riil atau sintetis teranotasi untuk korpus eksperimen
           </p>
         </div>
 
-        <div className="border-2 border-dashed border-[var(--border-subtle)] hover:border-[var(--accent)] rounded-2xl p-6 text-center space-y-2 transition-colors cursor-pointer relative">
+        <div className="border border-dashed border-[var(--color-hairline)] hover:border-[var(--color-ink)] rounded-[4px] p-6 text-center space-y-2 transition-colors cursor-pointer relative bg-[var(--color-linen)]/20">
           <input
             type="file"
             accept=".csv,.json"

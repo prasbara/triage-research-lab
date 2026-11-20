@@ -188,28 +188,28 @@ export function NewExperimentClient({
               <button
                 type="button"
                 onClick={() => handleProviderChange('nvidia')}
-                className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+                className={`p-4 rounded-[4px] border text-left transition-all cursor-pointer ${
                   form.ai_provider === 'nvidia'
-                    ? 'border-[#0071e3] bg-blue-50/50 ring-2 ring-blue-100'
-                    : 'border-[var(--border)] bg-white hover:bg-[var(--surface)]'
+                    ? 'border-[var(--color-electric-violet)] bg-[#f3f3ff] ring-1 ring-[var(--color-electric-violet)]'
+                    : 'border-[var(--color-hairline)] bg-[var(--color-pure-white)] hover:bg-[var(--color-linen)]'
                 }`}
               >
-                <div className="font-semibold text-sm text-[var(--text-primary)]">NVIDIA NIM</div>
-                <div className="text-xs text-[var(--text-secondary)] mt-1">
+                <div className="font-light text-sm text-[var(--color-ink)]">NVIDIA NIM</div>
+                <div className="text-xs text-[var(--color-graphite)] mt-1 font-mono">
                   Nemotron-3.5 Lightning (30B Reasoning)
                 </div>
               </button>
               <button
                 type="button"
                 onClick={() => handleProviderChange('gemini')}
-                className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+                className={`p-4 rounded-[4px] border text-left transition-all cursor-pointer ${
                   form.ai_provider === 'gemini'
-                    ? 'border-[#0071e3] bg-blue-50/50 ring-2 ring-blue-100'
-                    : 'border-[var(--border)] bg-white hover:bg-[var(--surface)]'
+                    ? 'border-[var(--color-electric-violet)] bg-[#f3f3ff] ring-1 ring-[var(--color-electric-violet)]'
+                    : 'border-[var(--color-hairline)] bg-[var(--color-pure-white)] hover:bg-[var(--color-linen)]'
                 }`}
               >
-                <div className="font-semibold text-sm text-[var(--text-primary)]">Google Gemini</div>
-                <div className="text-xs text-[var(--text-secondary)] mt-1">
+                <div className="font-light text-sm text-[var(--color-ink)]">Google Gemini</div>
+                <div className="text-xs text-[var(--color-graphite)] mt-1 font-mono">
                   Gemini 2.5 Flash / Pro
                 </div>
               </button>

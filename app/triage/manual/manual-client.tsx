@@ -125,7 +125,7 @@ export function ManualTriageClient({
   if (!hasMore || !task) {
     return (
       <Card className="max-w-xl mx-auto my-12 p-8 text-center space-y-4">
-        <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto">
+        <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-[4px] flex items-center justify-center mx-auto">
           <CheckCircle2 size={24} />
         </div>
         <h2 className="text-xl font-bold text-[var(--text-primary)]">
@@ -151,7 +151,7 @@ export function ManualTriageClient({
   return (
     <div className="max-w-6xl mx-auto space-y-5">
       {/* Timer Bar */}
-      <div className="bg-white rounded-2xl border border-[var(--border-subtle)] p-3 px-5 flex items-center justify-between shadow-xs">
+      <div className="bg-white rounded-[4px] border border-[var(--border-subtle)] p-3 px-5 flex items-center justify-between shadow-none">
         <div className="flex items-center gap-2.5">
           <Badge variant="outline">Kondisi A: Manual</Badge>
           <span className="text-xs text-[var(--text-muted)] font-mono">
@@ -167,7 +167,7 @@ export function ManualTriageClient({
       </div>
 
       {submittedMessage && (
-        <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-xs font-semibold text-center animate-in fade-in">
+        <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-[4px] text-xs font-semibold text-center animate-in fade-in">
           {submittedMessage}
         </div>
       )}
@@ -198,13 +198,13 @@ export function ManualTriageClient({
               <label className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                 Teks Narasi Keluhan Pasien
               </label>
-              <div className="mt-2 p-4 bg-[var(--surface)] rounded-2xl border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm leading-relaxed font-sans font-medium">
+              <div className="mt-2 p-4 bg-[var(--surface)] rounded-[4px] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm leading-relaxed font-sans font-medium">
                 "{task.complaint_cases?.complaint_text}"
               </div>
             </div>
 
             {/* SOP Reference Guide */}
-            <div className="mt-5 p-4 bg-gray-50/70 rounded-2xl border border-gray-200/60 text-xs space-y-2">
+            <div className="mt-5 p-4 bg-gray-50/70 rounded-[4px] border border-gray-200/60 text-xs space-y-2">
               <div className="flex items-center gap-1.5 font-semibold text-[var(--text-primary)]">
                 <ClipboardList size={14} className="text-[var(--accent)]" />
                 <span>Pedoman SOP Triase Administratif Rumah Sakit</span>
@@ -271,7 +271,7 @@ export function ManualTriageClient({
                 </Select>
 
                 <div className="pt-2">
-                  <label className="flex items-start gap-2.5 p-3 rounded-xl border border-[var(--border)] bg-gray-50/50 cursor-pointer hover:bg-gray-50 transition-colors">
+                  <label className="flex items-start gap-2.5 p-3 rounded-[4px] border border-[var(--border)] bg-gray-50/50 cursor-pointer hover:bg-gray-50 transition-colors">
                     <input
                       type="checkbox"
                       checked={form.final_escalation_required}
@@ -297,7 +297,7 @@ export function ManualTriageClient({
                   </label>
                   <textarea
                     rows={2}
-                    className="w-full rounded-xl border border-[var(--border)] p-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-blue-100"
+                    className="w-full rounded-[4px] border border-[var(--border)] p-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-blue-100"
                     placeholder="Pertimbangan pemilihan kategori/prioritas..."
                     value={form.reasoning}
                     onChange={(e) => setForm({ ...form, reasoning: e.target.value })}

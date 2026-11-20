@@ -27,7 +27,7 @@ const navItems = [
   { label: 'Triase AI', href: '/triage/ai-assisted', icon: Bot },
   { label: 'Validasi Ahli', href: '/validation', icon: ShieldCheck },
   { label: 'Partisipan', href: '/participants', icon: Users },
-  { label: 'Analitik', href: '/analytics', icon: BarChart2 },
+  { label: 'Analitik LMM', href: '/analytics', icon: BarChart2 },
   { label: 'AI Laboratory', href: '/ai-lab', icon: Cpu },
   { label: 'Laporan', href: '/reports', icon: FileBarChart },
   { label: 'Pengaturan', href: '/settings', icon: Settings },
@@ -53,23 +53,25 @@ export function Sidebar({ user }: SidebarProps) {
 
   return (
     <aside
-      style={{ width: 220 }}
-      className="flex flex-col h-screen border-r border-[var(--border-subtle)] bg-white shrink-0 sticky top-0"
+      style={{ width: 230 }}
+      className="flex flex-col h-screen border-r border-[#dedbd6] bg-[#f1eee9] shrink-0 sticky top-0 select-none"
     >
-      {/* Logo */}
-      <div className="px-5 py-5 border-b border-[var(--border-subtle)]">
+      {/* Brand Header */}
+      <div className="px-5 py-4 border-b border-[#dedbd6] bg-[#f1eee9]">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-[var(--accent)] flex items-center justify-center shrink-0">
-            <Microscope size={16} className="text-white" />
+          <div className="w-7 h-7 rounded-[4px] bg-[#000000] text-white flex items-center justify-center shrink-0">
+            <Microscope size={14} className="text-white" />
           </div>
           <div className="leading-tight min-w-0">
-            <p className="font-bold text-[var(--accent)] text-sm tracking-tight truncate">TRIAGE</p>
-            <p className="text-[10px] text-[var(--text-muted)] truncate">Research Lab</p>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[1.2px] text-[#111111] truncate">
+              TRIAGE
+            </p>
+            <p className="text-[10px] text-[#585858] truncate">Research Lab</p>
           </div>
         </div>
       </div>
 
-      {/* Navigation */}
+      {/* Navigation Links */}
       <nav className="flex-1 overflow-y-auto py-3 px-2">
         <ul className="space-y-0.5">
           {navItems.map(({ label, href, icon: Icon }) => {
@@ -79,17 +81,17 @@ export function Sidebar({ user }: SidebarProps) {
                 <Link
                   href={href}
                   className={cn(
-                    'flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-150',
+                    'flex items-center gap-2.5 px-3 py-2 rounded-[4px] text-xs transition-colors duration-100',
                     active
-                      ? 'bg-blue-50 text-[var(--accent)]'
-                      : 'text-[var(--text-secondary)] hover:bg-[var(--surface)] hover:text-[var(--text-primary)]'
+                      ? 'bg-[#ffffff] text-[#111111] font-medium border border-[#dedbd6] shadow-none'
+                      : 'text-[#585858] hover:bg-[#faf9f6] hover:text-[#111111]'
                   )}
                 >
                   <Icon
-                    size={16}
+                    size={14}
                     className={cn(
                       'shrink-0',
-                      active ? 'text-[var(--accent)]' : 'text-[var(--text-muted)]'
+                      active ? 'text-[#0007cb]' : 'text-[#888888]'
                     )}
                   />
                   <span className="truncate">{label}</span>
@@ -100,20 +102,15 @@ export function Sidebar({ user }: SidebarProps) {
         </ul>
       </nav>
 
-      {/* User area */}
-      {user && (
-        <div className="p-3 border-t border-[var(--border-subtle)]">
-          <div className="flex items-center gap-2.5 px-2 py-2">
-            <div className="w-7 h-7 rounded-full bg-[var(--accent)] flex items-center justify-center text-white text-xs font-semibold shrink-0">
-              {user.name.charAt(0).toUpperCase()}
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-xs font-medium text-[var(--text-primary)] truncate">{user.name}</p>
-              <p className="text-[10px] text-[var(--text-muted)] truncate">{user.role}</p>
-            </div>
-          </div>
+      {/* Footer User Info */}
+      <div className="p-3 border-t border-[#dedbd6] bg-[#f1eee9] text-xs">
+        <div className="p-2.5 rounded-[4px] bg-[#ffffff] border border-[#dedbd6]">
+          <span className="text-[10px] font-mono uppercase tracking-[1.2px] text-[#888888] block mb-0.5">
+            {user?.role || 'Peneliti'}
+          </span>
+          <p className="text-xs font-medium text-[#111111] truncate">{user?.name || 'Administrator'}</p>
         </div>
-      )}
+      </div>
     </aside>
   )
 }

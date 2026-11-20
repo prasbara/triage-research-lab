@@ -28,12 +28,12 @@ export default async function ParticipantsPage() {
     <AppShell>
       <div className="space-y-8 max-w-7xl mx-auto px-2 sm:px-4 py-2">
         {/* ─── Header Stage ────────────────────────────── */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-6 border-b border-[var(--color-control-gray)]">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-6 border-b border-[var(--color-hairline)]">
           <div className="space-y-1.5">
             <span className="launch-label text-[11px] font-semibold uppercase tracking-wider">
               Kohort Partisipan Eksperimen Terkendali
             </span>
-            <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[var(--color-ink)]">
+            <h1 className="text-2xl sm:text-3xl font-light tracking-tight text-[var(--color-ink)]">
               Partisipan Penelitian
             </h1>
             <p className="text-sm text-[var(--color-slate)] max-w-2xl">
@@ -45,8 +45,8 @@ export default async function ParticipantsPage() {
 
         {/* ─── Methodology & Eligibility Cards ─────────── */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-6 space-y-3">
-            <div className="w-8 h-8 rounded-xl bg-blue-50 text-[var(--color-pricing-blue)] flex items-center justify-center">
+          <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-6 space-y-3">
+            <div className="w-8 h-8 rounded-[4px] bg-blue-50 text-[var(--color-electric-violet)] flex items-center justify-center">
               <Shuffle size={18} />
             </div>
             <h3 className="font-semibold text-sm text-[var(--color-ink)]">
@@ -56,19 +56,19 @@ export default async function ParticipantsPage() {
               Partisipan dibagi seimbang ke dalam 2 kelompok urutan untuk mengeliminasi bias kelelahan (*fatigue*) dan bias pembelajaran (*carryover*):
             </p>
             <div className="space-y-1.5 pt-1 text-[11px] font-mono">
-              <div className="p-2 rounded-xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] flex justify-between">
+              <div className="p-2 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] flex justify-between">
                 <span>Kelompok A (Genap):</span>
                 <strong className="text-[var(--color-ink)]">Manual → AI</strong>
               </div>
-              <div className="p-2 rounded-xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] flex justify-between">
+              <div className="p-2 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] flex justify-between">
                 <span>Kelompok B (Ganjil):</span>
                 <strong className="text-[var(--color-ink)]">AI → Manual</strong>
               </div>
             </div>
           </div>
 
-          <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-6 space-y-3">
-            <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+          <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-6 space-y-3">
+            <div className="w-8 h-8 rounded-[4px] bg-emerald-50 text-emerald-600 flex items-center justify-center">
               <FileCheck size={18} />
             </div>
             <h3 className="font-semibold text-sm text-[var(--color-ink)]">
@@ -90,8 +90,8 @@ export default async function ParticipantsPage() {
             </ul>
           </div>
 
-          <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-6 space-y-3">
-            <div className="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
+          <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-6 space-y-3">
+            <div className="w-8 h-8 rounded-[4px] bg-purple-50 text-purple-600 flex items-center justify-center">
               <ShieldCheck size={18} />
             </div>
             <h3 className="font-semibold text-sm text-[var(--color-ink)]">
@@ -100,15 +100,15 @@ export default async function ParticipantsPage() {
             <p className="text-xs text-[var(--color-slate)] leading-relaxed">
               Berdasarkan UU PDP No. 27/2022, nama dan email partisipan disamarkan dalam analisis statistik menggunakan kode unik permanen (<code className="font-mono text-purple-700">P001</code>, <code className="font-mono text-purple-700">P002</code>, <code className="font-mono text-purple-700">E001</code>).
             </p>
-            <div className="p-2.5 rounded-xl bg-purple-50/50 border border-purple-200/60 text-[11px] text-purple-900 font-medium">
+            <div className="p-2.5 rounded-[4px] bg-purple-50/50 border border-purple-200/60 text-[11px] text-purple-900 font-medium">
               Data hasil observasi disimpan tanpa identitas personal langsung.
             </div>
           </div>
         </div>
 
         {/* ─── Participant Table ───────────────────────── */}
-        <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] overflow-hidden">
-          <div className="p-6 pb-4 border-b border-[var(--color-control-gray)] flex items-center justify-between">
+        <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] overflow-hidden">
+          <div className="p-6 pb-4 border-b border-[var(--color-hairline)] flex items-center justify-between">
             <div className="space-y-0.5">
               <h3 className="font-semibold text-sm text-[var(--color-ink)]">
                 Daftar Subjek & Penilai Terdaftar
@@ -125,7 +125,7 @@ export default async function ParticipantsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="bg-[var(--color-studio-mist)] border-b border-[var(--color-control-gray)] text-[11px] uppercase tracking-wider text-[var(--color-slate)] font-semibold">
+                <tr className="bg-[var(--color-linen)] border-b border-[var(--color-hairline)] text-[11px] uppercase tracking-wider text-[var(--color-slate)] font-semibold">
                   <th className="px-6 py-4">Kode Subjek</th>
                   <th className="px-6 py-4">Peran Penelitian</th>
                   <th className="px-6 py-4">Kelompok Latin Square</th>
@@ -135,7 +135,7 @@ export default async function ParticipantsPage() {
                   <th className="px-6 py-4 text-right">Terdaftar</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[var(--color-control-gray)]">
+              <tbody className="divide-y divide-[var(--color-hairline)]">
                 {participants && participants.length > 0 ? (
                   participants.map((p: any, idx: number) => {
                     const completedTasks = p.triage_tasks?.[0]?.count || 0
@@ -149,7 +149,7 @@ export default async function ParticipantsPage() {
                         : `P00${idx + 1}`
 
                     return (
-                      <tr key={p.id} className="hover:bg-[var(--color-studio-mist)] transition-colors">
+                      <tr key={p.id} className="hover:bg-[var(--color-linen)] transition-colors">
                         <td className="px-6 py-4 font-mono font-bold text-[var(--color-ink)] whitespace-nowrap">
                           {subjectCode}
                         </td>

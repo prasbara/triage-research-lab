@@ -227,12 +227,12 @@ export function AboutClient() {
   return (
     <div className="space-y-10 max-w-5xl mx-auto pb-16 px-2 sm:px-4 py-2">
       {/* Title Hero */}
-      <div className="pb-6 border-b border-[var(--color-control-gray)] space-y-3">
+      <div className="pb-6 border-b border-[var(--color-hairline)] space-y-3">
         <div className="flex items-center gap-3">
           <Badge variant="default">Dasar Ilmiah & Protokol Tesis Magister</Badge>
           <Badge variant="purple">Kemenkes / KARS Standard</Badge>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-[var(--color-ink)] leading-tight font-sans">
+        <h1 className="text-3xl sm:text-4xl font-light tracking-tight text-[var(--color-ink)] leading-tight font-sans">
           Tentang Riset: Efektivitas Pendampingan Large Language Model dalam Triase Keluhan Rumah Sakit
         </h1>
         <p className="text-sm text-[var(--color-slate)] leading-relaxed max-w-3xl">
@@ -241,9 +241,9 @@ export function AboutClient() {
       </div>
 
       {/* Section A: Research Identity */}
-      <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-8 space-y-5">
+      <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-8 space-y-5">
         <div className="flex items-center gap-2.5 text-base font-semibold text-[var(--color-ink)]">
-          <FileText size={18} className="text-[var(--color-pricing-blue)]" />
+          <FileText size={18} className="text-[var(--color-electric-violet)]" />
           <span>Bagian A — Identitas Riset & Definisi Operasional Judul</span>
         </div>
         <div className="space-y-4 text-xs leading-relaxed text-[var(--color-slate)]">
@@ -251,19 +251,19 @@ export function AboutClient() {
             Judul lengkap penelitian: <strong>&ldquo;Efektivitas Pendampingan Large Language Model dalam Klasifikasi dan Prioritisasi Keluhan Pasien terhadap Waktu Triase dan Ketepatan Penanganan Awal Keluhan di Rumah Sakit.&rdquo;</strong>
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-            <div className="p-4 bg-[var(--color-studio-mist)] rounded-2xl border border-[var(--color-control-gray)] space-y-1">
+            <div className="p-4 bg-[var(--color-linen)] rounded-[4px] border border-[var(--color-hairline)] space-y-1">
               <span className="font-semibold text-[var(--color-ink)] block">Efektivitas Pendampingan:</span>
               <p>Bukan otomasi penuh; mengukur dampak kolaborasi human–AI terhadap peningkatan efisiensi dan akurasi.</p>
             </div>
-            <div className="p-4 bg-[var(--color-studio-mist)] rounded-2xl border border-[var(--color-control-gray)] space-y-1">
+            <div className="p-4 bg-[var(--color-linen)] rounded-[4px] border border-[var(--color-hairline)] space-y-1">
               <span className="font-semibold text-[var(--color-ink)] block">Waktu Triase (Luaran Primer):</span>
               <p>Total durasi dari awal pembacaan narasi hingga penetapan keputusan final tersimpan dalam sistem.</p>
             </div>
-            <div className="p-4 bg-[var(--color-studio-mist)] rounded-2xl border border-[var(--color-control-gray)] space-y-1">
+            <div className="p-4 bg-[var(--color-linen)] rounded-[4px] border border-[var(--color-hairline)] space-y-1">
               <span className="font-semibold text-[var(--color-ink)] block">Ketepatan Penanganan Awal:</span>
               <p>Kesesuaian kategori keluhan dan unit tujuan terhadap Standar Emas (Gold Standard) yang disepakati ahli.</p>
             </div>
-            <div className="p-4 bg-[var(--color-studio-mist)] rounded-2xl border border-[var(--color-control-gray)] space-y-1">
+            <div className="p-4 bg-[var(--color-linen)] rounded-[4px] border border-[var(--color-hairline)] space-y-1">
               <span className="font-semibold text-[var(--color-ink)] block">Prioritisasi & Eskalasi:</span>
               <p>Ketepatan penentuan urgensi respon administratif serta kepekaan menangkap keluhan keselamatan pasien.</p>
             </div>
@@ -272,13 +272,13 @@ export function AboutClient() {
       </div>
 
       {/* Section B: Theoretical Framework */}
-      <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-8 space-y-5">
+      <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-8 space-y-5">
         <div className="flex items-center gap-2.5 text-base font-semibold text-[var(--color-ink)]">
-          <Layers size={18} className="text-[var(--color-pricing-blue)]" />
+          <Layers size={18} className="text-[var(--color-electric-violet)]" />
           <span>Bagian B — Kerangka Teori: Donabedian, HCAT, dan Human-in-the-Loop</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs text-[var(--color-slate)]">
-          <div className="p-5 bg-[var(--color-studio-mist)] rounded-2xl border border-[var(--color-control-gray)] space-y-2">
+          <div className="p-5 bg-[var(--color-linen)] rounded-[4px] border border-[var(--color-hairline)] space-y-2">
             <span className="font-semibold text-[var(--color-ink)] block text-sm">
               Model Donabedian
             </span>
@@ -288,7 +288,7 @@ export function AboutClient() {
               <strong>Outcome:</strong> Efisiensi waktu, akurasi disposisi, dan beban kerja.
             </p>
           </div>
-          <div className="p-5 bg-[var(--color-studio-mist)] rounded-2xl border border-[var(--color-control-gray)] space-y-2">
+          <div className="p-5 bg-[var(--color-linen)] rounded-[4px] border border-[var(--color-hairline)] space-y-2">
             <span className="font-semibold text-[var(--color-ink)] block text-sm">
               Healthcare Complaints Tool (HCAT)
             </span>
@@ -296,7 +296,7 @@ export function AboutClient() {
               Mengadopsi prinsip HCAT untuk membedakan domain masalah: administratif/birokrasi, komunikasi interpersonal, mutu klinis, dan fasilitas fisik, disesuaikan dengan SOP lokal.
             </p>
           </div>
-          <div className="p-5 bg-[var(--color-studio-mist)] rounded-2xl border border-[var(--color-control-gray)] space-y-2">
+          <div className="p-5 bg-[var(--color-linen)] rounded-[4px] border border-[var(--color-hairline)] space-y-2">
             <span className="font-semibold text-[var(--color-ink)] block text-sm">
               Human-in-the-Loop (HITL)
             </span>
@@ -308,10 +308,10 @@ export function AboutClient() {
       </div>
 
       {/* Section C: Indonesian Regulatory Compliance Matrix */}
-      <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-8 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3 border-b border-[var(--color-control-gray)]">
+      <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-8 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3 border-b border-[var(--color-hairline)]">
           <div className="flex items-center gap-2.5">
-            <Scale size={18} className="text-[var(--color-pricing-blue)]" />
+            <Scale size={18} className="text-[var(--color-electric-violet)]" />
             <h2 className="text-base font-semibold text-[var(--color-ink)]">
               Bagian C — Matriks Kepatuhan Regulasi Indonesia (Indonesian Regulatory Compliance Matrix)
             </h2>
@@ -322,7 +322,7 @@ export function AboutClient() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="bg-[var(--color-studio-mist)] border-b border-[var(--color-control-gray)] text-[11px] font-semibold uppercase tracking-wider text-[var(--color-slate)]">
+              <tr className="bg-[var(--color-linen)] border-b border-[var(--color-hairline)] text-[11px] font-semibold uppercase tracking-wider text-[var(--color-slate)]">
                 <th className="p-4">Regulasi & Dasar Hukum</th>
                 <th className="p-4">Pasal Relevan</th>
                 <th className="p-4">Kewajiban Pokok</th>
@@ -330,9 +330,9 @@ export function AboutClient() {
                 <th className="p-4">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[var(--color-control-gray)] text-xs text-[var(--color-slate)]">
+            <tbody className="divide-y divide-[var(--color-hairline)] text-xs text-[var(--color-slate)]">
               {regulations.map((reg, idx) => (
-                <tr key={idx} className="hover:bg-[var(--color-studio-mist)] transition-colors">
+                <tr key={idx} className="hover:bg-[var(--color-linen)] transition-colors">
                   <td className="p-4 font-semibold text-[var(--color-ink)] max-w-xs">{reg.law}</td>
                   <td className="p-4 font-mono text-[var(--color-steel)]">{reg.articles}</td>
                   <td className="p-4 leading-relaxed max-w-xs">{reg.obligation}</td>
@@ -351,10 +351,10 @@ export function AboutClient() {
       </div>
 
       {/* Section D: 12-Factor Implementation Readiness Framework */}
-      <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-8 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3 border-b border-[var(--color-control-gray)]">
+      <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-8 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3 border-b border-[var(--color-hairline)]">
           <div className="flex items-center gap-2.5">
-            <Building2 size={18} className="text-[var(--color-pricing-blue)]" />
+            <Building2 size={18} className="text-[var(--color-electric-violet)]" />
             <h2 className="text-base font-semibold text-[var(--color-ink)]">
               Bagian D — Kerangka Penilaian Kesiapan Implementasi RS (12-Factor Readiness Framework)
             </h2>
@@ -366,7 +366,7 @@ export function AboutClient() {
           {readinessCriteria.map((c, i) => (
             <div
               key={i}
-              className="p-5 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] space-y-2 flex flex-col justify-between"
+              className="p-5 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] space-y-2 flex flex-col justify-between"
             >
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
@@ -375,7 +375,7 @@ export function AboutClient() {
                 </div>
                 <p className="text-[var(--color-slate)] leading-relaxed">{c.desc}</p>
               </div>
-              <div className="pt-2 border-t border-[var(--color-control-gray)] text-[11px] text-[var(--color-ink)] font-medium">
+              <div className="pt-2 border-t border-[var(--color-hairline)] text-[11px] text-[var(--color-ink)] font-medium">
                 <strong>Catatan Audit:</strong> {c.notes}
               </div>
             </div>
@@ -384,9 +384,9 @@ export function AboutClient() {
       </div>
 
       {/* Section E: 18 FAQ Accordion */}
-      <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-8 space-y-5">
-        <div className="flex items-center gap-2 text-base font-semibold text-[var(--color-ink)] pb-2 border-b border-[var(--color-control-gray)]">
-          <HelpCircle size={18} className="text-[var(--color-pricing-blue)]" />
+      <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-8 space-y-5">
+        <div className="flex items-center gap-2 text-base font-semibold text-[var(--color-ink)] pb-2 border-b border-[var(--color-hairline)]">
+          <HelpCircle size={18} className="text-[var(--color-electric-violet)]" />
           <span>Bagian E — Tanya Jawab Akademik & Pembelaan Desain Riset (18 FAQ)</span>
         </div>
         <div className="space-y-3">
@@ -395,18 +395,18 @@ export function AboutClient() {
             return (
               <div
                 key={i}
-                className="rounded-2xl border border-[var(--color-control-gray)] overflow-hidden transition-colors"
+                className="rounded-[4px] border border-[var(--color-hairline)] overflow-hidden transition-colors"
               >
                 <button
                   type="button"
                   onClick={() => toggleFaq(i)}
-                  className="w-full p-4 text-left font-semibold text-xs text-[var(--color-ink)] flex items-center justify-between gap-3 hover:bg-[var(--color-studio-mist)] cursor-pointer"
+                  className="w-full p-4 text-left font-semibold text-xs text-[var(--color-ink)] flex items-center justify-between gap-3 hover:bg-[var(--color-linen)] cursor-pointer"
                 >
                   <span>{faq.q}</span>
                   {isOpen ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
                 </button>
                 {isOpen && (
-                  <div className="p-4 pt-1 text-xs text-[var(--color-slate)] leading-relaxed bg-[var(--color-studio-mist)] border-t border-[var(--color-control-gray)]">
+                  <div className="p-4 pt-1 text-xs text-[var(--color-slate)] leading-relaxed bg-[var(--color-linen)] border-t border-[var(--color-hairline)]">
                     {faq.a}
                   </div>
                 )}

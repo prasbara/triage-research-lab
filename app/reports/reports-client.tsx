@@ -103,12 +103,12 @@ export function ReportsClient({ stats }: ReportsClientProps) {
   return (
     <div className="space-y-8 max-w-7xl mx-auto px-2 sm:px-4 py-2 print:p-0">
       {/* ─── Header Stage ────────────────────────────── */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-6 border-b border-[var(--color-control-gray)] print:hidden">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-6 border-b border-[var(--color-hairline)] print:hidden">
         <div className="space-y-1.5">
           <span className="launch-label text-[11px] font-semibold uppercase tracking-wider">
             Dokumentasi Ilmiah & Ekspor Dataset Terverifikasi
           </span>
-          <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[var(--color-ink)]">
+          <h1 className="text-2xl sm:text-3xl font-light tracking-tight text-[var(--color-ink)]">
             Laporan Penelitian & Ekspor Riset
           </h1>
           <p className="text-sm text-[var(--color-slate)] max-w-2xl">
@@ -130,7 +130,7 @@ export function ReportsClient({ stats }: ReportsClientProps) {
 
       {/* ─── Tabs ────────────────────────────────────── */}
       <Tabs defaultValue="report" className="w-full space-y-6">
-        <TabsList className="bg-[var(--color-studio-mist)] p-1 rounded-full border border-[var(--color-control-gray)] print:hidden">
+        <TabsList className="bg-[var(--color-linen)] p-1 rounded-full border border-[var(--color-hairline)] print:hidden">
           <TabsTrigger value="report" className="rounded-full px-5 py-2 text-xs font-medium">
             Pratinjau Laporan Tesis
           </TabsTrigger>
@@ -141,9 +141,9 @@ export function ReportsClient({ stats }: ReportsClientProps) {
 
         {/* TAB 1: FORMAL REPORT VIEW */}
         <TabsContent value="report" className="space-y-6">
-          <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-8 sm:p-12 space-y-8 print:border-none print:p-0">
+          <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-8 sm:p-12 space-y-8 print:border-none print:p-0">
             {/* Title Block */}
-            <div className="text-center space-y-3 pb-8 border-b border-[var(--color-control-gray)]">
+            <div className="text-center space-y-3 pb-8 border-b border-[var(--color-hairline)]">
               <span className="text-[11px] font-semibold uppercase tracking-[0.228px] text-[var(--color-slate)] block">
                 Laporan Hasil Penelitian Eksperimental
               </span>
@@ -157,17 +157,17 @@ export function ReportsClient({ stats }: ReportsClientProps) {
 
             {/* Key Outcomes Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="p-5 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] space-y-1">
+              <div className="p-5 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] space-y-1">
                 <span className="text-[10px] uppercase font-semibold text-[var(--color-slate)] block">
                   Luaran Primer (H1)
                 </span>
-                <p className="text-2xl font-bold text-[var(--color-pricing-blue)]">-51.8%</p>
+                <p className="text-2xl font-bold text-[var(--color-electric-violet)]">-51.8%</p>
                 <p className="text-[11px] text-[var(--color-slate)]">
                   Efisiensi waktu triase (Manual 68.4s vs AI 32.9s, p &lt; 0.001)
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] space-y-1">
+              <div className="p-5 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] space-y-1">
                 <span className="text-[10px] uppercase font-semibold text-[var(--color-slate)] block">
                   Safety Recall (H2)
                 </span>
@@ -177,7 +177,7 @@ export function ReportsClient({ stats }: ReportsClientProps) {
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] space-y-1">
+              <div className="p-5 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] space-y-1">
                 <span className="text-[10px] uppercase font-semibold text-[var(--color-slate)] block">
                   Reliabilitas Pakar
                 </span>
@@ -187,7 +187,7 @@ export function ReportsClient({ stats }: ReportsClientProps) {
                 </p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] space-y-1">
+              <div className="p-5 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] space-y-1">
                 <span className="text-[10px] uppercase font-semibold text-[var(--color-slate)] block">
                   Beban Kerja (H3)
                 </span>
@@ -200,18 +200,18 @@ export function ReportsClient({ stats }: ReportsClientProps) {
 
             {/* Narrative Summary */}
             <div className="space-y-4 text-xs leading-relaxed text-[var(--color-ink)]">
-              <h3 className="text-sm font-semibold text-[var(--color-ink)] border-b pb-2 border-[var(--color-control-gray)]">
+              <h3 className="text-sm font-semibold text-[var(--color-ink)] border-b pb-2 border-[var(--color-hairline)]">
                 1. Metodologi Penelitian & Desain Eksperimen
               </h3>
               <p className="text-[var(--color-slate)]">
                 Penelitian ini menerapkan rancangan kuasi-eksperimen kuantitatif *within-subject repeated measures* dengan matriks penyilangan berimbang (*Counterbalanced Latin Square Design*). Korpus keluhan berisikan 25 kasus terverifikasi dari empat sumber provenance terpercaya (RSUD Rawat Jalan, SP4N LAPOR! Kemenkes, SIMRS Rawat Inap, dan Survei BPJS), dipartisi secara deterministik menjadi 60% Train (15 kasus), 20% Validation (5 kasus), dan 20% Held-out Test (5 kasus).
               </p>
 
-              <h3 className="text-sm font-semibold text-[var(--color-ink)] border-b pb-2 border-[var(--color-control-gray)] pt-4">
+              <h3 className="text-sm font-semibold text-[var(--color-ink)] border-b pb-2 border-[var(--color-hairline)] pt-4">
                 2. Temuan Uji Hipotesis
               </h3>
               <div className="space-y-3">
-                <div className="p-4 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] space-y-1">
+                <div className="p-4 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] space-y-1">
                   <strong className="text-[var(--color-ink)] block">
                     Hipotesis 1 (Efisiensi Waktu) — TERDUKUNG SIGNIFIKAN
                   </strong>
@@ -220,7 +220,7 @@ export function ReportsClient({ stats }: ReportsClientProps) {
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] space-y-1">
+                <div className="p-4 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] space-y-1">
                   <strong className="text-[var(--color-ink)] block">
                     Hipotesis 2 (Ketepatan & Non-Inferioritas) — TERDUKUNG NON-INFERIOR
                   </strong>
@@ -229,7 +229,7 @@ export function ReportsClient({ stats }: ReportsClientProps) {
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] space-y-1">
+                <div className="p-4 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] space-y-1">
                   <strong className="text-[var(--color-ink)] block">
                     Hipotesis 3 (Beban Kerja Kognitif / NASA-TLX) — TERDUKUNG SIGNIFIKAN
                   </strong>
@@ -239,7 +239,7 @@ export function ReportsClient({ stats }: ReportsClientProps) {
                 </div>
               </div>
 
-              <h3 className="text-sm font-semibold text-[var(--color-ink)] border-b pb-2 border-[var(--color-control-gray)] pt-4">
+              <h3 className="text-sm font-semibold text-[var(--color-ink)] border-b pb-2 border-[var(--color-hairline)] pt-4">
                 3. Kepatuhan Regulasi & Kesiapan Implementasi
               </h3>
               <p className="text-[var(--color-slate)]">
@@ -252,9 +252,9 @@ export function ReportsClient({ stats }: ReportsClientProps) {
         {/* TAB 2: EXPORT PACKAGES */}
         <TabsContent value="export" className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-7 space-y-4 flex flex-col justify-between">
+            <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-7 space-y-4 flex flex-col justify-between">
               <div className="space-y-3">
-                <div className="w-10 h-10 rounded-2xl bg-blue-50 text-[var(--color-pricing-blue)] flex items-center justify-center">
+                <div className="w-10 h-10 rounded-[4px] bg-blue-50 text-[var(--color-electric-violet)] flex items-center justify-center">
                   <FileSpreadsheet size={20} />
                 </div>
                 <h3 className="font-semibold text-base text-[var(--color-ink)]">
@@ -267,7 +267,7 @@ export function ReportsClient({ stats }: ReportsClientProps) {
                   {stats.cases} kasus terdaftar
                 </div>
               </div>
-              <div className="pt-3 border-t border-[var(--color-control-gray)]">
+              <div className="pt-3 border-t border-[var(--color-hairline)]">
                 <Button
                   className="w-full h-10"
                   size="sm"
@@ -281,9 +281,9 @@ export function ReportsClient({ stats }: ReportsClientProps) {
               </div>
             </div>
 
-            <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-7 space-y-4 flex flex-col justify-between">
+            <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-7 space-y-4 flex flex-col justify-between">
               <div className="space-y-3">
-                <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-[4px] bg-emerald-50 text-emerald-600 flex items-center justify-center">
                   <FileText size={20} />
                 </div>
                 <h3 className="font-semibold text-base text-[var(--color-ink)]">
@@ -296,7 +296,7 @@ export function ReportsClient({ stats }: ReportsClientProps) {
                   {stats.tasks} tugas observasi tercatat
                 </div>
               </div>
-              <div className="pt-3 border-t border-[var(--color-control-gray)]">
+              <div className="pt-3 border-t border-[var(--color-hairline)]">
                 <Button
                   className="w-full h-10"
                   size="sm"
@@ -310,9 +310,9 @@ export function ReportsClient({ stats }: ReportsClientProps) {
               </div>
             </div>
 
-            <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-7 space-y-4 flex flex-col justify-between">
+            <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-7 space-y-4 flex flex-col justify-between">
               <div className="space-y-3">
-                <div className="w-10 h-10 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-[4px] bg-purple-50 text-purple-600 flex items-center justify-center">
                   <Code2 size={20} />
                 </div>
                 <h3 className="font-semibold text-base text-[var(--color-ink)]">
@@ -325,7 +325,7 @@ export function ReportsClient({ stats }: ReportsClientProps) {
                   lme4 / lmerTest syntax
                 </div>
               </div>
-              <div className="pt-3 border-t border-[var(--color-control-gray)]">
+              <div className="pt-3 border-t border-[var(--color-hairline)]">
                 <Button
                   className="w-full h-10"
                   size="sm"

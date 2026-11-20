@@ -50,12 +50,12 @@ const DEFAULT_HYPOTHESES: HypothesisItem[] = [
 
 export function HypothesisTracker({ hypotheses = DEFAULT_HYPOTHESES }: HypothesisTrackerProps) {
   return (
-    <Card className="p-6 space-y-4">
+    <Card className="p-6 space-y-4 border-[var(--color-hairline)] bg-[var(--color-pure-white)] rounded-[4px] shadow-none">
       <div>
-        <h3 className="font-semibold text-base text-[var(--text-primary)]">
+        <h3 className="font-light text-base text-[var(--color-ink)]">
           Status Evaluasi Hipotesis Tesis (H1, H2, H3)
         </h3>
-        <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+        <p className="text-xs text-[var(--color-graphite)] mt-0.5">
           Verifikasi empiris berdasarkan model inferensi statistik terhadap data eksperimen
         </p>
       </div>
@@ -64,18 +64,18 @@ export function HypothesisTracker({ hypotheses = DEFAULT_HYPOTHESES }: Hypothesi
         {hypotheses.map((h) => (
           <div
             key={h.id}
-            className="p-4 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-secondary)] space-y-2"
+            className="p-4 rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-linen)]/30 space-y-2"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="font-bold text-xs px-2 py-0.5 rounded-md bg-[var(--accent)] text-white">
+                <span className="font-mono font-medium text-[11px] tracking-[1.2px] px-2 py-0.5 rounded-[4px] bg-[var(--color-carbon)] text-white">
                   {h.id}
                 </span>
-                <span className="font-semibold text-sm text-[var(--text-primary)]">{h.title}</span>
+                <span className="font-light text-sm text-[var(--color-ink)]">{h.title}</span>
               </div>
               <Badge
                 variant={h.status === 'supported' ? 'default' : 'outline'}
-                className="text-xs flex items-center gap-1"
+                className="text-xs flex items-center gap-1 font-mono tracking-[1px] uppercase rounded-[4px]"
               >
                 {h.status === 'supported' ? (
                   <>

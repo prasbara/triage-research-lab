@@ -95,12 +95,12 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
   return (
     <div className="space-y-8 max-w-7xl mx-auto px-2 sm:px-4 py-2">
       {/* ─── Header Stage ────────────────────────────── */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-6 border-b border-[var(--color-control-gray)]">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-6 border-b border-[var(--color-hairline)]">
         <div className="space-y-1.5">
           <span className="launch-label text-[11px] font-semibold uppercase tracking-wider">
             Evaluasi Statistik Empiris & Output Riset
           </span>
-          <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[var(--color-ink)]">
+          <h1 className="text-2xl sm:text-3xl font-light tracking-tight text-[var(--color-ink)]">
             Research Analytics & Uji Hipotesis (LMM)
           </h1>
           <p className="text-sm text-[var(--color-slate)] max-w-2xl">
@@ -121,7 +121,7 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
 
       {/* ─── 4 Primary KPI Highlight Cards ────────────── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-6 space-y-2">
+        <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-6 space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-slate)]">
               Observasi Manual
@@ -136,14 +136,14 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
           </p>
         </div>
 
-        <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-6 space-y-2">
+        <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-6 space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-slate)]">
               Observasi AI-Assisted
             </span>
-            <span className="w-2 h-2 rounded-full bg-[var(--color-pricing-blue)]" />
+            <span className="w-2 h-2 rounded-full bg-[var(--color-electric-violet)]" />
           </div>
-          <div className="text-3xl font-semibold font-mono tracking-tight text-[var(--color-pricing-blue)]">
+          <div className="text-3xl font-semibold font-mono tracking-tight text-[var(--color-electric-violet)]">
             {summary.aiCount}
           </div>
           <p className="text-xs text-[var(--color-steel)]">
@@ -151,7 +151,7 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
           </p>
         </div>
 
-        <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-6 space-y-2">
+        <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-6 space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-slate)]">
               Efisiensi Waktu (H1)
@@ -166,12 +166,12 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
           </p>
         </div>
 
-        <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-6 space-y-2">
+        <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-6 space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-slate)]">
               Safety Recall (H2)
             </span>
-            <ShieldCheck size={16} className="text-[var(--color-pricing-blue)]" />
+            <ShieldCheck size={16} className="text-[var(--color-electric-violet)]" />
           </div>
           <div className="text-3xl font-semibold font-mono tracking-tight text-[var(--color-ink)]">
             {(summary.aiHighPriorityRecall * 100).toFixed(0)}%
@@ -183,11 +183,11 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
       </div>
 
       {/* ─── LMM & Non-Inferiority Statistical Architecture ── */}
-      <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-7 sm:p-8 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-[var(--color-control-gray)]">
+      <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-7 sm:p-8 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-[var(--color-hairline)]">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-[var(--color-pricing-blue)] border border-blue-200">
+              <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-[var(--color-electric-violet)] border border-blue-200">
                 Formula: lmer(log(time) ~ method)
               </span>
               <Badge variant="purple">Linear Mixed-Effects Model</Badge>
@@ -205,11 +205,11 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
           {/* LMM Mathematical Formulation */}
           <div className="space-y-4 text-xs">
             <h3 className="font-semibold text-sm text-[var(--color-ink)] flex items-center gap-2">
-              <Scale size={16} className="text-[var(--color-pricing-blue)]" />
+              <Scale size={16} className="text-[var(--color-electric-violet)]" />
               <span>Model 1: Efisiensi Waktu (H1 - LMM on Log-Duration)</span>
             </h3>
             
-            <div className="p-4 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] font-mono space-y-2 text-[11px]">
+            <div className="p-4 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] font-mono space-y-2 text-[11px]">
               <div className="text-[var(--color-slate)]"># Formula R Standar Tesis Magister:</div>
               <div className="text-[var(--color-ink)] font-bold">
                 fit_h1 &lt;- lmer(log(duration_seconds) ~ method + (1 | participant_id) + (1 | case_id), data = df)
@@ -217,22 +217,22 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-              <div className="p-3 bg-[var(--color-studio-mist)] rounded-2xl border border-[var(--color-control-gray)]">
+              <div className="p-3 bg-[var(--color-linen)] rounded-[4px] border border-[var(--color-hairline)]">
                 <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold block">Fixed Effect (β)</span>
-                <span className="text-base font-bold text-[var(--color-pricing-blue)] font-mono">-0.732</span>
+                <span className="text-base font-bold text-[var(--color-electric-violet)] font-mono">-0.732</span>
                 <span className="text-[9px] text-[var(--color-steel)] block">SE = 0.067</span>
               </div>
-              <div className="p-3 bg-[var(--color-studio-mist)] rounded-2xl border border-[var(--color-control-gray)]">
+              <div className="p-3 bg-[var(--color-linen)] rounded-[4px] border border-[var(--color-hairline)]">
                 <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold block">t-Statistic</span>
                 <span className="text-base font-bold text-[var(--color-ink)] font-mono">-10.92</span>
                 <span className="text-[9px] text-[var(--color-steel)] block">df = 38.4</span>
               </div>
-              <div className="p-3 bg-[var(--color-studio-mist)] rounded-2xl border border-[var(--color-control-gray)]">
+              <div className="p-3 bg-[var(--color-linen)] rounded-[4px] border border-[var(--color-hairline)]">
                 <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold block">p-Value</span>
                 <span className="text-base font-bold text-emerald-700 font-mono">&lt; 0.001</span>
                 <span className="text-[9px] text-[var(--color-steel)] block">Signifikan (H1 Diterima)</span>
               </div>
-              <div className="p-3 bg-[var(--color-studio-mist)] rounded-2xl border border-[var(--color-control-gray)]">
+              <div className="p-3 bg-[var(--color-linen)] rounded-[4px] border border-[var(--color-hairline)]">
                 <span className="text-[10px] text-[var(--color-slate)] uppercase font-semibold block">Rasio Geometrik</span>
                 <span className="text-base font-bold text-emerald-700 font-mono">0.481</span>
                 <span className="text-[9px] text-[var(--color-steel)] block">exp(β) = -51.9%</span>
@@ -251,7 +251,7 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
               <span>Model 2: Uji Non-Inferioritas Ketepatan & Patient Safety (H2)</span>
             </h3>
 
-            <div className="p-4 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] space-y-3">
+            <div className="p-4 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] space-y-3">
               <div className="flex items-center justify-between text-xs font-semibold">
                 <span>Marjin Toleransi Non-Inferioritas (Δ)</span>
                 <span className="font-mono text-rose-600">-5.0% (-0.05)</span>
@@ -277,7 +277,7 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-[var(--color-control-gray)] grid grid-cols-2 gap-3 text-[11px]">
+              <div className="pt-2 border-t border-[var(--color-hairline)] grid grid-cols-2 gap-3 text-[11px]">
                 <div>
                   <span className="text-[10px] text-[var(--color-slate)] block">Batas Bawah 95% CI (Wald):</span>
                   <strong className="text-emerald-700 font-mono text-xs">+2.1% (Safe &gt; -5.0%)</strong>
@@ -297,8 +297,8 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
       </div>
 
       {/* ─── AI Statistical Copilot Section ─────────── */}
-      <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-7 sm:p-8 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-[var(--color-control-gray)]">
+      <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-7 sm:p-8 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4 border-b border-[var(--color-hairline)]">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <div className="w-6 h-6 rounded-lg bg-purple-50 text-purple-700 flex items-center justify-center font-bold text-xs">
@@ -317,7 +317,7 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
             <select
               value={selectedProvider}
               onChange={(e) => setSelectedProvider(e.target.value as any)}
-              className="h-9 px-3 rounded-xl border border-[var(--color-hairline-silver)] bg-white text-xs text-[var(--color-ink)]"
+              className="h-9 px-3 rounded-[4px] border border-[var(--color-hairline)] bg-white text-xs text-[var(--color-ink)]"
             >
               <option value="gemini">Google Gemini 2.5 Flash</option>
               <option value="nvidia">NVIDIA Nemotron 3.5 (30B)</option>
@@ -335,7 +335,7 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
         </div>
 
         {aiError && (
-          <div className="p-4 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded-2xl">
+          <div className="p-4 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded-[4px]">
             {aiError}
           </div>
         )}
@@ -343,8 +343,8 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
         {aiInterpretation ? (
           <div className="space-y-6 animate-fade-in text-xs">
             {/* Executive Abstract Paragraph */}
-            <div className="p-5 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] space-y-2">
-              <span className="text-[10px] uppercase font-bold text-[var(--color-pricing-blue)] tracking-wider block">
+            <div className="p-5 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] space-y-2">
+              <span className="text-[10px] uppercase font-bold text-[var(--color-electric-violet)] tracking-wider block">
                 Ringkasan Eksekutif Hasil Uji Inferensial (LMM & Non-Inferiority)
               </span>
               <p className="text-sm font-medium text-[var(--color-ink)] leading-relaxed">
@@ -353,19 +353,19 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
             </div>
 
             {/* APA Reporting Standard Card */}
-            <div className="p-5 rounded-2xl bg-blue-50/50 border border-blue-200/60 space-y-2">
+            <div className="p-5 rounded-[4px] bg-blue-50/50 border border-blue-200/60 space-y-2">
               <span className="text-[10px] uppercase font-bold text-blue-900 tracking-wider flex items-center gap-1.5">
                 <BookOpen size={13} />
                 <span>Format Pelaporan APA 7th Edition (Bab IV Hasil Tesis)</span>
               </span>
-              <p className="font-mono text-xs text-blue-950 bg-white p-3.5 rounded-xl border border-blue-200/50 leading-relaxed select-all">
+              <p className="font-mono text-xs text-blue-950 bg-white p-3.5 rounded-[4px] border border-blue-200/50 leading-relaxed select-all">
                 {aiInterpretation.apa_format_citation}
               </p>
             </div>
 
             {/* Detailed Hypotheses Breakdown */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-4 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] space-y-1.5">
+              <div className="p-4 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] space-y-1.5">
                 <strong className="text-xs text-[var(--color-ink)] block">
                   Interpretasi H1: Durasi Waktu Triase
                 </strong>
@@ -374,7 +374,7 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] space-y-1.5">
+              <div className="p-4 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] space-y-1.5">
                 <strong className="text-xs text-[var(--color-ink)] block">
                   Interpretasi H2: Non-Inferioritas & Safety
                 </strong>
@@ -383,7 +383,7 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] space-y-1.5">
+              <div className="p-4 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] space-y-1.5">
                 <strong className="text-xs text-[var(--color-ink)] block">
                   Interpretasi H3: Beban Kognitif (NASA-TLX)
                 </strong>
@@ -394,7 +394,7 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
             </div>
 
             {/* Thesis Defense Talking Points */}
-            <div className="p-5 rounded-2xl bg-amber-50/50 border border-amber-200/60 space-y-3">
+            <div className="p-5 rounded-[4px] bg-amber-50/50 border border-amber-200/60 space-y-3">
               <span className="text-[10px] uppercase font-bold text-amber-900 tracking-wider flex items-center gap-1.5">
                 <GraduationCap size={14} />
                 <span>Antisipasi Pertanyaan Dosen Penguji Sidang Tesis (Defense Talking Points)</span>
@@ -412,7 +412,7 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
             </div>
 
             {/* Practical Hospital Recommendation */}
-            <div className="p-4 rounded-2xl bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] space-y-1.5">
+            <div className="p-4 rounded-[4px] bg-[var(--color-linen)] border border-[var(--color-hairline)] space-y-1.5">
               <strong className="text-xs text-[var(--color-ink)] block">
                 Rekomendasi Manajerial bagi Direktur Rumah Sakit:
               </strong>
@@ -438,20 +438,20 @@ export function AnalyticsClient({ initialSummary }: AnalyticsClientProps) {
         </div>
 
         {/* Hypothesis Overview Summary */}
-        <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-7 space-y-4">
+        <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-7 space-y-4">
           <h3 className="font-semibold text-sm text-[var(--color-ink)]">
             Status Validasi Hipotesis Tesis
           </h3>
           <div className="space-y-3 text-xs">
-            <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-xl space-y-1">
+            <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-[4px] space-y-1">
               <strong className="block">H1: Efisiensi Waktu (p &lt; 0.001)</strong>
               <span>LLM memotong waktu triase sebesar 51.8% secara signifikan.</span>
             </div>
-            <div className="p-3 bg-blue-50 border border-blue-200 text-blue-900 rounded-xl space-y-1">
+            <div className="p-3 bg-blue-50 border border-blue-200 text-blue-900 rounded-[4px] space-y-1">
               <strong className="block">H2: Non-Inferioritas Akurasi</strong>
               <span>Akurasi 90.0% vs Manual 85.0% (Margin Δ = -5.0% terpenuhi aman).</span>
             </div>
-            <div className="p-3 bg-purple-50 border border-purple-200 text-purple-900 rounded-xl space-y-1">
+            <div className="p-3 bg-purple-50 border border-purple-200 text-purple-900 rounded-[4px] space-y-1">
               <strong className="block">H3: Penurunan Beban Kognitif</strong>
               <span>NASA-TLX turun dari 61.3 ke 38.5 (-37.2% beban mental).</span>
             </div>

@@ -71,16 +71,16 @@ export function HighResTimer({
   }
 
   return (
-    <Card className="px-4 py-3 flex items-center justify-between border-[var(--border-subtle)] bg-[var(--surface-secondary)]">
+    <Card className="px-4 py-3 flex items-center justify-between border-[var(--color-hairline)] bg-[var(--color-pure-white)] rounded-[4px] shadow-none">
       <div className="flex items-center gap-2">
         <Timer
           size={16}
           className={`${
-            isRunning && !isPaused ? 'text-[var(--accent)] animate-pulse' : 'text-[var(--text-muted)]'
+            isRunning && !isPaused ? 'text-[var(--color-electric-violet)] animate-pulse' : 'text-[var(--color-smoke)]'
           }`}
         />
-        <span className="text-xs font-semibold text-[var(--text-secondary)]">Stopwatch Audit:</span>
-        <span className="font-mono font-bold text-base text-[var(--text-primary)]">
+        <span className="text-[11px] font-mono uppercase tracking-[1.2px] text-[var(--color-graphite)]">Stopwatch Audit:</span>
+        <span className="font-mono text-base font-light text-[var(--color-ink)]">
           {formatMilliseconds(elapsedMs)}
         </span>
       </div>
@@ -88,7 +88,7 @@ export function HighResTimer({
       {isRunning && (
         <button
           onClick={togglePause}
-          className="text-xs flex items-center gap-1 font-medium px-2.5 py-1 rounded-full border border-[var(--border-subtle)] bg-white hover:bg-gray-50 text-[var(--text-primary)] transition-colors"
+          className="text-xs flex items-center gap-1 font-mono uppercase tracking-[1px] px-2.5 py-1 rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] hover:bg-[var(--color-linen)] text-[var(--color-ink)] transition-colors cursor-pointer"
         >
           {isPaused ? (
             <>

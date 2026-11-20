@@ -41,7 +41,7 @@ export function TabsList({ children, className }: { children: ReactNode; classNa
   return (
     <div
       className={cn(
-        'inline-flex items-center gap-1 p-1 bg-[var(--surface)] border border-[var(--border-subtle)] rounded-full',
+        'inline-flex items-center gap-1 p-1 bg-[var(--color-linen)] border border-[var(--color-hairline)] rounded-[4px]',
         className
       )}
     >
@@ -68,10 +68,10 @@ export function TabsTrigger({
       type="button"
       onClick={() => ctx.setActiveTab(value)}
       className={cn(
-        'px-4 py-1.5 text-xs font-semibold rounded-full transition-all cursor-pointer select-none',
+        'px-4 py-1.5 text-xs font-medium rounded-[4px] transition-all cursor-pointer select-none',
         isSelected
-          ? 'bg-white text-[var(--text-primary)] shadow-sm'
-          : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+          ? 'bg-[var(--color-pure-white)] text-[var(--color-ink)] border border-[var(--color-hairline)]'
+          : 'text-[var(--color-graphite)] hover:text-[var(--color-ink)]'
       )}
     >
       {children}

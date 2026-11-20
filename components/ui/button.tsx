@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 import { type ButtonHTMLAttributes, forwardRef } from 'react'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'outline'
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'outline' | 'accent'
   size?: 'sm' | 'md' | 'lg'
   loading?: boolean
 }
@@ -10,31 +10,36 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = 'primary', size = 'md', loading, children, className, disabled, ...props }, ref) => {
     const variants = {
-      // Pricing Blue Pill — Filled conversion control with 9999px radius, zero shadow
+      // Intercom Filled Primary Button — Black block anchoring on warm cream canvas
       primary:
-        'bg-[#0071e3] text-white hover:bg-[#0077ed] active:bg-[#006edb] tracking-[-0.12px]',
-      // Secondary Pill — Studio mist with hairline outline
-      secondary:
-        'bg-[#f5f5f7] text-[#1d1d1f] border border-[#d6d6d6] hover:bg-[#e6e6e8] active:bg-[#d6d6d6] tracking-[-0.12px]',
-      // Outlined Explore Pill — Transparent fill, 1px #86868b outline, 9999px radius
+        'bg-[#000000] text-[#ffffff] hover:bg-[#1a1a1a] active:bg-[#333333] border border-[#000000] tracking-normal',
+      // Outlined CTA Button — White bg with crisp 1px solid #111111 border
       outline:
-        'bg-transparent text-[#1d1d1f] border border-[#86868b] hover:border-[#1d1d1f] hover:bg-[#f5f5f7] active:bg-[#e6e6e8] tracking-[-0.12px]',
+        'bg-[#ffffff] text-[#111111] border border-[#111111] hover:bg-[#f1eee9] active:bg-[#dedbd6] tracking-normal',
+      // Secondary Button — Subtle hairline border on linen
+      secondary:
+        'bg-[#ffffff] text-[#111111] border border-[#dedbd6] hover:bg-[#f1eee9] active:bg-[#dedbd6] tracking-normal',
+      // Ghost Text Button — No background, plain ink text
       ghost:
-        'bg-transparent text-[#0066cc] hover:bg-blue-50/50 active:bg-blue-100/50 tracking-[-0.12px]',
+        'bg-transparent text-[#111111] hover:bg-[#f1eee9] active:bg-[#dedbd6] tracking-normal',
+      // Electric Violet Accent Button (used sparingly for brand punctuation)
+      accent:
+        'bg-[#0007cb] text-[#ffffff] hover:bg-[#0006a8] active:bg-[#00058e] border border-[#0007cb] tracking-normal',
+      // Danger Action
       danger:
-        'bg-rose-600 text-white hover:bg-rose-700 active:bg-rose-800 tracking-[-0.12px]',
+        'bg-rose-700 text-[#ffffff] hover:bg-rose-800 active:bg-rose-900 border border-rose-700 tracking-normal',
     }
     const sizes = {
       sm: 'px-3.5 py-1.5 text-xs font-normal gap-1.5 h-8',
-      md: 'px-5 py-2 text-xs font-medium gap-2 h-9',
-      lg: 'px-7 py-3 text-sm font-medium gap-2.5 h-11',
+      md: 'px-4 py-2 text-xs font-normal gap-2 h-9',
+      lg: 'px-5 py-3 text-sm font-normal gap-2.5 h-11',
     }
     return (
       <button
         ref={ref}
         disabled={disabled || loading}
         className={cn(
-          'inline-flex items-center justify-center rounded-full transition-all duration-150 select-none cursor-pointer',
+          'inline-flex items-center justify-center rounded-[4px] transition-colors duration-150 select-none cursor-pointer',
           'disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none',
           variants[variant],
           sizes[size],

@@ -29,30 +29,39 @@ export function LoginClient() {
   const quickAccounts = [
     {
       title: 'Peneliti Utama (Admin)',
-      email: 'peneliti@triage.ac.id',
-      password: 'Password123!',
+      email: 'admin@triage.ac.id',
+      password: 'Triage2025!',
       role: 'researcher',
       desc: 'Akses penuh seluruh dashboard, analitik, dan pengaturan',
       icon: ShieldCheck,
       badge: 'Admin',
     },
     {
-      title: 'Pakar Adjudikator (Expert)',
+      title: 'Pakar 1 (Medis & KARS)',
       email: 'expert@triage.ac.id',
-      password: 'Password123!',
+      password: 'Triage2025!',
       role: 'expert',
       desc: 'Validasi independen keluhan & pembentukan Gold Standard',
       icon: Stethoscope,
-      badge: 'Pakar Klinis',
+      badge: 'Pakar 1',
+    },
+    {
+      title: 'Pakar 2 (Mutu RS & MARS)',
+      email: 'expert2@triage.ac.id',
+      password: 'Triage2025!',
+      role: 'expert',
+      desc: 'Validasi independen kedua & sidang adjudikasi konsensus',
+      icon: Stethoscope,
+      badge: 'Pakar 2',
     },
     {
       title: 'Staf Penguji Triase (Participant)',
-      email: 'staff@triage.ac.id',
-      password: 'Password123!',
+      email: 'participant@triage.ac.id',
+      password: 'Triage2025!',
       role: 'participant',
       desc: 'Pengujian triase manual vs AI-assisted terandomisasi',
       icon: UserCheck,
-      badge: 'Partisipan (P001)',
+      badge: 'Partisipan P001',
     },
   ]
 
@@ -89,33 +98,33 @@ export function LoginClient() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--color-studio-mist)] flex flex-col justify-center items-center py-12 px-6">
-      {/* Brand Logo & Header */}
+    <div className="min-h-screen bg-[#faf9f6] flex flex-col justify-center items-center py-12 px-6">
+      {/* Brand Header in Intercom Whisper-Weight */}
       <div className="text-center mb-8 max-w-sm">
-        <div className="w-12 h-12 rounded-2xl bg-[var(--color-pricing-blue)] text-white mx-auto mb-4 flex items-center justify-center font-bold text-xl shadow-xs">
+        <div className="w-10 h-10 rounded-[4px] bg-[#000000] text-white mx-auto mb-4 flex items-center justify-center font-mono font-bold text-base shadow-none">
           T
         </div>
-        <p className="launch-label mb-1">Portal Eksperimen Riset</p>
-        <h1 className="text-2xl font-semibold tracking-tight text-[var(--color-ink)]">
+        <p className="font-mono text-xs uppercase tracking-[1.2px] text-[#585858] mb-1">Portal Eksperimen Riset</p>
+        <h1 className="text-2xl font-light tracking-tight text-[#111111]">
           Masuk ke TRIAGE Lab
         </h1>
-        <p className="text-xs text-[var(--color-slate)] mt-1.5 leading-relaxed">
+        <p className="text-xs text-[#585858] mt-1.5 leading-relaxed">
           Gunakan akun penelitian terdaftar untuk mengakses ruang kerja triase dan instrumen eksperimen.
         </p>
       </div>
 
-      {/* Main Login Card */}
-      <Card className="max-w-md w-full p-8 border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] space-y-6">
+      {/* Main Login Card in Intercom Warm Cream Editorial */}
+      <Card className="max-w-md w-full p-8 border border-[#dedbd6] bg-[#ffffff] rounded-[4px] space-y-6">
         {errorMessage && (
-          <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-xs text-rose-800 flex items-start gap-2.5">
-            <AlertCircle size={16} className="text-rose-600 shrink-0 mt-0.5" />
+          <div className="p-3.5 rounded-[4px] bg-rose-50 border border-rose-200 text-xs text-rose-800 flex items-start gap-2.5">
+            <AlertCircle size={15} className="text-rose-600 shrink-0 mt-0.5" />
             <span>{errorMessage}</span>
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-[var(--color-ink)] block">
+            <label className="text-[11px] font-mono uppercase tracking-[1.2px] text-[#585858] block">
               Alamat Email Penelitian
             </label>
             <Input
@@ -124,17 +133,17 @@ export function LoginClient() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="peneliti@triage.ac.id"
-              className="text-xs h-11 rounded-full px-4"
+              className="text-xs h-10 rounded-[4px] px-3.5"
             />
           </div>
 
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-semibold text-[var(--color-ink)] block">
+              <label className="text-[11px] font-mono uppercase tracking-[1.2px] text-[#585858] block">
                 Kata Sandi
               </label>
-              <span className="text-[11px] text-[var(--color-steel)] font-mono">
-                Default: Password123!
+              <span className="text-[10px] text-[#888888] font-mono">
+                Default: Triage2025!
               </span>
             </div>
             <Input
@@ -143,7 +152,7 @@ export function LoginClient() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="text-xs h-11 rounded-full px-4"
+              className="text-xs h-10 rounded-[4px] px-3.5"
             />
           </div>
 
@@ -151,18 +160,18 @@ export function LoginClient() {
             type="submit"
             size="lg"
             variant="primary"
-            className="w-full text-xs font-medium h-11 mt-2"
+            className="w-full text-xs font-normal h-10 mt-2 rounded-[4px]"
             loading={loading}
           >
             <span>Masuk ke Dashboard</span>
-            <ArrowRight size={14} className="ml-1" />
+            <ArrowRight size={13} className="ml-1.5" />
           </Button>
         </form>
 
         {/* 1-Click Fast Fill Accounts */}
-        <div className="pt-5 border-t border-[var(--color-control-gray)] space-y-3">
-          <span className="text-[11px] font-semibold text-[var(--color-slate)] uppercase tracking-[0.2px] block text-center">
-            Akun Riset Tersedia (Klik untuk Mengisi Cepat):
+        <div className="pt-5 border-t border-[#dedbd6] space-y-3">
+          <span className="text-[10px] font-mono text-[#585858] uppercase tracking-[1.2px] block text-center">
+            Akun Riset Tersedia (Klik untuk Mengisi):
           </span>
 
           <div className="space-y-2">
@@ -174,20 +183,21 @@ export function LoginClient() {
                   key={acc.email}
                   type="button"
                   onClick={() => handleFill(acc.email, acc.password)}
-                  className={`w-full p-3 rounded-2xl text-left border transition-all flex items-center justify-between gap-3 text-xs ${isSelected
-                      ? 'border-[var(--color-pricing-blue)] bg-blue-50/30'
-                      : 'border-[var(--color-control-gray)] bg-[var(--color-studio-mist)]/50 hover:bg-[var(--color-studio-mist)]'
-                    }`}
+                  className={`w-full p-3 rounded-[4px] text-left border transition-colors flex items-center justify-between gap-3 text-xs ${
+                    isSelected
+                      ? 'border-[#000000] bg-[#f1eee9]'
+                      : 'border-[#dedbd6] bg-[#faf9f6] hover:bg-[#f1eee9]'
+                  }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-7 h-7 rounded-full bg-white border border-[var(--color-control-gray)] flex items-center justify-center shrink-0">
-                      <Icon size={14} className="text-[var(--color-ink)]" />
+                    <div className="w-6 h-6 rounded-[2px] bg-white border border-[#dedbd6] flex items-center justify-center shrink-0">
+                      <Icon size={12} className="text-[#111111]" />
                     </div>
                     <div className="min-w-0">
-                      <div className="font-semibold text-[var(--color-ink)] truncate flex items-center gap-1.5">
+                      <div className="font-normal text-[#111111] truncate flex items-center gap-1.5">
                         <span>{acc.title}</span>
                       </div>
-                      <span className="text-[11px] text-[var(--color-slate)] font-mono block truncate">
+                      <span className="text-[10px] text-[#585858] font-mono block truncate">
                         {acc.email}
                       </span>
                     </div>
@@ -203,10 +213,10 @@ export function LoginClient() {
       </Card>
 
       {/* Back to Home Link */}
-      <div className="mt-8 text-center text-xs">
+      <div className="mt-8 text-center text-xs font-mono uppercase tracking-[1.2px]">
         <Link
           href="/"
-          className="text-[var(--color-slate)] hover:text-[var(--color-ink)] transition-colors"
+          className="text-[#585858] hover:text-[#111111] transition-colors"
         >
           ← Kembali ke Beranda TRIAGE Lab
         </Link>

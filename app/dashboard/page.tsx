@@ -100,29 +100,29 @@ export default async function DashboardPage() {
     <AppShell>
       <div className="space-y-8 max-w-7xl mx-auto px-2 sm:px-4 py-2">
         {/* Header Stage */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-6 border-b border-[var(--color-control-gray)]">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-6 border-b border-[var(--color-hairline)]">
           <div className="space-y-1.5">
             <div className="flex items-center gap-3">
-              <span className="launch-label text-[11px] font-semibold uppercase tracking-wider">
+              <span className="font-mono text-[11px] font-normal uppercase tracking-[1.2px] text-[var(--color-graphite)]">
                 Hospital Informatics Clinical Trial
               </span>
               <Badge variant="purple">Fase Riset Empiris Aktif</Badge>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[var(--color-ink)]">
+            <h1 className="text-3xl sm:text-4xl font-light tracking-tight text-[var(--color-ink)]">
               Overview Dashboard Riset
             </h1>
-            <p className="text-sm text-[var(--color-slate)] max-w-2xl">
+            <p className="text-sm text-[var(--color-graphite)] max-w-2xl font-normal leading-relaxed">
               Observasi eksperimental kuasi-kuantitatif efektivitas pendampingan LLM (NVIDIA & Gemini) terhadap durasi triase dan keselamatan klinis pasien RS.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <Link href="/triage/manual">
-              <Button variant="outline" size="md" className="h-10 px-5">
+              <Button variant="outline" size="md" className="h-9 px-4 rounded-[4px]">
                 Triase Manual
               </Button>
             </Link>
             <Link href="/triage/ai-assisted">
-              <Button size="md" className="h-10 px-5">
+              <Button size="md" className="h-9 px-4 rounded-[4px]">
                 Triase AI-Assisted
               </Button>
             </Link>
@@ -162,49 +162,49 @@ export default async function DashboardPage() {
         {/* Live Empirical Performance Indicators */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {/* H1 Time Efficiency */}
-          <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-6 space-y-2">
+          <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-6 space-y-2 shadow-none">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-700">
+              <span className="text-[11px] font-mono uppercase tracking-[1.2px] text-emerald-700">
                 Efisiensi Waktu Triase (H1)
               </span>
               <Zap size={15} className="text-emerald-600" />
             </div>
-            <div className="text-3xl font-semibold font-mono tracking-tight text-emerald-600">
+            <div className="text-3xl font-light font-mono tracking-tight text-emerald-600">
               -{timeSavings.toFixed(1)}%
             </div>
-            <p className="text-xs text-[var(--color-slate)] leading-relaxed pt-1">
+            <p className="text-xs text-[var(--color-graphite)] leading-relaxed pt-1">
               Durasi rata-rata turun dari <strong>{avgManual.toFixed(1)} detik</strong> (manual) menjadi <strong>{avgAI.toFixed(1)} detik</strong> (AI-assisted).
             </p>
           </div>
 
           {/* H2 Accuracy & Safety */}
-          <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-6 space-y-2">
+          <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-6 space-y-2 shadow-none">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-pricing-blue)]">
+              <span className="text-[11px] font-mono uppercase tracking-[1.2px] text-[var(--color-electric-violet)]">
                 Ketepatan Klasifikasi (H2)
               </span>
-              <ShieldCheck size={15} className="text-[var(--color-pricing-blue)]" />
+              <ShieldCheck size={15} className="text-[var(--color-electric-violet)]" />
             </div>
-            <div className="text-3xl font-semibold font-mono tracking-tight text-[var(--color-pricing-blue)]">
+            <div className="text-3xl font-light font-mono tracking-tight text-[var(--color-electric-violet)]">
               95.0%
             </div>
-            <p className="text-xs text-[var(--color-slate)] leading-relaxed pt-1">
+            <p className="text-xs text-[var(--color-graphite)] leading-relaxed pt-1">
               Akurasi kategori berbantuan model mengungguli proses manual (82.5%) dengan <strong>High-Priority Recall 100%</strong>.
             </p>
           </div>
 
           {/* Inter-Rater Agreement */}
-          <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-6 space-y-2">
+          <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-6 space-y-2 shadow-none">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-purple-700">
+              <span className="text-[11px] font-mono uppercase tracking-[1.2px] text-purple-700">
                 Inter-Rater Agreement (Pakar)
               </span>
               <Scale size={15} className="text-purple-600" />
             </div>
-            <div className="text-3xl font-semibold font-mono tracking-tight text-purple-700">
+            <div className="text-3xl font-light font-mono tracking-tight text-purple-700">
               κ = 0.80
             </div>
-            <p className="text-xs text-[var(--color-slate)] leading-relaxed pt-1">
+            <p className="text-xs text-[var(--color-graphite)] leading-relaxed pt-1">
               Tingkat kesepakatan independen 2 pakar (*Substantial Agreement*): 21 kasus sepakat, 4 kasus melalui panel adjudikasi.
             </p>
           </div>
@@ -213,12 +213,12 @@ export default async function DashboardPage() {
         {/* Duration Chart & Sidebar */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           <div className="lg:col-span-8">
-            <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-7 space-y-5">
+            <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-7 space-y-5 shadow-none">
               <div>
-                <h2 className="text-base font-semibold text-[var(--color-ink)]">
+                <h2 className="text-base font-light text-[var(--color-ink)]">
                   Perbandingan Durasi Triase (Hasil Observasi Empiris)
                 </h2>
-                <p className="text-xs text-[var(--color-slate)] mt-1">
+                <p className="text-xs text-[var(--color-graphite)] mt-1">
                   Rata-rata waktu penyelesaian triase administratif per kasus keluhan (dalam detik)
                 </p>
               </div>
@@ -228,26 +228,26 @@ export default async function DashboardPage() {
 
           <div className="lg:col-span-4 space-y-5">
             {/* Active Models */}
-            <div className="p-6 rounded-[28px] bg-[var(--color-gallery-white)] border border-[var(--color-control-gray)] space-y-4">
+            <div className="p-6 rounded-[4px] bg-[var(--color-pure-white)] border border-[var(--color-hairline)] space-y-4 shadow-none">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-2xl bg-blue-50 text-[var(--color-pricing-blue)] flex items-center justify-center font-bold text-xs border border-blue-100">
-                  <Bot size={18} />
+                <div className="w-8 h-8 rounded-[4px] bg-[var(--color-linen)] text-[var(--color-electric-violet)] flex items-center justify-center font-mono text-xs border border-[var(--color-hairline)]">
+                  <Bot size={16} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm text-[var(--color-ink)]">
+                  <h3 className="font-light text-sm text-[var(--color-ink)]">
                     Dual Provider AI Aktif
                   </h3>
-                  <span className="text-[11px] text-[var(--color-slate)]">
+                  <span className="text-[11px] font-mono tracking-[1px] text-[var(--color-graphite)]">
                     NVIDIA NIM & Google Gemini
                   </span>
                 </div>
               </div>
-              <p className="text-xs text-[var(--color-slate)] leading-relaxed">
+              <p className="text-xs text-[var(--color-graphite)] leading-relaxed">
                 Platform terhubung ke model <strong>Nemotron-3.5 Lightning (30B)</strong> dan <strong>Gemini 2.5 Flash</strong> dengan key server-side dan validasi skema Zod.
               </p>
               <div className="pt-2">
                 <Link href="/ai-lab">
-                  <Button variant="secondary" size="md" className="w-full h-10 gap-2">
+                  <Button variant="secondary" size="md" className="w-full h-9 gap-2 rounded-[4px]">
                     <span>Buka AI Laboratory</span>
                     <ArrowRight size={14} />
                   </Button>
@@ -256,17 +256,17 @@ export default async function DashboardPage() {
             </div>
 
             {/* Implementation Readiness Status */}
-            <div className="p-6 rounded-[28px] bg-[var(--color-studio-mist)] border border-[var(--color-control-gray)] space-y-3">
+            <div className="p-6 rounded-[4px] bg-[var(--color-linen)]/40 border border-[var(--color-hairline)] space-y-3 shadow-none">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-semibold text-[var(--color-slate)] uppercase tracking-wider">
+                <span className="text-[11px] font-mono text-[var(--color-graphite)] uppercase tracking-[1.2px]">
                   Kesiapan Implementasi RS
                 </span>
                 <Badge variant="warning">Tahap Uji Validasi</Badge>
               </div>
-              <p className="text-xs text-[var(--color-slate)] leading-relaxed">
+              <p className="text-xs text-[var(--color-iron)] leading-relaxed font-light">
                 Berdasarkan evaluasi 12 kriteria kesiapan, sistem berstatus <strong>Memerlukan Pengujian Skala Besar</strong> sebelum implementasi klinis operasional mandiri.
               </p>
-              <Link href="/about" className="text-xs text-[var(--color-pricing-blue)] font-medium inline-block hover:underline pt-1">
+              <Link href="/about" className="text-xs text-[var(--color-electric-violet)] font-mono tracking-[1px] inline-block hover:underline pt-1">
                 Tinjau Matriks Regulasi & Kesiapan →
               </Link>
             </div>
@@ -274,17 +274,17 @@ export default async function DashboardPage() {
         </div>
 
         {/* Dataset Distribution Breakdown Stage */}
-        <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-7 space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3 border-b border-[var(--color-control-gray)]">
+        <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-7 space-y-6 shadow-none">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-3 border-b border-[var(--color-hairline)]">
             <div>
-              <h2 className="text-base font-semibold text-[var(--color-ink)]">
+              <h2 className="text-base font-light text-[var(--color-ink)]">
                 Karakteristik & Distribusi Dataset Keluhan Pasien
               </h2>
-              <p className="text-xs text-[var(--color-slate)] mt-0.5">
+              <p className="text-xs text-[var(--color-graphite)] mt-0.5">
                 Sebaran kategori Standar Emas KARS, tingkat prioritas, dan pemisahan dataset (*stratified train/val/test*).
               </p>
             </div>
-            <div className="text-xs text-[var(--color-slate)]">
+            <div className="text-xs font-mono tracking-[1px] text-[var(--color-graphite)]">
               Periode Data: <strong>01 Jan 2025 – 30 Mar 2025</strong>
             </div>
           </div>
@@ -292,7 +292,7 @@ export default async function DashboardPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Category Distribution */}
             <div className="space-y-3">
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-slate)] block">
+              <span className="text-[11px] font-mono uppercase tracking-[1.2px] text-[var(--color-graphite)] block">
                 Sebaran Kategori Keluhan (Gold Standard)
               </span>
               <div className="space-y-2 text-xs">
@@ -301,12 +301,12 @@ export default async function DashboardPage() {
                   return (
                     <div key={cat} className="space-y-1">
                       <div className="flex justify-between text-xs">
-                        <span className="font-medium text-[var(--color-ink)]">{cat}</span>
-                        <span className="font-mono text-[var(--color-slate)]">{count} kasus ({pct}%)</span>
+                        <span className="font-light text-[var(--color-ink)]">{cat}</span>
+                        <span className="font-mono text-[var(--color-smoke)]">{count} kasus ({pct}%)</span>
                       </div>
-                      <div className="h-1.5 w-full bg-[var(--color-control-gray)] rounded-full overflow-hidden">
+                      <div className="h-1.5 w-full bg-[var(--color-hairline)] rounded-[4px] overflow-hidden">
                         <div
-                          className="h-full bg-[var(--color-pricing-blue)] rounded-full"
+                          className="h-full bg-[var(--color-electric-violet)] rounded-[4px]"
                           style={{ width: `${pct}%` }}
                         />
                       </div>
@@ -318,7 +318,7 @@ export default async function DashboardPage() {
 
             {/* Priority Distribution */}
             <div className="space-y-3">
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-slate)] block">
+              <span className="text-[11px] font-mono uppercase tracking-[1.2px] text-[var(--color-graphite)] block">
                 Sebaran Tingkat Prioritas Respon
               </span>
               <div className="space-y-2 text-xs">
@@ -328,14 +328,14 @@ export default async function DashboardPage() {
                   return (
                     <div key={pri} className="space-y-1">
                       <div className="flex justify-between text-xs">
-                        <span className={`font-medium ${isHigh ? 'text-amber-800 font-semibold' : 'text-[var(--color-ink)]'}`}>
+                        <span className={`font-light ${isHigh ? 'text-amber-800 font-medium' : 'text-[var(--color-ink)]'}`}>
                           {pri}
                         </span>
-                        <span className="font-mono text-[var(--color-slate)]">{count} kasus ({pct}%)</span>
+                        <span className="font-mono text-[var(--color-smoke)]">{count} kasus ({pct}%)</span>
                       </div>
-                      <div className="h-1.5 w-full bg-[var(--color-control-gray)] rounded-full overflow-hidden">
+                      <div className="h-1.5 w-full bg-[var(--color-hairline)] rounded-[4px] overflow-hidden">
                         <div
-                          className={`h-full rounded-full ${isHigh ? 'bg-amber-600' : 'bg-slate-400'}`}
+                          className={`h-full rounded-[4px] ${isHigh ? 'bg-amber-600' : 'bg-[var(--color-smoke)]'}`}
                           style={{ width: `${pct}%` }}
                         />
                       </div>

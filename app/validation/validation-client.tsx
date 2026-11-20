@@ -99,7 +99,7 @@ export function ValidationClient({
   return (
     <div className="space-y-8 max-w-7xl mx-auto px-2 sm:px-4 py-2">
       {/* ─── Header Stage ────────────────────────────── */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-6 border-b border-[var(--color-control-gray)]">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-6 border-b border-[var(--color-hairline)]">
         <div className="space-y-1.5">
           <div className="flex items-center gap-3">
             <span className="launch-label text-[11px] font-semibold uppercase tracking-wider">
@@ -107,7 +107,7 @@ export function ValidationClient({
             </span>
             <Badge variant="purple">Validasi Standar Emas Independen</Badge>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[var(--color-ink)]">
+          <h1 className="text-2xl sm:text-3xl font-light tracking-tight text-[var(--color-ink)]">
             Validasi Ahli & Ground Truth
           </h1>
           <p className="text-sm text-[var(--color-slate)] max-w-2xl">
@@ -123,7 +123,7 @@ export function ValidationClient({
 
       {/* ─── Inter-Rater Reliability KPI Row ─────────── */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="p-5 rounded-[24px] bg-[var(--color-gallery-white)] border border-[var(--color-control-gray)] space-y-1">
+        <div className="p-5 rounded-[24px] bg-[var(--color-pure-white)] border border-[var(--color-hairline)] space-y-1">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--color-slate)]">
             Total Kasus Diteliti
           </span>
@@ -133,7 +133,7 @@ export function ValidationClient({
           <span className="text-[10px] text-[var(--color-steel)]">Korpus tervalidasi</span>
         </div>
 
-        <div className="p-5 rounded-[24px] bg-[var(--color-gallery-white)] border border-[var(--color-control-gray)] space-y-1">
+        <div className="p-5 rounded-[24px] bg-[var(--color-pure-white)] border border-[var(--color-hairline)] space-y-1">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-emerald-700">
             Tingkat Kesepakatan (Agreement)
           </span>
@@ -143,7 +143,7 @@ export function ValidationClient({
           <span className="text-[10px] text-[var(--color-slate)]">{agreedCount} kasus konsensus penuh</span>
         </div>
 
-        <div className="p-5 rounded-[24px] bg-[var(--color-gallery-white)] border border-[var(--color-control-gray)] space-y-1">
+        <div className="p-5 rounded-[24px] bg-[var(--color-pure-white)] border border-[var(--color-hairline)] space-y-1">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-purple-700">
             Cohen&apos;s Kappa (κ)
           </span>
@@ -153,7 +153,7 @@ export function ValidationClient({
           <span className="text-[10px] text-[var(--color-slate)]">Substantial Agreement</span>
         </div>
 
-        <div className="p-5 rounded-[24px] bg-[var(--color-gallery-white)] border border-[var(--color-control-gray)] space-y-1">
+        <div className="p-5 rounded-[24px] bg-[var(--color-pure-white)] border border-[var(--color-hairline)] space-y-1">
           <span className="text-[10px] font-semibold uppercase tracking-wider text-amber-700">
             Kasus Diadjudikasi Panel
           </span>
@@ -168,8 +168,8 @@ export function ValidationClient({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left: Case Navigation List */}
         <div className="lg:col-span-5 space-y-3">
-          <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-6 space-y-4">
-            <div className="flex items-center justify-between pb-2 border-b border-[var(--color-control-gray)]">
+          <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-6 space-y-4">
+            <div className="flex items-center justify-between pb-2 border-b border-[var(--color-hairline)]">
               <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-slate)]">
                 Daftar Kasus ({cases.length})
               </span>
@@ -186,9 +186,9 @@ export function ValidationClient({
                   <div
                     key={c.id}
                     onClick={() => setSelectedCase(c)}
-                    className={`p-4 rounded-2xl border text-xs cursor-pointer transition-all ${isSelected
-                        ? 'border-[var(--color-pricing-blue)] bg-blue-50/40 ring-1 ring-blue-200'
-                        : 'border-[var(--color-control-gray)] bg-white hover:bg-[var(--color-studio-mist)]'
+                    className={`p-4 rounded-[4px] border text-xs cursor-pointer transition-all ${isSelected
+                        ? 'border-[var(--color-electric-violet)] bg-blue-50/40 ring-1 ring-blue-200'
+                        : 'border-[var(--color-hairline)] bg-white hover:bg-[var(--color-linen)]'
                       }`}
                   >
                     <div className="flex items-center justify-between mb-1.5">
@@ -214,9 +214,9 @@ export function ValidationClient({
           {selectedCase ? (
             <>
               {/* Selected Case Narrative Card */}
-              <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-7 space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-[var(--color-control-gray)]">
-                  <span className="font-mono text-xs font-semibold text-[var(--color-pricing-blue)] bg-blue-50 px-3 py-1 rounded-full border border-blue-200/50">
+              <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-7 space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-[var(--color-hairline)]">
+                  <span className="font-mono text-xs font-semibold text-[var(--color-electric-violet)] bg-blue-50 px-3 py-1 rounded-full border border-blue-200/50">
                     {selectedCase.case_id}
                   </span>
                   <div className="flex items-center gap-2">
@@ -231,7 +231,7 @@ export function ValidationClient({
                   <label className="text-[11px] font-semibold text-[var(--color-slate)] uppercase tracking-wider block">
                     Narasi Keluhan Pasien
                   </label>
-                  <p className="text-xs sm:text-sm text-[var(--color-ink)] leading-relaxed bg-[var(--color-studio-mist)] p-4 rounded-2xl border border-[var(--color-control-gray)]">
+                  <p className="text-xs sm:text-sm text-[var(--color-ink)] leading-relaxed bg-[var(--color-linen)] p-4 rounded-[4px] border border-[var(--color-hairline)]">
                     &ldquo;{selectedCase.complaint_text}&rdquo;
                   </p>
                 </div>
@@ -240,9 +240,9 @@ export function ValidationClient({
               {/* Side-by-Side Dual Expert Assessments */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* Expert 1 */}
-                <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-6 space-y-4">
-                  <div className="flex items-center gap-2.5 pb-2 border-b border-[var(--color-control-gray)]">
-                    <div className="w-7 h-7 rounded-full bg-blue-50 text-[var(--color-pricing-blue)] flex items-center justify-center font-bold text-xs">
+                <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-6 space-y-4">
+                  <div className="flex items-center gap-2.5 pb-2 border-b border-[var(--color-hairline)]">
+                    <div className="w-7 h-7 rounded-full bg-blue-50 text-[var(--color-electric-violet)] flex items-center justify-center font-bold text-xs">
                       1
                     </div>
                     <div>
@@ -252,11 +252,11 @@ export function ValidationClient({
                   </div>
 
                   <div className="space-y-2.5 text-xs">
-                    <div className="p-3 bg-[var(--color-studio-mist)] rounded-xl space-y-0.5">
+                    <div className="p-3 bg-[var(--color-linen)] rounded-[4px] space-y-0.5">
                       <span className="text-[10px] uppercase font-semibold text-[var(--color-slate)]">Kategori</span>
                       <p className="font-semibold text-[var(--color-ink)]">{expert1?.category || goldStandard?.category}</p>
                     </div>
-                    <div className="p-3 bg-[var(--color-studio-mist)] rounded-xl space-y-0.5">
+                    <div className="p-3 bg-[var(--color-linen)] rounded-[4px] space-y-0.5">
                       <span className="text-[10px] uppercase font-semibold text-[var(--color-slate)]">Prioritas</span>
                       <p className="font-semibold text-[var(--color-ink)]">{expert1?.priority || goldStandard?.priority}</p>
                     </div>
@@ -267,8 +267,8 @@ export function ValidationClient({
                 </div>
 
                 {/* Expert 2 */}
-                <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-gallery-white)] p-6 space-y-4">
-                  <div className="flex items-center gap-2.5 pb-2 border-b border-[var(--color-control-gray)]">
+                <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-pure-white)] p-6 space-y-4">
+                  <div className="flex items-center gap-2.5 pb-2 border-b border-[var(--color-hairline)]">
                     <div className="w-7 h-7 rounded-full bg-purple-50 text-purple-700 flex items-center justify-center font-bold text-xs">
                       2
                     </div>
@@ -279,11 +279,11 @@ export function ValidationClient({
                   </div>
 
                   <div className="space-y-2.5 text-xs">
-                    <div className="p-3 bg-[var(--color-studio-mist)] rounded-xl space-y-0.5">
+                    <div className="p-3 bg-[var(--color-linen)] rounded-[4px] space-y-0.5">
                       <span className="text-[10px] uppercase font-semibold text-[var(--color-slate)]">Kategori</span>
                       <p className="font-semibold text-[var(--color-ink)]">{expert2?.category || goldStandard?.category}</p>
                     </div>
-                    <div className="p-3 bg-[var(--color-studio-mist)] rounded-xl space-y-0.5">
+                    <div className="p-3 bg-[var(--color-linen)] rounded-[4px] space-y-0.5">
                       <span className="text-[10px] uppercase font-semibold text-[var(--color-slate)]">Prioritas</span>
                       <p className="font-semibold text-[var(--color-ink)]">{expert2?.priority || goldStandard?.priority}</p>
                     </div>
@@ -295,29 +295,29 @@ export function ValidationClient({
               </div>
 
               {/* Official Gold Standard Capsule */}
-              <div className="rounded-[28px] border border-[var(--color-control-gray)] bg-[var(--color-studio-mist)] p-6 space-y-4">
-                <div className="flex items-center justify-between pb-2 border-b border-[var(--color-control-gray)]">
+              <div className="rounded-[4px] border border-[var(--color-hairline)] bg-[var(--color-linen)] p-6 space-y-4">
+                <div className="flex items-center justify-between pb-2 border-b border-[var(--color-hairline)]">
                   <div className="flex items-center gap-2 font-semibold text-xs text-[var(--color-ink)]">
-                    <Lock size={14} className="text-[var(--color-pricing-blue)]" />
+                    <Lock size={14} className="text-[var(--color-electric-violet)]" />
                     <span>Standar Emas Resmi Terkunci (Gold Standard Ground Truth)</span>
                   </div>
                   <Badge variant="success">Final Consensus</Badge>
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                  <div className="p-3 bg-white rounded-xl border border-[var(--color-control-gray)]">
+                  <div className="p-3 bg-white rounded-[4px] border border-[var(--color-hairline)]">
                     <span className="text-[10px] uppercase text-[var(--color-slate)] block">Kategori Final</span>
                     <strong className="text-[var(--color-ink)] mt-0.5 block">{goldStandard?.category}</strong>
                   </div>
-                  <div className="p-3 bg-white rounded-xl border border-[var(--color-control-gray)]">
+                  <div className="p-3 bg-white rounded-[4px] border border-[var(--color-hairline)]">
                     <span className="text-[10px] uppercase text-[var(--color-slate)] block">Prioritas Final</span>
                     <strong className="text-[var(--color-ink)] mt-0.5 block">{goldStandard?.priority}</strong>
                   </div>
-                  <div className="p-3 bg-white rounded-xl border border-[var(--color-control-gray)]">
+                  <div className="p-3 bg-white rounded-[4px] border border-[var(--color-hairline)]">
                     <span className="text-[10px] uppercase text-[var(--color-slate)] block">Unit Disposisi</span>
                     <strong className="text-[var(--color-ink)] mt-0.5 block">{goldStandard?.target_unit}</strong>
                   </div>
-                  <div className="p-3 bg-white rounded-xl border border-[var(--color-control-gray)]">
+                  <div className="p-3 bg-white rounded-[4px] border border-[var(--color-hairline)]">
                     <span className="text-[10px] uppercase text-[var(--color-slate)] block">Eskalasi</span>
                     <strong className="text-[var(--color-ink)] mt-0.5 block">
                       {goldStandard?.escalation_required ? 'Ya (Segera)' : 'Tidak'}

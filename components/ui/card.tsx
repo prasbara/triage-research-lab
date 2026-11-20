@@ -5,7 +5,7 @@ export function Card({ className, children, ...props }: HTMLAttributes<HTMLDivEl
   return (
     <div
       className={cn(
-        'bg-white rounded-[28px] border border-[var(--border-subtle)] p-7 transition-colors',
+        'bg-[#ffffff] rounded-[4px] border border-[#dedbd6] p-6 transition-colors shadow-none',
         className
       )}
       {...props}
@@ -21,7 +21,7 @@ export function CardHeader({ className, children, ...props }: HTMLAttributes<HTM
 
 export function CardTitle({ className, children, ...props }: HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h3 className={cn('text-lg font-semibold text-[var(--text-primary)] tracking-tight', className)} {...props}>
+    <h3 className={cn('text-base font-normal text-[#111111] tracking-tight', className)} {...props}>
       {children}
     </h3>
   )
@@ -29,7 +29,7 @@ export function CardTitle({ className, children, ...props }: HTMLAttributes<HTML
 
 export function CardDescription({ className, children, ...props }: HTMLAttributes<HTMLParagraphElement>) {
   return (
-    <p className={cn('text-sm text-[var(--text-secondary)] leading-relaxed', className)} {...props}>
+    <p className={cn('text-xs text-[#585858] leading-relaxed', className)} {...props}>
       {children}
     </p>
   )
@@ -43,7 +43,7 @@ export function CardFooter({ className, children, ...props }: HTMLAttributes<HTM
   return (
     <div
       className={cn(
-        'mt-4 pt-4 border-t border-[var(--border-subtle)] flex items-center justify-between',
+        'mt-4 pt-4 border-t border-[#dedbd6] flex items-center justify-between',
         className
       )}
       {...props}

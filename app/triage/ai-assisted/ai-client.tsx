@@ -242,7 +242,7 @@ export function AIAssistedTriageClient({
   if (!hasMore || !task) {
     return (
       <Card className="max-w-xl mx-auto my-12 p-8 text-center space-y-4">
-        <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto">
+        <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-[4px] flex items-center justify-center mx-auto">
           <CheckCircle2 size={24} />
         </div>
         <h2 className="text-xl font-bold text-[var(--text-primary)]">
@@ -268,7 +268,7 @@ export function AIAssistedTriageClient({
   return (
     <div className="max-w-6xl mx-auto space-y-5">
       {/* Timer Bar */}
-      <div className="bg-white rounded-2xl border border-[var(--border-subtle)] p-3 px-5 flex items-center justify-between shadow-xs">
+      <div className="bg-white rounded-[4px] border border-[var(--border-subtle)] p-3 px-5 flex items-center justify-between shadow-none">
         <div className="flex items-center gap-2.5">
           <Badge variant="default">Kondisi B: AI-Assisted</Badge>
           <span className="text-xs text-[var(--text-muted)] font-mono">
@@ -288,7 +288,7 @@ export function AIAssistedTriageClient({
       </div>
 
       {submittedMessage && (
-        <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-xs font-semibold text-center animate-in fade-in">
+        <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-[4px] text-xs font-semibold text-center animate-in fade-in">
           {submittedMessage}
         </div>
       )}
@@ -319,7 +319,7 @@ export function AIAssistedTriageClient({
               <label className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                 Teks Narasi Keluhan Pasien
               </label>
-              <div className="mt-2 p-4 bg-[var(--surface)] rounded-2xl border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm leading-relaxed font-sans font-medium">
+              <div className="mt-2 p-4 bg-[var(--surface)] rounded-[4px] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm leading-relaxed font-sans font-medium">
                 "{task.complaint_cases?.complaint_text}"
               </div>
             </div>
@@ -329,7 +329,7 @@ export function AIAssistedTriageClient({
           <Card className="p-6 border-blue-100 bg-gradient-to-br from-white to-blue-50/20">
             <div className="flex items-center justify-between pb-3 border-b border-blue-100">
               <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-xl bg-blue-50 text-[var(--accent)] flex items-center justify-center">
+                <div className="w-7 h-7 rounded-[4px] bg-blue-50 text-[var(--accent)] flex items-center justify-center">
                   <Bot size={16} />
                 </div>
                 <div>
@@ -354,14 +354,14 @@ export function AIAssistedTriageClient({
                 </p>
               </div>
             ) : aiError ? (
-              <div className="mt-3 p-3 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl text-xs">
+              <div className="mt-3 p-3 bg-rose-50 border border-rose-200 text-rose-800 rounded-[4px] text-xs">
                 Gagal memuat rekomendasi: {aiError}. Anda dapat tetap mengklasifikasikan secara manual.
               </div>
             ) : aiRecommendation ? (
               <div className="mt-4 space-y-3.5">
                 {/* Clinical Safety Warning if flagged */}
                 {aiRecommendation.requires_human_review && (
-                  <div className="p-3 bg-amber-50 border border-amber-200/80 rounded-xl flex items-start gap-2.5 text-xs text-amber-900">
+                  <div className="p-3 bg-amber-50 border border-amber-200/80 rounded-[4px] flex items-start gap-2.5 text-xs text-amber-900">
                     <ShieldAlert size={16} className="text-amber-600 shrink-0 mt-0.5" />
                     <div>
                       <span className="font-bold">Peringatan Keselamatan / Review Ketat:</span>
@@ -373,7 +373,7 @@ export function AIAssistedTriageClient({
                 )}
 
                 <div className="grid grid-cols-2 gap-3 text-xs">
-                  <div className="p-2.5 bg-white rounded-xl border border-[var(--border-subtle)]">
+                  <div className="p-2.5 bg-white rounded-[4px] border border-[var(--border-subtle)]">
                     <span className="text-[var(--text-muted)] block text-[10px] uppercase font-semibold">
                       Kategori Rekomendasi
                     </span>
@@ -381,7 +381,7 @@ export function AIAssistedTriageClient({
                       {aiRecommendation.category}
                     </span>
                   </div>
-                  <div className="p-2.5 bg-white rounded-xl border border-[var(--border-subtle)]">
+                  <div className="p-2.5 bg-white rounded-[4px] border border-[var(--border-subtle)]">
                     <span className="text-[var(--text-muted)] block text-[10px] uppercase font-semibold">
                       Prioritas Rekomendasi
                     </span>
@@ -389,7 +389,7 @@ export function AIAssistedTriageClient({
                       {aiRecommendation.priority}
                     </span>
                   </div>
-                  <div className="p-2.5 bg-white rounded-xl border border-[var(--border-subtle)]">
+                  <div className="p-2.5 bg-white rounded-[4px] border border-[var(--border-subtle)]">
                     <span className="text-[var(--text-muted)] block text-[10px] uppercase font-semibold">
                       Unit Tujuan
                     </span>
@@ -397,7 +397,7 @@ export function AIAssistedTriageClient({
                       {aiRecommendation.target_unit}
                     </span>
                   </div>
-                  <div className="p-2.5 bg-white rounded-xl border border-[var(--border-subtle)]">
+                  <div className="p-2.5 bg-white rounded-[4px] border border-[var(--border-subtle)]">
                     <span className="text-[var(--text-muted)] block text-[10px] uppercase font-semibold">
                       Status Eskalasi
                     </span>
@@ -407,7 +407,7 @@ export function AIAssistedTriageClient({
                   </div>
                 </div>
 
-                <div className="p-3 bg-white rounded-xl border border-[var(--border-subtle)] text-xs">
+                <div className="p-3 bg-white rounded-[4px] border border-[var(--border-subtle)] text-xs">
                   <span className="text-[var(--text-muted)] block text-[10px] uppercase font-semibold">
                     Pertimbangan Model (Reasoning)
                   </span>
@@ -506,7 +506,7 @@ export function AIAssistedTriageClient({
                 </Select>
 
                 <div className="pt-2">
-                  <label className="flex items-start gap-2.5 p-3 rounded-xl border border-[var(--border)] bg-gray-50/50 cursor-pointer hover:bg-gray-50 transition-colors">
+                  <label className="flex items-start gap-2.5 p-3 rounded-[4px] border border-[var(--border)] bg-gray-50/50 cursor-pointer hover:bg-gray-50 transition-colors">
                     <input
                       type="checkbox"
                       checked={form.final_escalation_required}
@@ -532,7 +532,7 @@ export function AIAssistedTriageClient({
                   </label>
                   <textarea
                     rows={2}
-                    className="w-full rounded-xl border border-[var(--border)] p-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-blue-100"
+                    className="w-full rounded-[4px] border border-[var(--border)] p-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-blue-100"
                     placeholder="Alasan penerimaan atau revisi rekomendasi AI..."
                     value={form.reasoning}
                     onChange={(e) => setForm({ ...form, reasoning: e.target.value })}
@@ -541,7 +541,7 @@ export function AIAssistedTriageClient({
               </div>
 
               {revisions.length > 0 && (
-                <div className="p-3 bg-amber-50/70 border border-amber-200/50 rounded-xl text-xs space-y-1">
+                <div className="p-3 bg-amber-50/70 border border-amber-200/50 rounded-[4px] text-xs space-y-1">
                   <span className="font-semibold text-amber-900">
                     Log Perubahan Petugas ({revisions.length} bidang):
                   </span>

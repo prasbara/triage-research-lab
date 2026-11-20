@@ -41,32 +41,32 @@ export function DurationChart({ data }: DurationChartProps) {
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chartData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e6e6e8" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#dedbd6" vertical={false} />
                 <XAxis
                   dataKey="label"
-                  tick={{ fontSize: 12, fill: '#707070' }}
-                  axisLine={{ stroke: '#e6e6e8' }}
+                  tick={{ fontSize: 12, fill: '#585858' }}
+                  axisLine={{ stroke: '#dedbd6' }}
                 />
                 <YAxis
-                  tick={{ fontSize: 12, fill: '#707070' }}
-                  axisLine={{ stroke: '#e6e6e8' }}
+                  tick={{ fontSize: 12, fill: '#585858' }}
+                  axisLine={{ stroke: '#dedbd6' }}
                   unit="s"
                 />
                 <Tooltip
                   formatter={(val: any) => [`${Number(val).toFixed(1)} detik`, 'Rata-rata Waktu']}
                   contentStyle={{
                     backgroundColor: '#ffffff',
-                    borderRadius: 12,
-                    border: '1px solid #e6e6e8',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
+                    borderRadius: 4,
+                    border: '1px solid #dedbd6',
+                    boxShadow: 'none',
                     fontSize: 12,
                   }}
                 />
-                <Bar dataKey="duration" radius={[6, 6, 0, 0]} maxBarSize={60}>
+                <Bar dataKey="duration" radius={[2, 2, 0, 0]} maxBarSize={56}>
                   {chartData.map((entry, index) => (
                     <Cell
                       key={`cell-${index}`}
-                      fill={entry.method === 'manual' ? '#707070' : '#0071e3'}
+                      fill={entry.method === 'manual' ? '#585858' : '#0007cb'}
                     />
                   ))}
                 </Bar>
@@ -74,7 +74,7 @@ export function DurationChart({ data }: DurationChartProps) {
             </ResponsiveContainer>
           </div>
         ) : (
-          <div className="h-48 flex flex-col items-center justify-center text-center p-6 bg-[var(--surface)] rounded-2xl border border-[var(--border-subtle)]">
+          <div className="h-48 flex flex-col items-center justify-center text-center p-6 bg-[var(--color-linen)] rounded-[4px] border border-[var(--color-hairline)]">
             <p className="text-sm font-medium text-[var(--text-secondary)]">
               Belum ada observasi tugas triage yang tercatat.
             </p>

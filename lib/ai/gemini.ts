@@ -3,6 +3,67 @@ import { ComplaintClassificationInput, ComplaintClassificationResult, ProviderHe
 import { buildClassificationPrompt, hashPrompt } from './prompt'
 import { ComplaintClassificationSchema } from './schemas'
 
+function cleanAndParseJSON(str: string): any {
+  if (!str) return null
+  const trimmed = str.trim()
+  try {
+    return JSON.parse(trimmed)
+  } catch {}
+
+  const noComments = trimmed
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/\/\/.*/g, '')
+
+  try {
+    return JSON.parse(noComments)
+  } catch {}
+
+  const noTrailingCommas = noComments
+    .replace(/,\s*([}\]])/g, '$1')
+
+  try {
+    return JSON.parse(noTrailingCommas)
+  } catch {}
+
+  const quotedKeys = noTrailingCommas
+    .replace(/([{,]\s*)([a-zA-Z0-9_]+)\s*:/g, '$1"$2":')
+
+  try {
+    return JSON.parse(quotedKeys)
+  } catch {}
+
+  return null
+}
+
+function extractValidJSON(text: string): any {
+  if (!text) return null
+  let cleaned = text
+    .replace(/<think>[\s\S]*?<\/think>/gi, '')
+    .replace(/Here's a thinking process[\s\S]*?(?=\{|\`\`\`)/gi, '')
+    .trim()
+
+  const direct = cleanAndParseJSON(cleaned)
+  if (direct && typeof direct === 'object') return direct
+
+  const codeBlockRegex = /```(?:json)?\s*([\s\S]*?)\s*```/gi
+  let match: RegExpExecArray | null
+  while ((match = codeBlockRegex.exec(cleaned)) !== null) {
+    const candidate = match[1]
+    const parsed = cleanAndParseJSON(candidate)
+    if (parsed && typeof parsed === 'object') return parsed
+  }
+
+  const firstBrace = cleaned.indexOf('{')
+  const lastBrace = cleaned.lastIndexOf('}')
+  if (firstBrace !== -1 && lastBrace > firstBrace) {
+    const candidate = cleaned.substring(firstBrace, lastBrace + 1)
+    const parsed = cleanAndParseJSON(candidate)
+    if (parsed && typeof parsed === 'object') return parsed
+  }
+
+  return null
+}
+
 export class GeminiProvider {
   private client: GoogleGenAI
   private model: string
@@ -68,20 +129,13 @@ export class GeminiProvider {
         }
       }
 
-      let parsed: unknown
-      try {
-        const cleaned = raw_response
-          .replace(/```json\s*/gi, '')
-          .replace(/```\s*/gi, '')
-          .trim()
-        const match = cleaned.match(/\{[\s\S]*\}/)
-        parsed = JSON.parse(match ? match[0] : cleaned)
-      } catch (err: any) {
+      const parsed = extractValidJSON(raw_response)
+      if (!parsed) {
         return {
           result: null,
           raw_response,
           latency_ms,
-          error: `Failed to parse JSON from Gemini: ${err.message}`,
+          error: `Gagal mengekstrak format JSON valid dari Gemini (${raw_response.slice(0, 100)}...).`,
           validation_status: 'invalid',
           prompt_hash,
         }

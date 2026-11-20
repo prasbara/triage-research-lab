@@ -41,7 +41,7 @@ export function ComplaintFilters({
           placeholder="Cari narasi keluhan atau kode kasus..."
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="pl-10 text-xs h-10 rounded-full"
+          className="pl-10 text-xs h-9 rounded-[4px] border-[var(--color-hairline)]"
         />
       </div>
 
@@ -49,7 +49,7 @@ export function ComplaintFilters({
         <Select
           value={selectedCategory}
           onChange={(e) => onCategoryChange(e.target.value)}
-          className="text-xs h-10 w-36 rounded-full"
+          className="text-xs h-9 w-36 rounded-[4px] border-[var(--color-hairline)]"
         >
           <option value="all">Semua Kategori</option>
           {categories.map((c) => (
@@ -62,7 +62,7 @@ export function ComplaintFilters({
         <Select
           value={selectedPriority}
           onChange={(e) => onPriorityChange(e.target.value)}
-          className="text-xs h-10 w-36 rounded-full"
+          className="text-xs h-9 w-36 rounded-[4px] border-[var(--color-hairline)]"
         >
           <option value="all">Semua Prioritas</option>
           {priorities.map((p) => (
@@ -75,7 +75,7 @@ export function ComplaintFilters({
         <Select
           value={selectedStatus}
           onChange={(e) => onStatusChange(e.target.value)}
-          className="text-xs h-10 w-36 rounded-full"
+          className="text-xs h-9 w-36 rounded-[4px] border-[var(--color-hairline)]"
         >
           <option value="all">Semua Status</option>
           <option value="validated">Tervalidasi</option>
